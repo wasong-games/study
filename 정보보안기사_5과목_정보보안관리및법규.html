@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보보안기사 5과목 — 정보보안 관리 및 법규</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{--bg:#0f0f13;--surface:#16161e;--surface2:#1e1e2a;--surface3:#242433;--border:#2a2a3a;--border2:#333348;--accent:#7c6af7;--accent2:#5eead4;--accent3:#f59e0b;--accent4:#f87171;--accent5:#34d399;--accent6:#fb923c;--text:#dde1f0;--text-sub:#a8adc4;--text-dim:#666880;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;font-size:15px;padding:0 0 80px;}
+.hero{background:linear-gradient(160deg,#1a0f00 0%,#2a1800 40%,#1a0a0a 100%);border-bottom:1px solid var(--border);padding:64px 40px 48px;max-width:860px;margin:0 auto;}
+.hero-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;color:var(--accent6);text-transform:uppercase;margin-bottom:14px;}
+.hero h1{font-size:2rem;font-weight:700;line-height:1.3;background:linear-gradient(100deg,#fed7aa 0%,#fb923c 40%,#f87171 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.hero p{color:var(--text-sub);font-size:.95rem;max-width:560px;line-height:1.8;}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.badge{font-size:.72rem;font-weight:600;padding:3px 11px;border-radius:20px;border:1px solid;letter-spacing:.03em;}
+.badge-w{background:#7c6af718;border-color:#7c6af7;color:#a78bfa;}
+.badge-p{background:#5eead418;border-color:#5eead4;color:#5eead4;}
+.badge-wp{background:#f59e0b18;border-color:#f59e0b;color:#fcd34d;}
+.content{max-width:860px;margin:0 auto;padding:0 40px;}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin:40px 0 0;}
+.toc h3{color:var(--accent6);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
+.toc ol{padding-left:18px;}
+.toc li{margin:7px 0;color:var(--text-sub);font-size:.88rem;}
+.toc a{color:var(--text-sub);text-decoration:none;}
+.toc a:hover{color:var(--accent2);}
+.chapter{margin-top:72px;padding-top:32px;border-top:1px solid var(--border);}
+.chapter-num{font-size:.7rem;font-weight:700;letter-spacing:.15em;color:var(--accent6);text-transform:uppercase;margin-bottom:6px;}
+.chapter h2{font-size:1.55rem;font-weight:700;margin-bottom:14px;color:var(--text);}
+.chapter-intro{color:var(--text-sub);font-size:.93rem;line-height:1.9;padding:16px 20px;border-left:2px solid var(--border2);margin-bottom:32px;}
+.section{margin-bottom:48px;}
+.section-title{font-size:1.05rem;font-weight:700;color:var(--accent2);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-title .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+.section-title .badge{margin-left:4px;}
+.prose{color:var(--text-sub);font-size:.93rem;line-height:2;margin-bottom:14px;}
+.prose b,.prose strong{color:var(--text);font-weight:600;}
+.prose em{color:var(--accent3);font-style:normal;font-weight:600;}
+.prose u{text-decoration:none;color:var(--accent2);font-weight:600;}
+.prose .danger{color:var(--accent4);font-weight:600;}
+.callout{border-radius:10px;padding:16px 20px;margin:16px 0;font-size:.9rem;line-height:1.85;display:flex;gap:14px;align-items:flex-start;}
+.callout-icon{font-size:1.05rem;flex-shrink:0;margin-top:1px;}
+.callout-body{color:var(--text-sub);}
+.callout-body b{color:var(--text);}
+.callout-body em{color:var(--accent3);font-style:normal;}
+.callout-body .danger{color:var(--accent4);}
+.callout-body u{text-decoration:none;color:var(--accent2);}
+.callout-body code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem;color:var(--accent3);}
+.callout.tip{background:#5eead410;border:1px solid #5eead428;}
+.callout.warn{background:#f59e0b10;border:1px solid #f59e0b28;}
+.callout.info{background:#7c6af710;border:1px solid #7c6af728;}
+.callout.danger{background:#f8717110;border:1px solid #f8717128;}
+.table-wrap{overflow-x:auto;margin:16px 0 20px;}
+table{width:100%;border-collapse:collapse;font-size:.87rem;}
+th{background:var(--surface2);color:var(--accent);padding:10px 16px;border:1px solid var(--border);font-weight:600;text-align:left;white-space:nowrap;}
+td{padding:10px 16px;border:1px solid var(--border);vertical-align:top;line-height:1.75;color:var(--text-sub);}
+td b,td strong{color:var(--text);}
+td em{color:var(--accent3);font-style:normal;}
+td .danger{color:var(--accent4);}
+td code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem;color:var(--accent3);}
+tr:nth-child(even) td{background:#ffffff04;}
+tr:hover td{background:#7c6af708;}
+.row-key td:first-child{color:var(--text);font-weight:600;}
+code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;font-size:.82rem;color:var(--accent3);}
+.memo{background:linear-gradient(135deg,#1a1440 0%,#1e1b4b 100%);border:1px solid #3730a3;border-radius:10px;padding:16px 20px;margin:16px 0;font-size:.88rem;}
+.memo .memo-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:#818cf8;text-transform:uppercase;margin-bottom:8px;}
+.memo .memo-body{color:#c7d2fe;line-height:1.8;}
+.memo .memo-body b{color:#e0e7ff;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+@media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
+.card h4{color:var(--accent);font-size:.88rem;margin-bottom:12px;}
+.card ul{list-style:none;padding:0;}
+.card ul li{font-size:.88rem;color:var(--text-sub);padding:4px 0 4px 16px;position:relative;line-height:1.7;}
+.card ul li::before{content:'·';position:absolute;left:4px;color:var(--accent);}
+.card ul li b{color:var(--text);}
+.card ul li em{color:var(--accent3);font-style:normal;}
+hr{border:none;border-top:1px solid var(--border);margin:50px 0;}
+.num-list{padding-left:0;list-style:none;margin:10px 0;}
+.num-list li{padding:5px 0 5px 28px;position:relative;font-size:.9rem;color:var(--text-sub);line-height:1.8;}
+.num-list li .num{position:absolute;left:0;color:var(--accent3);font-weight:700;font-size:.82rem;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">정보보안기사 필기+실기</div>
+  <h1>5과목 — 정보보안 관리 및 법규<br>읽으면서 이해되는 정리노트</h1>
+  <p>ISMS-P, 위험관리, 정보보호 시스템 인증, ISO 27000, 개인정보보호법까지 — 관리와 법규의 흐름을 이해해봐.</p>
+  <div class="badge-row">
+    <span class="badge badge-w">📝 필기 출제</span>
+    <span class="badge badge-p">💻 실기 출제</span>
+    <span class="badge badge-wp">⭐ 필기+실기 모두</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="toc">
+  <h3>📋 목차</h3>
+  <ol>
+    <li><a href="#ch1">ISMS-P 인증 — 대상자, 인증체계</a></li>
+    <li><a href="#ch2">위험관리 — 구성요소, 분석기법, 대응전략, 처리절차</a></li>
+    <li><a href="#ch3">BCP와 재해복구 시스템</a></li>
+    <li><a href="#ch4">정보보호 시스템 인증 — TCSEC, ITSEC, CC, CC인증</a></li>
+    <li><a href="#ch5">ISO 27000 표준 패밀리</a></li>
+    <li><a href="#ch6">개인정보보호법 — 동의, 영향평가, 유출 신고</a></li>
+    <li><a href="#ch7">의명화 기법 — k-익명성, ℓ-다양성, t-근접성</a></li>
+    <li><a href="#ch8">개인정보 안전성 확보조치 — 제6조~제8조</a></li>
+  </ol>
+</div>
+
+
+<!-- CH1 ISMS-P -->
+<div id="ch1" class="chapter">
+  <div class="chapter-num">Chapter 01 · POINT 016</div>
+  <h2>ISMS-P 인증<br>— 대상자, 인증체계</h2>
+  <div class="chapter-intro">
+    ISMS-P는 정보보호 관리체계(ISMS)와 개인정보보호 관리체계(PIMS)를 통합한 인증제도야. 기업이 정보보호를 체계적으로 관리하고 있는지를 공인된 기관이 심사·인증하는 제도.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>ISMS-P 인증 대상자 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>기준</th><th>정보통신서비스 제공자</th><th>비고</th></tr>
+        <tr>
+          <td><b>ISP</b><br>(인터넷 서비스 제공자)</td>
+          <td>전기통신사업법의 전기통신사업자로 전국적으로 정보통신망 서비스를 제공하는 사업자. 인터넷 접속 서비스, 인터넷 전화 서비스(VoIP), CDN(Content Delivery Network) 사업자, IPTV 사업자</td>
+          <td>서울 및 모든 광역시에서 정보통신망 제공</td>
+        </tr>
+        <tr>
+          <td><b>IDC</b><br>(데이터센터)</td>
+          <td>타인의 정보통신서비스 제공을 위하여 집적된 정보통신시설을 운영·관리하는 사업자. 서버 호스팅, 코로케이션 서비스 등</td>
+          <td>정보통신서비스 부문 전년도 매출액 100억 혹은 100만 명 이상인 경우에만 VIDC의 의무 인증 대상이 됨</td>
+        </tr>
+        <tr>
+          <td><b>정보통신서비스 제공자</b></td>
+          <td>정보통신서비스 매출액 100억 또는 이용자 수 100만 명 이상인 사업자. 인터넷 쇼핑몰, 포털, 게임, 예약, Cable-SO 등</td>
+          <td>정보통신서비스 부문 전년도 매출액 100억 이상 또는 전년도 말 기준 직전 3개월간 일일 평균 이용자 수 100만 명 이상 사업자</td>
+        </tr>
+        <tr>
+          <td><b>전년도 매출액 및 세입 등 1,500억 이상인 기업 중 상급종합병원, 1만 명 이상 재학생이 있는 학교</b></td>
+          <td>정보통신서비가 아니어도 매출액이 1,500억 이상인 상급종합병원·매출액이 1,500억 이상이면서 재학생이 1만 명 이상인 학교</td>
+          <td>대학교는 교육부에서 실시하는 정보보호 수준 진단에서 80점(우수) 평가 시에 ISMS인증을 면제함</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>정보보호 및 개인정보보호 관리체계 인증심사 기준 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">📋</span>
+      <div class="callout-body">
+        <b>관리체계 수립 및 운영 (16가지)</b> — 1.1 관리체계 기반 마련 / 1.2 위험관리 / 1.3 관리체계 운영 / 1.4 관리체계 점검 및 개선<br><br>
+        <b>보호대책 요구사항 (64가지)</b><br>
+        2.1 정책·조직·자산관리 / 2.2 인적보안 / 2.3 외부자 보안 / 2.4 물리보안 / 2.5 인증 및 권한관리 / 2.6 접근통제 / 2.7 암호화 적용 / 2.8 정보시스템 도입 및 개발보안 / 2.9 시스템 및 서비스 운영관리 / 2.10 시스템 및 서비스 보안관리 / 2.11 사고 예방 및 대응 / 2.12 재해복구<br><br>
+        <b>개인정보 처리단계별 요구사항 (22가지)</b><br>
+        3.1 개인정보 수집 시 보호조치 / 3.2 개인정보 보유 및 이용 시 보호조치 / 3.3 개인정보 제공 시 보호조치 / 3.4 개인정보 파기 시 보호조치 / 3.5 정보주체 권리보호
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH2 위험관리 -->
+<div id="ch2" class="chapter">
+  <div class="chapter-num">Chapter 02 · POINT 016</div>
+  <h2>위험관리<br>— 구성요소, 분석기법, 대응전략, 처리절차</h2>
+  <div class="chapter-intro">
+    위험관리는 조직의 자산을 위협으로부터 보호하기 위해 위험을 식별하고 평가해서 적절한 대책을 마련하는 과정이야. "위협 × 취약점 = 위험"이라는 관계가 핵심이야.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>위험관리 구성요소 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구성</th><th>설명</th></tr>
+        <tr><td><b>위협 (Threat)</b></td><td>위협, 취약점을 이용하여 자산에 손실, 피해를 가져올 가능성. 자산에 악영향을 줄 수 있는 사건 및 행위</td></tr>
+        <tr><td><b>위험 (Risk)</b></td><td>자산에 손실을 초래할 수 있는 원치 않는 사건의 잠재적인 원인 또는 행위자(손실은 영향과 결과로 표현하며, 발생 가능성은 위협이다)</td></tr>
+        <tr><td><b>취약점 (Vulnerability)</b></td><td>위협이 발생하기 위한 조건이나 상형. 어느 정도 피해가 발생할 수 있는지를 취약점, 노출 정도로 나타냄</td></tr>
+        <tr><td><b>자산 (Asset)</b></td><td>조직이 보호해야 할 대상(자산그룹핑·유사자산은 동일한 취약점)</td></tr>
+      </table>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">🔗</span>
+      <div class="callout-body">
+        <b>위험분석 요소 간의 관계</b><br>
+        위협 → 취약성 → <em>위험</em> → 자산<br>
+        보안대책 → 위험 감소 / 보안 요구사항 → 기치(사업 영향) 관계
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>위험분석기법 체계 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>분류</th><th>기법</th><th>특징</th></tr>
+        <tr>
+          <td rowspan="4"><b>정성적 위험분석</b></td>
+          <td>전문가 감정</td>
+          <td>전문가의 경험과 지식 기반</td>
+        </tr>
+        <tr>
+          <td>기준선법</td>
+          <td>표준화된 보안 기준선 적용</td>
+        </tr>
+        <tr>
+          <td>시나리오법</td>
+          <td>특정 시나리오 기반으로 위험 분석</td>
+        </tr>
+        <tr>
+          <td>연년손실액 (혼합에 의한 방법)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="2"><b>정량적 위험분석</b></td>
+          <td>과거자료</td>
+          <td>과거 사고 데이터 기반</td>
+        </tr>
+        <tr>
+          <td>수학</td>
+          <td>수학적 모델로 위험 계산</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>접근 방식에 따른 위험분석 기법 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>위험분석 기법</th><th>설명</th></tr>
+        <tr>
+          <td><b>기준선 접근법</b><br>(Baseline)</td>
+          <td>시간 및 비용이 적게 소요되며, 모든 조직에서 기본적으로 필요한 보호 대책을 선택할 수 있음. 조직의 특성을 고려하지 않기 때문에, 조직 내에서 부서별로 직정 보안수준보다도 높게 혹은 낮게 보안통제를 적용함</td>
+        </tr>
+        <tr>
+          <td><b>전문가 판단</b><br>(비정형 접근법)</td>
+          <td>정형화된 방법을 사용하지 않고 전문가의 지식과 경험에 따라서 위험을 분석. 비용적인 면에서 작은 조직에 효과적이며, 구조화된 접근방법이 없기 때문에 위험을 제대로 평가하기 어려워 보호대책의 선택 및 소요비용을 합리적으로 도출하기 어려움</td>
+        </tr>
+        <tr>
+          <td><b>상세위험분석</b></td>
+          <td>자산분석, 위협분석, 취약점 분석 단계로 위험평가를 수행. 자산의 가치를 측정하고 자산에 대한 위협 정도와 취약점을 분석하여 위험 정도를 결정. 정성적 분석기법과 정량적 분석기법이 존재</td>
+        </tr>
+        <tr>
+          <td><b>복합적 접근법</b><br>(혼합에 의한 방법)</td>
+          <td>고위험 영역은 식별하여 이 영역은 상세 위험분석을 수행하고 다른 영역은 기준선 접근법을 사용. 빠르게 위험을 식별할 수 있고 효과적. 고위험을 잘못 식별하면 비용이 낭비됨</td>
+        </tr>
+        <tr>
+          <td><b>시나리오법</b></td>
+          <td>어떤 사건도 기대하는 대로 발생하지 않는다는 시실에 근거하여 일정 조건하에서 위험에 대한 발생 가능한 결과들을 추정하는 방법</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>위험대응 전략 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>전략</th><th>특징</th></tr>
+        <tr><td><b>위험수용</b></td><td>위험을 받아들이고 비용을 감수. 잔여 위험이 허용 가능한 수준일 때</td></tr>
+        <tr><td><b>위험감소</b></td><td>위험을 감소시킬 수 있는 대책을 채택하여 구현. 보안 통제 적용</td></tr>
+        <tr><td><b>위험회피</b></td><td>위험이 존재하는 프로세스나 사업을 포기. 위험 원인 자체를 제거</td></tr>
+        <tr><td><b>위험전가</b></td><td>잠재적 비용을 제3자에게 이전하거나 할당. 보험, 아웃소싱</td></tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 암기법</div>
+      <div class="memo-body"><b>수감회전</b> — 위험수용, 위험감소, 위험회피, 위험전가</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>위험처리 절차 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🔄</span>
+      <div class="callout-body">
+        위험 식별 → 위험도 ≤ 목표 위험수준? → <em>YES: 위험수용</em><br>
+        NO → 비용효과적 대책 존재? → <em>YES: 위험감소</em><br>
+        NO → 적절한 보험 또는 전가 대상 존재? → <em>YES: 위험전가</em><br>
+        NO → <em>위험회피</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH3 BCP와 재해복구 -->
+<div id="ch3" class="chapter">
+  <div class="chapter-num">Chapter 03 · POINT 016</div>
+  <h2>BCP와 재해복구 시스템</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>BCP (Business Continuity Planning, 사업 연속성 계획) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🏢</span>
+      <div class="callout-body">
+        • 비상시에도 기업의 존립을 유지하기 위한 프로세스를 정의한 <em>복구 절차</em>야.<br>
+        • 업무의 중단 상황과 이후의 비즈니스 운영의 <em>연속성을 위한 계획</em>.<br>
+        • <em>가장 핵심적인 비즈니스 기능들의 복구에 우선순위</em>를 둔 개념.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>재해복구 시스템의 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>사이트</th><th>목표 복구 시간</th><th>장점</th><th>단점</th></tr>
+        <tr>
+          <td><b>Mirrored</b></td>
+          <td>0~수분</td>
+          <td>1차와 동일. 동기화 가능. Active, Active 서버로 구성</td>
+          <td>고비용, 상시 검토</td>
+        </tr>
+        <tr>
+          <td><b>Hot</b></td>
+          <td>24시간 내</td>
+          <td>고가용성, 데이터 최신성. Active, Standby 서버로 구성</td>
+          <td>DB복구 필요</td>
+        </tr>
+        <tr>
+          <td><b>Warm</b></td>
+          <td>수일 내</td>
+          <td>핫사이트로 전환 용이</td>
+          <td>시스템 확보 필요</td>
+        </tr>
+        <tr>
+          <td><b>Cold</b></td>
+          <td>수개월 내</td>
+          <td>저비용, 데이터만 백업</td>
+          <td>시간이 가장 오래 걸림</td>
+        </tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 복구 속도 순서</div>
+      <div class="memo-body"><b>Mirrored(0분) > Hot(24시간) > Warm(수일) > Cold(수개월)</b><br>빠를수록 비용이 높음</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH4 정보보호 시스템 인증 -->
+<div id="ch4" class="chapter">
+  <div class="chapter-num">Chapter 04 · POINT 016</div>
+  <h2>정보보호 시스템 인증<br>— TCSEC, ITSEC, CC</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>정보보호 시스템 인증 비교 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>인증</th><th>특징</th></tr>
+        <tr>
+          <td><b>TCSEC</b><br>(Trusted Computer System Evaluation Criteria, Orange Book)</td>
+          <td>
+            독립적인 시스템(OS, 제품)을 평가하며 Orange-book이라고 함. <em>BLP(Bell-LaPadula) 모델에 기반하여 기밀성만 강조</em>.<br>
+            보안 요구사항을 정의하고 정보 조달 요구사항을 표준화하는 것. 기능성과 보증을 구분하지 않고 평가하는 <em>최초의 체계적이고 논리적인 표준</em>
+          </td>
+        </tr>
+        <tr>
+          <td><b>ITSEC</b><br>(Information Technology Security Evaluation Criteria)</td>
+          <td>
+            운영체제와 장치를 평가하기 위한 유럽형 지침. <em>기밀성, 무결성, 가용성을 다룸</em>.<br>
+            TOE(Target of Evaluation): 평가 대상 제품 또는 시스템.<br>
+            기능성과 보증을 분리하여 평가함
+          </td>
+        </tr>
+        <tr>
+          <td><b>CC</b><br>(Common Criteria, ISO 15408)</td>
+          <td>
+            IT 제품 및 정보시스템에 대한 정보 보안평가 인증을 위한 평가 기준으로 <em>CCRA 가입국 간에 모두 적용되는 상호인증을 지원</em>.<br>
+            CC인증의 유효기간은 <em>5년</em>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="prose" style="margin-top:16px;"><b>CC의 주요 제공 기능</b></p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>주요 특징</th><th>세부 설명</th></tr>
+        <tr><td><b>PP</b> (Protection Profile, 보호 프로파일)</td><td>특정 고객의 요구를 충족시키는 제품의 기능성, 보증 관련 요구사항을 묶어 놓은 것</td></tr>
+        <tr><td><b>ST</b> (Security Target, 보안목표명세서)</td><td>제품 평가 시 사용되는 기능성과 보증 관련 요구사항을 포함한 제품의 명세서로서 벤더 또는 개발자에 의해 작성</td></tr>
+        <tr><td><b>ToE</b> (Target of Evaluation)</td><td>평가 대상 시스템이나 제품</td></tr>
+        <tr><td><b>EAL</b> (Evaluation Assurance Level)</td><td><em>EAL1~EAL7</em>. 숫자가 높을수록 보증 수준이 높음</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>정보보호제품 평가인증제도 (CC인증) <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>역할</th><th>기관명</th><th>주요업무</th></tr>
+        <tr>
+          <td><b>정책기관</b></td>
+          <td>과학기술정보통신부</td>
+          <td>CC평가·인증 관련 법령·개정 / CC평가·인증 관련 제도 수립 / CC평가·인증 관련 제도 예산 확보</td>
+        </tr>
+        <tr>
+          <td><b>인증기관</b></td>
+          <td>국가보안기술연구소(NSR)의 IT보안인증사무국</td>
+          <td>평가결과의 승인 및 인증서 발급 / 평가기관 관리 및 CC인증 정책수립 지원 / CCRA 관련 국제 활동</td>
+        </tr>
+        <tr>
+          <td><b>평가기관</b></td>
+          <td>한국인터넷진흥원 / 한국시스템보증 / 한국아이티평가원 / 한국정보통신기술협회 / 한국기계전기전자시험연구원 / 한국화학융합시험연구원</td>
+          <td>품질 매뉴얼에 따른 평가기관 운영 / 제출물 조사 및 시험, 취약점 분석 등 제품 평가 / 평가자 교육 훈련 / 신청기관 개발환경 보안 점검</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>클라우드 인증 (CASP) <span class="badge badge-w">필기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">☁️</span>
+      <div class="callout-body">
+        • <b>정책기관</b>: 과학기술정보통신부<br>
+        • <b>인증기관</b>: 한국인터넷진흥원<br>
+        • <b>평가기관</b>: 한국인터넷진흥원 및 과학기술정보통신부에서 지정한 기관<br>
+        • <b>공공부문 기술자문 기관</b>: 국가보안기술연구소<br><br>
+        <b>CASP SaaS 인증등급</b>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>SaaS 표준등급</th><th>SaaS 간편등급</th></tr>
+        <tr><td><b>유효기간</b></td><td>5년</td><td>기존 3년에서 5년으로 변경됨</td></tr>
+        <tr><td><b>대상</b></td><td>중요 데이터를 다루는 SaaS 서비스</td><td>표준등급 대상 이외의 SaaS 서비스</td></tr>
+        <tr><td><b>평가 종류</b></td><td>최초평가, 사후평가, 갱신평가</td><td>최초평가, 사후평가, 갱신평가</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>보안기능 시험 제도 <span class="badge badge-w">필기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🔬</span>
+      <div class="callout-body">
+        보안 적합성 검증절차 간소화를 위해 정보보호시스템, 네트워크 장비 및 양자 암호통신장비 등 IT 제품에 대해 공인 시험기관이 "국가용 보안 요구사항" 만족 여부를 시험하여 안전성을 확인하는 제도.<br>
+        • <em>정책기관</em>: 국가정보원<br>
+        • <em>검증기관</em>: 국가보안기술연구소
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH5 ISO 27000 -->
+<div id="ch5" class="chapter">
+  <div class="chapter-num">Chapter 05 · POINT 016</div>
+  <h2>ISO 27000 표준 패밀리</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>ISO 27000 표준 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">📌</span>
+      <div class="callout-body">
+        ISO 27000 표준은 과거 영국에서 개발한 BS7799 인증을 기반으로 만들어진 국제표준 인증이야.<br>
+        BS7799는 Part 1과 Part 2로 구성되어 있으며 Part 1이 ISO 17799 인증을 받았고 Part 2는 정보보호 관리체계 ISMS이야.<br>
+        BS7799는 ISO 27000 표준으로 인정받았으며, ISO 27000 인증 중에서 ISMS는 <em>ISO 27001</em>이고 한국 인터넷진흥원에서 개발한 ISMS인증은 <em>BS7799를 기반으로 국내에서 개발</em>한 것이야.
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>유형</th><th>설명</th></tr>
+        <tr><td><b>ISO/IEC 27000</b><br>(Overview & Vocabulary)</td><td>ISMS 수립 및 인증에 관한 원칙과 용어를 규정하는 표준</td></tr>
+        <tr><td><b>ISO/IEC 27001</b><br>(ISMS requirements standard)</td><td>ISMS 수립, 구현, 운영, 모니터링, 검토, 유지 및 개선하기 위한 요구사항을 규정</td></tr>
+        <tr><td><b>ISO/IEC 27002</b><br>(code of practice for ISMS)</td><td>ISMS 수립, 구현 및 유지하기 위해 공통적으로 적용할 수 있는 실무적인 지침 및 일반적인 원칙</td></tr>
+        <tr><td><b>ISO/IEC 27003</b><br>(ISMS Implementation Guide)</td><td>보안범위 및 자산정의, 정책시행, 모니터링과 검토, 지속적인 개선 등 ISMS 구현을 위한 프로젝트 수행 시 참고할 만한 구체적인 구현 관련사항을 규정한 규격으로, 문서 구조를 프로젝트 관리 프로세스에 맞춰 작성</td></tr>
+        <tr><td><b>ISO/IEC 27004</b><br>(ISM Measurement)</td><td>ISMS에 구현된 정보보안통제의 유효성을 측정하기 위한 프로그램과 프로세스를 규정한 규격으로 무엇을, 어떻게, 언제 측정할 것인지를 제시하여 정보보안의 수준을 파악하고 지속적으로 개선시키기 위한 문서</td></tr>
+        <tr><td><b>ISO/IEC 27005</b><br>(ISM Risk Management)</td><td>위험관리 과정을 환경설정, 위험평가, 위험처리, 위험수용, 위험소통, 위험 모니터링 및 검토 등 6개의 프로세스로 구분하고, 각 프로세스 활동을 input, action, implementation guidance, output으로 구분하여 기술한 문서</td></tr>
+        <tr><td><b>ISO/IEC 27006</b><br>(Certification or registration process)</td><td>ISMS 인증기관을 인정하기 위한 요구사항을 명시한 표준으로서 인증기관 및 심사인의 자격요건 등을 기술</td></tr>
+        <tr><td><b>ISO/IEC 27006</b><br>(통신분야)</td><td>통신분야에 특화된 ISM 적용실무 지침으로서 ISO/IEC 27002와 함께 적용</td></tr>
+        <tr><td><b>ISO/IEC 27033</b><br>(IT network security)</td><td>네트워크시스템의 보안관리와 운영에 대한 실무지침으로 ISO/IEC 27002의 네트워크보안통제를 구현관점에서 기술한 문서</td></tr>
+        <tr><td><b>ISO 27799</b><br>(Health Organizations)</td><td>의료정보분야에 특화된 ISMS 적용 실무지침으로서 ISO/IEC 27002와 함께 적용</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH6 개인정보보호법 -->
+<div id="ch6" class="chapter">
+  <div class="chapter-num">Chapter 06 · POINT 017</div>
+  <h2>개인정보보호법<br>— 동의, 영향평가, 유출 신고</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개인정보보호법 제33조 제2항 영향평가 시 고려사항 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>영향평가 시 고려사항</th></tr>
+        <tr>
+          <td><b>개인정보보호법<br>제33조 제2항</b></td>
+          <td>
+            1. 처리하는 개인정보의 수<br>
+            2. 개인정보의 제3자 제공 여부<br>
+            3. 정보주체의 권리를 해할 가능성 및 그 위험 정도<br>
+            4. 그 밖에 대통령령으로 정하는 사항
+          </td>
+        </tr>
+        <tr>
+          <td><b>동법 시행령 제36조</b></td>
+          <td>
+            5. 민감정보 또는 고유식별정보의 처리 여부<br>
+            6. 개인정보 보유기간
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개인정보보호법 — 개인정보 동의를 받는 방법 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">✅</span>
+      <div class="callout-body">
+        개인정보 동의 시 고지해야 할 사항:<br>
+        • 개인정보의 <em>수집·이용 목적</em><br>
+        • <em>수집하려는 개인정보의 항목</em><br>
+        • 개인정보의 <em>보유 및 이용 기간</em><br>
+        • 동의를 거부할 권리가 있다는 사실 및 동의 거부에 따른 <em>불이익이 있는 경우에는 그 불이익의 내용</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개인정보보호법 — 정보 수집 출처 및 이용내역 통지 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>수집 출처 통지 사항</th><th>이용·제공 내역 통지 사항</th></tr>
+        <tr>
+          <td><b>통지사항</b></td>
+          <td>• 개인정보 수집 출처<br>• 개인정보의 처리 목적<br>• 개인정보 처리의 정지를 요구하거나 동의를 철회할 수 있는 권리가 있다는 사실</td>
+          <td>• 개인정보의 수집·이용 목적 및 수집한 개인정보의 항목<br>• 개인정보를 제공받은 제3자와 그 제공 목적 및 제공한 개인정보 항목</td>
+        </tr>
+        <tr><td><b>통지시점</b></td><td>연 1회 이상</td><td>연 1회 이상</td></tr>
+        <tr>
+          <td><b>통지방법</b></td>
+          <td>이용 제공 내역 통지와 함께 할 수 있음</td>
+          <td>서면, 전자우편, 전화, 문자전송 등 / 알림창을 이용한 방법 추가</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>고정형 영상처리기기 안내서 설치 <span class="badge badge-w">필기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">📷</span>
+      <div class="callout-body">
+        안내서에 기재해야 할 사항:<br>
+        • 설치 목적 및 장소<br>
+        • 촬영 범위 및 시간<br>
+        • 관리책임자의 연락처<br>
+        • 그 밖에 대통령령으로 정하는 사항
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개인정보 유출 신고 비교 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>정보통신망법</th><th>개인정보보호법</th></tr>
+        <tr><td><b>법률 근거</b></td><td>제48조의3(침해사고 신고 등)</td><td>제34조(개인정보 유출 등의 통지, 신고)</td></tr>
+        <tr><td><b>적용대상 (신고자)</b></td><td>주요정보통신서비스제공자 / 정보통신서비스제공자</td><td>개인정보처리자</td></tr>
+        <tr>
+          <td><b>신고기준</b></td>
+          <td>해킹, 바이러스, DDoS / 정상적인 인증절차를 우회하여 접근한 경우</td>
+          <td>1천명 이상 / 민감정보 혹은 고유식별자 유출 / 외부로부터 불법적으로 접근한 경우</td>
+        </tr>
+        <tr><td><b>신고시점</b></td><td>알게 된 시점에서 <em>24시간 이내</em></td><td>알게 된 시점에서 <em>72시간 이내</em></td></tr>
+        <tr><td><b>신고대상</b></td><td>과학기술정보통신부 혹은 한국인터넷진흥원(다른 법률에 따라 신고 시 신고한 곳)</td><td>개인정보보호위원회 또는 한국인터넷진흥원</td></tr>
+        <tr><td><b>통지</b></td><td>법 조항 없음(개인정보보호법 적용)</td><td>홈페이지, 서면 등으로 개별 통지</td></tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 신고 시점 암기</div>
+      <div class="memo-body">
+        <b>정보통신망법</b>: <em>24시간</em> 이내<br>
+        <b>개인정보보호법</b>: <em>72시간</em> 이내
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH7 익명화 기법 -->
+<div id="ch7" class="chapter">
+  <div class="chapter-num">Chapter 07 · POINT 017</div>
+  <h2>익명화 기법<br>— k-익명성, ℓ-다양성, t-근접성</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>익명화 기법 <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">개인정보를 직접 노출하지 않고도 데이터를 활용할 수 있도록 익명화하는 기법이야. 단계적으로 발전하면서 이전 기법의 취약점을 보완해왔어.</p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구분</th><th>내용</th></tr>
+        <tr>
+          <td><b>k-익명성</b><br>(k-anonymity)</td>
+          <td>주어진 데이터 집합에서 같은 값이 적어도 <em>k개 이상 존재</em>하도록 하여 쉽게 다른 정보로 결합할 수 없도록 하는 것</td>
+        </tr>
+        <tr>
+          <td><b>ℓ-다양성</b><br>(ℓ-diversity)</td>
+          <td>k-익명성에 대한 두 가지 공격, 즉 동질성 공격 및 배경 지식에 의한 공격을 방어하기 위한 모델. 주어진 데이터 집합에서 같이 비식별되는 레코드들은 (동질 집합에서) 적어도 <em>ℓ개의 서로 다른 민감한 정보를 가져야 함</em></td>
+        </tr>
+        <tr>
+          <td><b>t-근접성</b><br>(t-closeness)</td>
+          <td>같은 의미를 고려하는 프라이버시 모델. ℓ-다양성의 약점(쏠림 공격, 유사성 공격)을 보완하기 위한 모델. 동질 집합에서 특정 정보의 분포와 전체 데이터 집합에서 정보의 분포가 <em>t 이하의 차이를 보여야 함</em></td>
+        </tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 발전 순서</div>
+      <div class="memo-body"><b>k-익명성</b> → (동질성 공격 취약) → <b>ℓ-다양성</b> → (쏠림 공격 취약) → <b>t-근접성</b></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH8 개인정보 안전성 확보조치 -->
+<div id="ch8" class="chapter">
+  <div class="chapter-num">Chapter 08 · POINT 017</div>
+  <h2>개인정보 안전성 확보조치<br>— 제6조~제8조</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>내부관리계획의 구성 (18가지 포함 사항) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">📋</span>
+      <div class="callout-body">
+        <ol style="padding-left:16px; line-height:2; font-size:0.88rem;">
+          <li>개인정보 보호 조직의 구성 및 운영에 관한 사항</li>
+          <li>개인정보 보호책임자의 자격요건 및 지정에 관한 사항</li>
+          <li>개인정보 보호책임자와 개인정보보호취급자의 역할 및 책임에 관한 사항</li>
+          <li>개인정보취급자에 대한 관리·감독 및 교육에 관한사항</li>
+          <li>접근권한의 관리에 관한 사항</li>
+          <li>접근통제에 관한 사항</li>
+          <li>개인정보의 암호화 조치에 관한 사항</li>
+          <li>접속기록 보관 및 점검에 관한 사항</li>
+          <li>악성 프로그램 등 방지에 관한 사항</li>
+          <li>개인정보의 유출, 도난 방지 등을 위한 취약점 점검에 관한 사항</li>
+          <li>물리적 안전조치에 관한 사항</li>
+          <li>출력복사 시 안전조치에 관한 사항</li>
+          <li>개인정보의 파기에 관한 사항</li>
+          <li>개인정보 유출사고 대응 계획 수립·시행에 관한 사항</li>
+          <li>위험분석 및 관리에 관한 사항</li>
+          <li>개인정보 처리업무를 위탁하는 경우 수탁자에 대한 관리 및 감독에 관한 사항</li>
+          <li>개인정보 내부 관리계획의 수립, 변경 및 승인에 관한 사항</li>
+          <li>그 밖의 개인정보 보호를 위하여 필요한 사항</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>접근권한 기록 비교 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>개인정보의 안전성 확보조치 기준</th></tr>
+        <tr><td><b>보관기간</b></td><td>최소 <em>3년간</em></td></tr>
+        <tr><td><b>기록 방법</b></td><td>전자적으로 기록</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개인정보의 안전성 확보조치 기준 제6조 (접근 통제) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🔐</span>
+      <div class="callout-body">
+        <b>제6조 항</b><br>
+        ① 개인정보처리자는 정보통신망을 통한 불법적인 접근 및 침해사고방지를 위해:<br>
+        &nbsp;&nbsp;1. 개인정보처리시스템에 대한 접속 권한 IP(Internet Protocol) 주소 등으로 제한하여 인가받지 않은 접근을 제한<br>
+        &nbsp;&nbsp;2. 개인정보처리시스템에 접속한 IP(Internet Protocol) 주소 등을 분석하여 불법적인 개인정보 유출 시도 탐지 및 대응<br><br>
+        ② 개인정보처리자는 개인정보처리시스템에 대한 정당한 권한을 가진 자(다만, 정보주체는 제외한다) 정보통신망을 통해 외부에서 개인정보처리시스템에 접속하려는 경우 안전한 인증수단을 적용하여야 한다.<br><br>
+        ③ 개인정보처리자는 처리하는 개인정보가 인터넷 홈페이지, P2P, 공유설정 등을 통하여 권한이 없는 자에게 공개되거나 유출되지 않도록 개인정보처리 시스템, 개인정보취급자의 컴퓨터 및 모바일 기기 등에 조치를 하여야 한다.<br><br>
+        ④ 개인정보처리자는 개인정보처리시스템에 대한 불법적인 접근 및 침해사고 방지를 위하여 개인정보취급자가 일정시간 이상 업무처리를 하지 않는 경우에는 자동으로 접속이 차단되도록 하는 등 필요한 조치를 하여야 한다.<br><br>
+        ⑤ 개인정보처리자는 업무용 모바일 기기의 분실·도난 등으로 개인정보가 유출되지 않도록 해당 모바일 기기에 비밀번호 설정 등의 보호조치를 하여야 한다.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개인정보의 안전성 확보조치 기준 제7조 (개인정보 암호화) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🔑</span>
+      <div class="callout-body">
+        <b>제7조 항</b><br>
+        ① 개인정보처리자는 비밀번호, 생체인식정보 등 인증정보를 저장 또는 정보통신망을 통하여 송·수신하는 경우 이를 안전한 암호 알고리즘으로 암호화하여야 한다. 단, 비밀번호를 저장하는 경우에는 복호화되지 아니하도록 일방향 암호화한 후 저장하여야 한다.<br><br>
+        ② 개인정보처리자는 다음 각 호에 해당하는 이용자의 개인정보에 대해서는 안전한 암호 알고리즘으로 암호화하여 저장하여야 한다:<br>
+        1. 주민등록번호 / 2. 여권번호 / 3. 운전면허번호 / 4. 외국인등록번호 / 5. 신용카드번호 / 6. 계좌번호 / 7. 생체인식정보
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개인정보의 안전성 확보조치 기준 제8조 (접속기록의 보관 및 점검) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">📝</span>
+      <div class="callout-body">
+        <b>접속 기록</b>: 개인정보처리시스템에 접속하는 자가 개인정보처리시스템에 접속하여 수행한 업무내역에 대하여 식별자, 접속일시, 접속지 정보, 처리한 정보주체 수행한 업무내역에 대하여 전자적으로 기록한 것을 말한다. 이 경우 '접속'이란 정보, 수행한 업무내역 등이 개인정보처리시스템과 연결되어 데이터 송신 또는 수신이 가능한 상태를 말한다.<br><br>
+        <b>제8조</b><br>
+        ① 개인정보처리자는 개인정보처리시스템 접속한 자(단, 정보주체는 제외한다)의 접속기록을 <em>1년 이상 보관·관리</em>하여야 한다. 다만, 다음 각 호의 어느 하나에 해당하는 경우에는 <em>2년 이상 보관·관리</em>하여야 한다.<br><br>
+        ② 개인정보처리자는 개인정보의 오·남용, 분실·도난·유출·위조·변조 혹은 훼손 등에 대응하기 위하여 개인정보처리시스템의 접속기록 및 개인정보 다운로드 상황을 확인하고 점검하는 주기·방법·시후조치절차 등을 내부관리계획으로 정하고 이행하여야 한다.
+      </div>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 접속기록 보관기간 암기</div>
+      <div class="memo-body">
+        기본: <b>1년</b> 이상 보관<br>
+        예외(2년): 5만 명 이상 정보주체 처리 / 고유식별정보·민감정보 처리 / 100만 명 이상 이용자 수 / 매출 100억 이상
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>제6조의 2 (인터넷 차단 조치 등) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-body">
+        전년도 말 기준 직전 3개월간 그 개인정보가 저장·관리되고 있는 이용자 수가 일일 평균 100만 명 이상인 개인정보처리자는 다음 각 호의 어느 하나에 해당하는 개인정보취급자의 컴퓨터 등에 대해 해당 개인정보취급자의 컴퓨터 등에서 인터넷망 차단 조치를 하여야 한다:<br>
+        1. 개인정보처리시스템에 대접권한을 설정하고 있는 개인정보취급자<br>
+        2. 개인정보처리시스템에서 개인정보를 다운로드 또는 파기할 수 있는 개인정보취급자
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:60px 0 30px;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:60px;">
+  정보보안기사 5과목 정보보안 관리 및 법규 — 읽으면서 이해되는 정리노트 | 2025
+</div>
+</div>
+</body>
+</html>
