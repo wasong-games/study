@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보보안기사 3과목 — 애플리케이션 보안</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{--bg:#0f0f13;--surface:#16161e;--surface2:#1e1e2a;--surface3:#242433;--border:#2a2a3a;--border2:#333348;--accent:#7c6af7;--accent2:#5eead4;--accent3:#f59e0b;--accent4:#f87171;--accent5:#34d399;--accent6:#e879f9;--text:#dde1f0;--text-sub:#a8adc4;--text-dim:#666880;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;font-size:15px;padding:0 0 80px;}
+.hero{background:linear-gradient(160deg,#1a0d1a 0%,#2a0f2e 40%,#0f1a2e 100%);border-bottom:1px solid var(--border);padding:64px 40px 48px;max-width:860px;margin:0 auto;}
+.hero-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;color:var(--accent6);text-transform:uppercase;margin-bottom:14px;}
+.hero h1{font-size:2rem;font-weight:700;line-height:1.3;background:linear-gradient(100deg,#f0abfc 0%,#e879f9 40%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.hero p{color:var(--text-sub);font-size:.95rem;max-width:560px;line-height:1.8;}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.badge{font-size:.72rem;font-weight:600;padding:3px 11px;border-radius:20px;border:1px solid;letter-spacing:.03em;}
+.badge-w{background:#7c6af718;border-color:#7c6af7;color:#a78bfa;}
+.badge-p{background:#5eead418;border-color:#5eead4;color:#5eead4;}
+.badge-wp{background:#f59e0b18;border-color:#f59e0b;color:#fcd34d;}
+.content{max-width:860px;margin:0 auto;padding:0 40px;}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin:40px 0 0;}
+.toc h3{color:var(--accent6);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
+.toc ol{padding-left:18px;}
+.toc li{margin:7px 0;color:var(--text-sub);font-size:.88rem;}
+.toc a{color:var(--text-sub);text-decoration:none;}
+.toc a:hover{color:var(--accent2);}
+.chapter{margin-top:72px;padding-top:32px;border-top:1px solid var(--border);}
+.chapter-num{font-size:.7rem;font-weight:700;letter-spacing:.15em;color:var(--accent6);text-transform:uppercase;margin-bottom:6px;}
+.chapter h2{font-size:1.55rem;font-weight:700;margin-bottom:14px;color:var(--text);}
+.chapter-intro{color:var(--text-sub);font-size:.93rem;line-height:1.9;padding:16px 20px;border-left:2px solid var(--border2);margin-bottom:32px;}
+.section{margin-bottom:48px;}
+.section-title{font-size:1.05rem;font-weight:700;color:var(--accent2);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-title .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+.section-title .badge{margin-left:4px;}
+.prose{color:var(--text-sub);font-size:.93rem;line-height:2;margin-bottom:14px;}
+.prose b,.prose strong{color:var(--text);font-weight:600;}
+.prose em{color:var(--accent3);font-style:normal;font-weight:600;}
+.prose u{text-decoration:none;color:var(--accent2);font-weight:600;}
+.prose .danger{color:var(--accent4);font-weight:600;}
+.callout{border-radius:10px;padding:16px 20px;margin:16px 0;font-size:.9rem;line-height:1.85;display:flex;gap:14px;align-items:flex-start;}
+.callout-icon{font-size:1.05rem;flex-shrink:0;margin-top:1px;}
+.callout-body{color:var(--text-sub);}
+.callout-body b{color:var(--text);}
+.callout-body em{color:var(--accent3);font-style:normal;}
+.callout-body .danger{color:var(--accent4);}
+.callout-body u{text-decoration:none;color:var(--accent2);}
+.callout-body code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem;color:var(--accent3);}
+.callout.tip{background:#5eead410;border:1px solid #5eead428;}
+.callout.warn{background:#f59e0b10;border:1px solid #f59e0b28;}
+.callout.info{background:#7c6af710;border:1px solid #7c6af728;}
+.callout.danger{background:#f8717110;border:1px solid #f8717128;}
+.table-wrap{overflow-x:auto;margin:16px 0 20px;}
+table{width:100%;border-collapse:collapse;font-size:.87rem;}
+th{background:var(--surface2);color:var(--accent);padding:10px 16px;border:1px solid var(--border);font-weight:600;text-align:left;white-space:nowrap;}
+td{padding:10px 16px;border:1px solid var(--border);vertical-align:top;line-height:1.75;color:var(--text-sub);}
+td b,td strong{color:var(--text);}
+td em{color:var(--accent3);font-style:normal;}
+td .danger{color:var(--accent4);}
+td code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem;color:var(--accent3);}
+tr:nth-child(even) td{background:#ffffff04;}
+tr:hover td{background:#7c6af708;}
+.row-key td:first-child{color:var(--text);font-weight:600;}
+code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;font-size:.82rem;color:var(--accent3);}
+.memo{background:linear-gradient(135deg,#1a1440 0%,#1e1b4b 100%);border:1px solid #3730a3;border-radius:10px;padding:16px 20px;margin:16px 0;font-size:.88rem;}
+.memo .memo-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:#818cf8;text-transform:uppercase;margin-bottom:8px;}
+.memo .memo-body{color:#c7d2fe;line-height:1.8;}
+.memo .memo-body b{color:#e0e7ff;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+@media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
+.card h4{color:var(--accent);font-size:.88rem;margin-bottom:12px;}
+.card ul{list-style:none;padding:0;}
+.card ul li{font-size:.88rem;color:var(--text-sub);padding:4px 0 4px 16px;position:relative;line-height:1.7;}
+.card ul li::before{content:'·';position:absolute;left:4px;color:var(--accent);}
+.card ul li b{color:var(--text);}
+.card ul li em{color:var(--accent3);font-style:normal;}
+hr{border:none;border-top:1px solid var(--border);margin:50px 0;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">정보보안기사 필기+실기</div>
+  <h1>3과목 — 애플리케이션 보안<br>읽으면서 이해되는 정리노트</h1>
+  <p>FTP, 이메일, 웹 서버, DNS, DB, 전자상거래, SSL, 개발보안, 포렌식까지 흐름으로 이해해봐.</p>
+  <div class="badge-row">
+    <span class="badge badge-w">📝 필기 출제</span>
+    <span class="badge badge-p">💻 실기 출제</span>
+    <span class="badge badge-wp">⭐ 필기+실기 모두</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="toc">
+  <h3>📋 목차</h3>
+  <ol>
+    <li><a href="#ch1">FTP — Active/Passive 모드, ftpusers, xferlog</a></li>
+    <li><a href="#ch2">이메일 보안 — SMTP, PGP, PEM, S/MIME, 스팸메일 차단</a></li>
+    <li><a href="#ch3">웹 서버 보안 — Apache 설정, php.ini, HTTP 상태코드, CVE/CWE/CVSS</a></li>
+    <li><a href="#ch4">DNS 보안 — 쿼리 종류, 레코드, named.conf, DNS 공격</a></li>
+    <li><a href="#ch5">데이터베이스 보안 — 위협 요소, 암호화 방법</a></li>
+    <li><a href="#ch6">전자상거래 보안 — 전자화폐 프로토콜, SET</a></li>
+    <li><a href="#ch7">SSL — 구성요소, Handshaking 과정, HeartBleed</a></li>
+    <li><a href="#ch8">OTP — 동기식 vs 비동기식</a></li>
+    <li><a href="#ch9">보안 취약점 및 개발 보안 — OWASP, 입력값 검증, XSS, CSRF</a></li>
+    <li><a href="#ch10">SSO, DRM, 핑거프린트/워터마킹</a></li>
+    <li><a href="#ch11">디지털 포렌식 — 원칙, 리버싱 도구</a></li>
+  </ol>
+</div>
+
+<!-- CH1 FTP -->
+<div id="ch1" class="chapter">
+  <div class="chapter-num">Chapter 01 · POINT 008</div>
+  <h2>FTP — Active/Passive 모드, ftpusers, xferlog</h2>
+  <div class="chapter-intro">FTP는 파일 전송 프로토콜이야. Active/Passive 포트 동작 방식과, 접근 제어 파일인 ftpusers, 로그 파일인 xferlog가 보안 핵심이야.</div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>FTP의 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>종류</th><th>설명</th></tr>
+        <tr><td><b>ftp</b></td><td>ID 및 Password 인증을 수행하고 TCP 프로토콜을 사용하여 사용자의 데이터를 송수신</td></tr>
+        <tr><td><b>tftp</b></td><td>인증과정 없이 UDP 기반으로 데이터를 빠르게 송수신. <em>69번 포트</em> 사용. 인증이 없어서 보안에 취약</td></tr>
+        <tr><td><b>sftp</b></td><td>전송구간에 암호화 기법을 사용하여 <em>기밀성을 제공</em>. SSH 기반으로 동작</td></tr>
+      </table>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">📋</span>
+      <div class="callout-body">
+        <b>ftpusers 파일</b>: 특정 사용자에 대해서 ftp 접근을 차단할 수 있어. 여기에 등록된 계정은 FTP 로그인 불가.<br>
+        <b>xferlog 파일</b>: FTP의 서비스 로그파일 중 하나. 업로드·다운로드 기록 확인 가능.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Active mode vs Passive mode <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">FTP는 <strong>제어 채널(21번 포트)</strong>과 <strong>데이터 채널</strong>을 따로 사용해. 데이터 채널을 누가 열어주느냐에 따라 Active/Passive로 나뉘어.</p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>전송 방식</th><th>동작 방식</th></tr>
+        <tr>
+          <td><b>Active mode</b></td>
+          <td>① FTP Client에서 FTP Server <em>21번 포트</em>로 접속<br>② FTP Client는 FTP Server <em>20번 포트</em>로 데이터를 전송<br>→ 서버가 클라이언트에게 능동적으로 데이터 채널 연결</td>
+        </tr>
+        <tr>
+          <td><b>Passive mode</b></td>
+          <td>① FTP Client에서 FTP Server <em>21번 포트</em>로 접속<br>② FTP Server가 FTP Client로 데이터 송수신을 위해서 <em>1,024~65,535 범위의 Random 포트</em>를 선택<br>→ 서버가 수동적으로 클라이언트의 연결을 기다림</td>
+        </tr>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        Active = 서버가 <em>능동적(Active)</em>으로 클라이언트에게 20번 포트로 연결 시도<br>
+        Passive = 서버가 <em>수동적(Passive)</em>으로 Random 포트를 열고 클라이언트 연결을 기다림
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CH2 이메일 보안 -->
+<div id="ch2" class="chapter">
+  <div class="chapter-num">Chapter 02 · POINT 008</div>
+  <h2>이메일 보안 — SMTP, PGP, PEM, S/MIME, 스팸메일 차단</h2>
+  <div class="chapter-intro">이메일은 피싱·스팸·악성코드 유포의 주요 경로야. 프로토콜 구조와 암호화 방식, 스팸 차단 기법을 이해하면 실제 보안 설정과도 연결돼.</div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>SMTP 구성요소 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구성요소</th><th>역할</th></tr>
+        <tr><td><b>MTA</b> (Mail Transfer Agent)</td><td>메일을 전송하는 메일서버. 이메일을 라우팅하고 다른 MTA로 전달</td></tr>
+        <tr><td><b>MDA</b> (Mail Delivery Agent)</td><td>수신 측에 고용된 우체부 역할. MTA에게 받은 메일을 사용자에게 전달</td></tr>
+        <tr><td><b>MUA</b> (Mail User Agent)</td><td>사용자들이 사용하는 클라이언트 애플리케이션 (Outlook, Thunderbird 등)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>PGP (Pretty Good Privacy) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🔐</span>
+      <div class="callout-body">
+        <b>PGP 암호화 과정 순서 (암기 필수)</b><br>
+        <em>압축 → 세션키 생성 → 메시지 암호화 → 세션키 암호화 → 전자서명 → 전송 → 수신 및 복호화</em>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>PGP 서비스</th><th>사용 알고리즘</th></tr>
+        <tr><td><b>전자서명</b></td><td>DSS/SHA 또는 RSA/SHA로 전자서명이 가능</td></tr>
+        <tr><td><b>메시지 암호화</b></td><td>CAST-128, IDEA, 3DES로 메시지 암호화</td></tr>
+        <tr><td><b>1회용 세션키 생성</b></td><td>Diffie-Hellman 혹은 RSA로 키 분배</td></tr>
+        <tr><td><b>이메일 호환</b></td><td>RADIX-64로 바이너리를 ACS Code로 변환</td></tr>
+        <tr><td><b>세그먼테이션</b></td><td>메시지 최대 사이즈를 제한</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>PEM과 S/MIME <span class="badge badge-wp">필기+실기</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h4>📧 PEM (Privacy Enhanced Mail)</h4>
+        <ul>
+          <li><em>중앙집중화된 키를 인증</em></li>
+          <li>구현이 어렵고 높은 보안성을 제공</li>
+          <li>군대, 은행에서 사용</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>📧 S/MIME</h4>
+        <ul>
+          <li>인터넷 MIME 메시지에 <em>전자서명과 함께 암호화</em>를 더한 프로토콜</li>
+          <li><em>RSA 암호</em>를 사용</li>
+          <li>CA(인증기관)로부터 <em>X.509 인증서</em>를 받아야 함</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>스팸메일 차단 기법 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>기법</th><th>RBL (Real Time Blocking List)</th><th>SPF (Sender Policy Framework)</th></tr>
+        <tr>
+          <td><b>방식</b></td>
+          <td>KISA의 RBL 서버에 특정 IP를 등록하고 차단</td>
+          <td>발신자: 자신의 메일서버 정보와 정책을 나타내는 SPF 레코드를 해당 DNS에 등록.<br>수신자: 이메일 수신 시 DNS에 등록된 SPF 레코드를 확인하여 해당 이메일에 표시된 발송 IP와 비교하고 수신 여부를 결정</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- CH3 웹 서버 보안 -->
+<div id="ch3" class="chapter">
+  <div class="chapter-num">Chapter 03 · POINT 008</div>
+  <h2>웹 서버 보안 — Apache 설정, php.ini, HTTP 상태코드, CVE/CWE/CVSS</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Apache 웹 서버 보안설정 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>보안설정</th><th>설명</th></tr>
+        <tr><td><b>Directory Listing</b></td><td>index.html이 없거나 Listing을 보여주는 옵션이 indexes에 설정된 경우 웹 페이지의 디렉토리가 보이게 됨 → <em>보안상 비활성화 필요</em></td></tr>
+        <tr><td><b>FollowSymLinks</b></td><td>심볼릭 링크를 이용해서 파일 시스템에 접근하여 Root 권한을 획득할 수 있으므로 <em>FollowSymLinks를 제거</em></td></tr>
+        <tr><td><b>상위 디렉토리 이동 차단</b></td><td><em>AllowOverride AuthConfig</em>로 설정해야 함</td></tr>
+        <tr><td><b>ServerTokens</b></td><td>웹 서버에 접속할 경우 최소한의 정보만 보이도록 록 설정. <em>Prod로 설정</em>해야 하며 HTTP Response 메시지로 웹서버 정보가 노출됨 방지</td></tr>
+        <tr><td><b>ServerSignature</b></td><td>on으로 설정된 경우 아파치 버전 및 서버 이름이 노출되고 off로 설정되면 노출되지 않음. Not Found 에러 발생 시 ServerTokens에 설정된 형태로 노출</td></tr>
+        <tr><td><b>LimitRequestBody</b></td><td>아파치 웹서버에서 최대 업로드 파일의 크기를 지정.<br>예시: <code>&lt;Directory /&gt;</code> <code>LimitRequestBody 5000000</code> <code>&lt;/Directory&gt;</code></td></tr>
+        <tr><td><b>KeepAlive</b></td><td>KeepAlive On: 특정 시간 동안 연결 유지 / MaxKeepAliveRequests 100 / KeepAliveTimeout 5</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>php.ini 보안 설정 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>설정 항목</th><th>설명</th></tr>
+        <tr><td><b>register_globals</b></td><td>register_globals=On으로 설정하지 않으면 form 객체를 이용해서 입력값들을 전달받을 때 전역변수로 등록하고 사용해야 함. <em>기본값이 Off이며 Off로 설정해야 함</em></td></tr>
+        <tr><td><b>allow_url_fopen</b></td><td>On으로 활성화하면 HTTP는 include, require 등을 사용할 수 있고 FTP는 fopen으로 접속이 가능. <em>Off로 설정해야 함</em></td></tr>
+        <tr><td><b>allow_url_include</b></td><td>include(), require() 계열의 함수 사용 시 외부 사이트 파일을 호출할 수 있어 <em>Off로 설정해서 비활성화</em>해야 함</td></tr>
+        <tr><td><b>magic_quotes_gpc</b></td><td>PHP 입력값에 단일 인용부호('), 이중 인용부호(&quot;), 백슬러시(\), 널문자가 포함되는 경우 자동으로 해당문자 앞에 백슬래시를 추가하여 특수문자를 처리. <em>보안상 On으로 설정해야 함</em></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>HTTP 상태코드 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>코드</th><th>의미</th></tr>
+        <tr><td><b>200</b></td><td>OK — 요청 성공</td></tr>
+        <tr><td><b>400</b></td><td>Bad Request — 잘못된 요청</td></tr>
+        <tr><td><b>404</b></td><td>Not Found — 요청한 리소스 없음</td></tr>
+        <tr><td><b>500</b></td><td>Internal Server Error — 서버 내부 오류</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>CVE, CWE, CVSS <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>용어</th><th>전체 이름</th><th>설명</th></tr>
+        <tr><td><b>CVE</b></td><td>Common Vulnerabilities and Exposures</td><td><em>( )-YYYY-NNNN</em>으로 표기. YYYY는 CVE가 등록된 연도이고 N은 해당 연도마다 부여된 취약점들의 번호링</td></tr>
+        <tr><td><b>CWE</b></td><td>Common Weakness Enumeration</td><td>소프트웨어의 취약점으로 이어질 수 있는 <em>오류(error)이며, 소프트웨어 보안약점 리스트</em></td></tr>
+        <tr><td><b>CVSS</b></td><td>Common Vulnerability Scoring System</td><td>취약성의 주요 특성을 파악하고 심각도를 반영하는 점수를 생성하는 방법을 제공. 우선순위를 지정할 수 있음</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- CH4 DNS 보안 -->
+<div id="ch4" class="chapter">
+  <div class="chapter-num">Chapter 04 · POINT 008</div>
+  <h2>DNS 보안 — 쿼리 종류, 레코드, named.conf, DNS 공격</h2>
+  <div class="chapter-intro">DNS는 도메인 이름을 IP 주소로 변환하는 시스템이야. 인터넷의 전화번호부 역할인데, 이걸 공격하면 사용자를 가짜 사이트로 유도할 수 있어서 보안적으로 매우 중요해.</div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>DNS Query의 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>종류</th><th>설명</th></tr>
+        <tr><td><b>Recursive Query (순환)</b></td><td>Local DNS 서버에 Query를 보내 <em>완성된 답을 요청</em>. Local DNS 서버가 다른 서버들을 대신 조회해서 최종 결과를 돌려줌. 사용자 호스트(Stub-Resolver)가 이 방식으로 질의 전송</td></tr>
+        <tr><td><b>Iterative Query (반복)</b></td><td>Local DNS 서버가 다른 DNS 서버에게 Query를 보내서 답을 요청하며, <em>외부 도메인에서 개별적인 작업을 통해 정보를 얻어와서 종합해서 알려줌</em>. 순환 Name Server가 Master Name Server에 반복질의 수행</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>named.conf 파일 설정 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>설정 항목</th><th>설명</th></tr>
+        <tr><td><b>zone</b></td><td>설정하려는 도메인명을 기술</td></tr>
+        <tr><td><b>type</b></td><td>• <em>master</em>: Primary DNS<br>• <em>slave</em>: Secondary DNS</td></tr>
+        <tr><td><b>allow-transfer</b></td><td>Master Name Server에서는 Zone 파일을 수신할 Slave Name Server를 지정. <em>none</em>은 전송하지 않음</td></tr>
+        <tr><td><b>allow-recursion</b></td><td>순환 쿼리를 제한할 IP를 지정</td></tr>
+        <tr><td><b>FQDN</b></td><td>Fully Qualified Domain Name — 전체 도메인 네임</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>DNS 레코드 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>레코드</th><th>설명</th></tr>
+        <tr><td><b>A (Address)</b></td><td>호스트 이름을 <em>IPv4 주소</em>로 매핑. 단일 호스트 이름에 IP주소가 여러 개이거나, 동일한 IP에 여러 호스트 이름이 있을 수 있음</td></tr>
+        <tr><td><b>AAAA</b></td><td>호스트 이름을 <em>IPv6 주소</em>로 매핑</td></tr>
+        <tr><td><b>PTR (Pointer)</b></td><td>특수 이름이 도메인의 다른 위치를 가리킬 수 있음. 인터넷 주소의 PTR 레코드는 <em>정확히 한 개만</em> 있어야 함 (역방향 조회)</td></tr>
+        <tr><td><b>NS (Name Server)</b></td><td>도메인에는 해당 이름의 서비스 레코드가 적어도 <em>한 개 이상</em> 있어야 하며 이는 DNS 서버이다</td></tr>
+        <tr><td><b>MX (Mail Exchanger)</b></td><td>도메인 이름으로 보낸 메일을 받도록 구성되는 <em>호스트 목록</em>을 지정</td></tr>
+        <tr><td><b>CNAME (Canonical Name)</b></td><td>호스트의 <em>다른 이름(별칭)</em>을 정의하는 데 사용</td></tr>
+        <tr><td><b>SOA (Start of Authority)</b></td><td>도메인에 대한 권한을 갖는 서버를 표시. 도메인에서 가장 큰 권한을 부여받은 호스트를 선언</td></tr>
+        <tr><td><b>Any (ALL)</b></td><td>위의 모든 레코드를 표시</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>DNS 공격 방법 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <b>DNS 증폭(Amplification) 원리</b><br>
+        Open DNS Resolver 서버를 이용해서 DNS Query의 Type을 <em>"ANY"</em>로 설정. A, NS, CNAME, AAAA 등의 모든 레코드를 요청하기 때문에 요청한 쿼리 패킷보다 크게 증폭됨.
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>공격 종류</th><th>설명</th></tr>
+        <tr><td><b>DNS Zone Transfer 공격</b></td><td>DNS 서버에 Zone transfer를 계속 시도하여 시스템 자원과 대역폭을 소진하는 DoS 공격 기법. DNS Zone transfer는 Master DNS 서버와 Slave DNS 서버 간에 Zone 파일 동기화를 수행하는 프로토콜</td></tr>
+        <tr><td><b>DNS 증폭공격</b></td><td>DNS Query 시에 Any 타입을 사용하고 DNS Response 메시지를 피해자에게 전송시키는 공격</td></tr>
+        <tr><td><b>DNS Query Flooding</b></td><td>DNS Request를 지속적으로 발생시켜 DNS 서버를 공격하는 DoS 공격 기법</td></tr>
+        <tr><td><b>DNS Cache Poisoning</b></td><td>DNS 서버의 캐시 테이블을 공격하여 DNS Spoofing을 할 수 있도록 하는 공격 → 가짜 사이트로 유도 가능</td></tr>
+        <tr><td><b>Reflector Attack</b></td><td>DNS 순환 질의 과정을 악용한 DDoS 공격으로 특정 사이트에 트래픽을 유발</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- CH5 데이터베이스 보안 -->
+<div id="ch5" class="chapter">
+  <div class="chapter-num">Chapter 05 · POINT 008</div>
+  <h2>데이터베이스 보안 — 위협 요소, 암호화 방법</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>데이터베이스 보안 위협 요소 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>위협 요소</th><th>설명</th></tr>
+        <tr><td><b>집합성 (Aggregation)</b></td><td>낮은 보안 등급의 정보들을 이용하여 <em>높은 등급의 정보를 알아내는 것</em></td></tr>
+        <tr><td><b>추론 (Inference)</b></td><td>보안 등급이 없는 일반 사용자가 보안으로 분류되지 않은 정보에 정당하게 접근하여 기밀 정보를 추출해 내는 행위. 로우 데이터(Raw Data)로부터 민감한 데이터를 유출하는 행위.<br><em>보안 대책: 다중인스턴스화(Polyinstantiation)</em></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>데이터베이스 암호화 방법 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>방식</th><th>설명</th></tr>
+        <tr><td><b>Plug In 방식</b></td><td>데이터베이스 서버에 별도의 암호화 솔루션을 설치하고 애플리케이션이 데이터 조작어(insert, update, select 등)를 실행하면 암호화하거나 복호화함</td></tr>
+        <tr><td><b>API 방식</b></td><td>애플리케이션 레벨에서 암호화/복호화를 처리. 애플리케이션 코드 수정 필요</td></tr>
+        <tr><td><b>TDE</b> (Transparent Data Encryption)</td><td>DBMS 자체에서 지원하는 커널기반 암호화. 특정 DBMS에서만 지원하는 것으로 <em>데이터파일을 암호화</em>하는 것</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- CH6 전자상거래 보안 -->
+<div id="ch6" class="chapter">
+  <div class="chapter-num">Chapter 06 · POINT 009</div>
+  <h2>전자상거래 보안 — 전자화폐 프로토콜, SET</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>전자화폐 프로토콜 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>프로토콜</th><th>설명</th></tr>
+        <tr><td><b>인출 프로토콜</b></td><td>사용자와 은행 간의 프로토콜. 은행이 사용자에게 전자화폐를 발급해주는 절차를 설명하는 프로토콜</td></tr>
+        <tr><td><b>지불 프로토콜</b></td><td>사용자와 상점 간의 프로토콜. 사용자가 구매 대금으로 자신의 전자화폐를 상점에 지불하는 과정을 설명하는 프로토콜</td></tr>
+        <tr><td><b>예치 프로토콜</b></td><td>상점과 은행 간의 프로토콜. 상점이 사용자로부터 전자화폐를 은행에 입금시키는 프로토콜</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>SET (Secure Electronic Transaction) <span class="badge badge-w">필기</span></div>
+    <p class="prose">SET의 핵심기술은 <strong>이중서명과 전자봉투</strong>야. 카드 소유자, 가맹점, Payment Gateway 3자 간의 안전한 거래를 보장해.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>참여자</th><th>처리 내용</th></tr>
+        <tr>
+          <td><b>카드 소유자</b></td>
+          <td>
+            • 암호화된 구매정보: <em>상점의 공개키</em>로 암호화<br>
+            • 암호화된 결제정보: <em>대칭키</em>로 암호화<br>
+            • 검증 해시: 구매정보 해시, 결제정보 해시<br>
+            • 전자서명: 구매자의 개인키로 암호화<br>
+            • 전자봉투: 암호화된 결제정보, 암호화된 대칭키를 <em>Payment Gateway의 공개키</em>로 암호화
+          </td>
+        </tr>
+        <tr>
+          <td><b>가맹점 (상점)</b></td>
+          <td>
+            • 상점은 개인키로 암호화된 구매정보를 복호화<br>
+            • 상점은 구매정보를 해시함수에 입력하고 수신한 해시값과 일치하는지 확인<br>
+            • 고객의 공개키로 전자서명을 확인<br>
+            • 전자서명에서 추출한 검증 해시값이 같은지 확인
+          </td>
+        </tr>
+        <tr>
+          <td><b>Payment Gateway</b></td>
+          <td>
+            • 전자봉투를 자신의 개인키로 복호화<br>
+            • 대칭키를 획득하고 결제정보를 복호화<br>
+            • 결제정보를 해시함수에 입력하고 검증 해시값과 일치하는지 확인<br>
+            • 고객의 공개키로 전자서명을 풀고 검증 해시값이 일치하는지 확인
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- CH7 SSL -->
+<div id="ch7" class="chapter">
+  <div class="chapter-num">Chapter 07 · POINT 009</div>
+  <h2>SSL — 구성요소, Handshaking 과정, HeartBleed</h2>
+  <div class="chapter-intro">SSL(현재는 TLS)은 HTTPS의 기반이 되는 보안 프로토콜이야. 클라이언트와 서버가 어떻게 안전한 연결을 수립하는지 과정을 이해하면 시험뿐 아니라 실제 보안 이슈도 이해하기 쉬워.</div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>SSL 구성요소 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구성요소</th><th>역할</th></tr>
+        <tr><td><b>Change Cipher Spec Protocol</b></td><td>협의된 암호 알고리즘, 키 교환 알고리즘, MAC 암호, HASH 알고리즘이 사용될 것을 클라이언트와 웹 서버에게 공지</td></tr>
+        <tr><td><b>Alert Protocol</b></td><td>에러 발생 시 경고를 발령</td></tr>
+        <tr><td><b>Record Protocol</b></td><td>실제 암호화를 수행</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>SSL Handshaking Protocol 세부 과정 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>진행 과정</th><th>설명</th></tr>
+        <tr><td><b>Client Hello</b></td><td>첫 단계. 클라이언트 브라우저에서 지원하는 <em>암호 알고리즘, 키 교환 알고리즘, MAC 암호, HASH 알고리즘</em>을 서버에게 전송</td></tr>
+        <tr><td><b>Server Hello</b></td><td>Client Hello 내용 중 서버가 지원할 수 있는 알고리즘들을 클라이언트에게 전송</td></tr>
+        <tr><td><b>Server Hello Done</b></td><td>클라이언트에게 서버의 요청이 완료되었음을 공지</td></tr>
+        <tr><td><b>Client 인증서</b></td><td>서버에서 클라이언트의 인증 요청 발생 시 클라이언트의 인증서를 전달</td></tr>
+        <tr><td><b>Client Key Exchange</b><br>(Premaster Key 전송)</td><td>신뢰할 수 있는 서버인지 확인 후 암호 통신에 사용할 <em>Session Key를 생성</em>하고 이것을 서버의 공개키로 암호화하여 <em>Premaster Key를 만들어 서버로 전송</em></td></tr>
+        <tr><td><b>Change Cipher Spec (클라이언트)</b></td><td>협의된 암호 알고리즘들을 이후부터 사용한다는 것을 서버에게 알림</td></tr>
+        <tr><td><b>Finished (클라이언트)</b></td><td>서버에게 협의의 종료를 전달</td></tr>
+        <tr><td><b>Change Cipher Spec (서버)</b></td><td>서버도 클라이언트의 응답에 동의하고 협의된 알고리즘들의 적용을 공지</td></tr>
+        <tr><td><b>Finished (서버)</b></td><td>클라이언트에게 협의에 대한 종료를 선언</td></tr>
+      </table>
+    </div>
+    <div class="callout tip"><span class="callout-icon">💡</span><div class="callout-body">SSL 버전은 <em>TLS 1.2 이상</em>을 사용해야 보안 취약점 문제가 없어.</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>OpenSSL 보안 취약점 — HeartBleed <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout danger">
+      <span class="callout-icon">💥</span>
+      <div class="callout-body">
+        OpenSSL에서 발견된 보안 취약점을 <em>하트블리드(HeartBleed)</em> 취약점이라고 함.<br>
+        OpenSSL 암호화 라이브러리에서 <em>하트비트(Heartbeat)</em>라는 확장 모듈에서 발생한 것으로, 웹 브라우저가 요청(Request) 시에 <em>데이터 길이를 검증하지 않아</em> 메모리에 저장되어 있는 <b>평문의 64 Kilo Byte가 노출</b>되는 현상.<br>
+        64KB의 평문은 아무런 제약 없이 누구나 알 수 있어.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CH8 OTP -->
+<div id="ch8" class="chapter">
+  <div class="chapter-num">Chapter 08 · POINT 009</div>
+  <h2>OTP — 동기식 vs 비동기식</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>OTP의 동기 및 비동기식 방식 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>방식</th><th>동작 원리</th></tr>
+        <tr>
+          <td><b>동기식</b></td>
+          <td>시간, 이벤트</td>
+          <td>
+            • Time 동기화: 토큰(Token)은 정해져 있는 <em>고정된 시간 간격을 주기</em>로 삼아 난수 값을 생성<br>
+            • 난수 값 생성을 위한 특별화 암호화 알고리즘과 비밀키가 필요<br>
+            • 토큰 장치로부터 새로 생성된 난수와 개인의 PIN번호를 입력하게 되면 인증시스템 내의 사용자 개인 정보와 생성된 패스워드를 검증하여 인증
+          </td>
+        </tr>
+        <tr>
+          <td><b>비동기식</b></td>
+          <td>질의응답</td>
+          <td>
+            • 사용자가 인증요구와 함께 PIN을 전송하면 인증서버에서 난수가 발생하여 <em>Challenge</em>를 사용자에게 전달<br>
+            • 사용자는 다시 이 Challenge 값을 암호화하여 Response를 반환하면 인증 서버는 자신의 결과값과 비교하여 인증
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- CH9 보안 취약점 및 개발 보안 -->
+<div id="ch9" class="chapter">
+  <div class="chapter-num">Chapter 09 · POINT 010</div>
+  <h2>보안 취약점 및 개발 보안 — OWASP, 입력값 검증, XSS, CSRF</h2>
+  <div class="chapter-intro">웹 애플리케이션 취약점은 대부분 "사용자 입력값을 제대로 검증하지 않아서" 발생해. SQL Injection, XSS, CSRF 모두 이 맥락에서 이해하면 기억하기 쉬워.</div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>개발보안 방법론 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>방법론</th><th>설명</th></tr>
+        <tr><td><b>CLASP</b></td><td>OWASP의 보안약점을 고려한 개발 보안 방법론. 개념, 역할, 활동을 정의한 모델</td></tr>
+        <tr><td><b>MS-SDL</b></td><td>PreSDL 단계에서 위협분석을 수행하고 '분석, 설계, 구현, 테스트'의 SDLC 단계에서 보안을 고려한 모델링을 수행. Microsoft의 자동화 진단도구로 활용</td></tr>
+        <tr><td><b>7-Touch Point</b></td><td>위협분석, 코드리뷰, 자동화 진단 등의 활동을 정의</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>입력 데이터 표현 및 검증 — 보안약점 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>보안약점</th><th>설명</th></tr>
+        <tr><td><b>SQL 삽입</b></td><td>사용자의 입력값이 SQL 쿼리에 삽입되어 공격자가 쿼리를 조작·공격할 수 있는 보안약점. PreparedStatement를 사용해야 함. SQL Injection, Blind SQL Injection, Union SQL Injection, Mass SQL Injection</td></tr>
+        <tr><td><b>코드삽입</b></td><td>공격자가 소프트웨어의 의도된 동작을 변경하도록 임의의 코드를 삽입하여 비정상적으로 동작하는 보안약점. eval 함수를 사용해서 서버에서 스크립트를 실행</td></tr>
+        <tr><td><b>크로스사이트 스크립트</b></td><td>검증되지 않은 외부 입력값에 의해 브라우저에서 악의적인 코드가 실행(자바 스크립트)되는 보안약점</td></tr>
+        <tr><td><b>운영체제 명령어 삽입</b></td><td>운영체제 명령어를 구성하는 외부 입력값이 적절한 필터링을 거치지 않고 쓰여져서 공격자가 운영체제 명령어를 조작할 수 있는 보안약점. <em>Command Injection 공격</em></td></tr>
+        <tr><td><b>위험한 형식 파일 업로드</b></td><td>파일의 확장자 등 파일형식에 대한 검증 없이 업로드를 허용하여 발생하는 보안약점 (화이트 리스트 검증)</td></tr>
+        <tr><td><b>신뢰되지 않는 URL 주소로 자동 접속 연결</b></td><td>사용자의 입력값 등과 같은 외부 입력값이 링크 표현에 사용되고, 이를 이용하여 악의적인 사이트로 리다이렉트(redirect)되는 보안약점 (피싱 공격 가능)</td></tr>
+        <tr><td><b>부적절한 XML 외부 개체 참조</b></td><td>XML 문서의 DTD(Document Type Definition) 문서 내에 XML 외부 엔티티의 처리를 활성화할 때 발생하는 보안약점</td></tr>
+        <tr><td><b>XML 삽입</b></td><td>과거 XQuery 삽입과 XPath 삽입을 통합. 검증되지 않은 외부 입력값이 XQuery 또는 XPath 쿼리문을 생성하는 문자열로 사용되어 임의의 쿼리를 실행하는 보안약점</td></tr>
+        <tr><td><b>크로스사이트 요청 위조</b></td><td>검증되지 않은 외부 입력값에 의해 브라우저에서 악의적인 코드가 실행되어 공격자가 원하는 요청(Request)이 다른 사용자(관리자 등)의 권한으로 서버에 전송되는 보안약점</td></tr>
+        <tr><td><b>서버사이드 요청위조</b></td><td>적절한 검증절차를 거치지 않은 사용자 입력값을 서버의 요청에 사용하여 의도적인 행위가 발생하는 보안약점</td></tr>
+        <tr><td><b>HTTP 응답분할</b></td><td>사용자의 입력값 등 외부 입력값이 HTTP 응답헤더에 삽입되어 악의적인 코드가 실행되는 보안약점 (CRLF 개인문자 삽입)</td></tr>
+        <tr><td><b>포맷 스트링 삽입</b></td><td>print(), ftprintf(), sprintf()와 같이 포맷 스트링을 사용하는 함수를 사용하는 경우, 외부로부터 입력된 값을 검증하지 않고 출력함수의 포맷 문자열로 그대로 사용하는 경우 발생. (%n, %hn 악의적 코드 실행 가능)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>XSS의 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>종류</th><th>설명</th></tr>
+        <tr><td><b>Stored XSS</b></td><td>Persistent (지속적). 공격자는 악성 스크립트를 XSS에 취약한 웹 서버에 저장(웹 게시판, 방명록 등). 공격자는 해당 게시물을 피해자(Victim)에게 노출시킴</td></tr>
+        <tr><td><b>Reflective XSS</b></td><td>Non Persistent (비지속적). 공격자는 악성 스크립트를 포함한 URL을 피해자(Victim)에게 노출. 악성 스크립트는 서버에 저장되지 않음</td></tr>
+        <tr><td><b>DOM XSS</b></td><td>클라이언트에서 사용자 입력값으로 동적 웹페이지를 구성하면 요청이 서버로 전송되지 않고 클라이언트 웹브라우저에서 공격이 발생. document.write, document.cookie를 사용</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>CSRF 대응 방안 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🛡️</span>
+      <div class="callout-body">
+        <b>CSRF 대응 방안</b><br>
+        • 입력 폼 작성 시 <em>POST 방식</em>을 사용<br>
+        • 입력 폼과 해당 입력 처리 프로그램 간에 <em>토큰(CSRF 토큰)</em>을 사용<br>
+        • 중요한 기능에 대해 <em>세션 검증과 재인증 처리</em> 또는 트랜잭션 서명을 수행<br>
+        • <em>CAPTCHA</em>: 특정 이미지를 화면에 보여 주고 해당 이미지의 값을 사용자에게 직접 입력하게 하는 것 → 악성 스크립트가 실행되지 못함
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CH10 SSO, DRM -->
+<div id="ch10" class="chapter">
+  <div class="chapter-num">Chapter 10 · POINT 010</div>
+  <h2>SSO, DRM, 핑거프린트/워터마킹</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>SSO와 DRM <span class="badge badge-wp">필기+실기</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h4>🔑 SSO (Single Sign On)</h4>
+        <ul>
+          <li>다수의 서비스를 <em>한 번의 Login으로</em> 기업의 업무시스템이나 인터넷 서비스에 접속할 수 있도록 해주는 보안 시스템</li>
+          <li>사용자 편의성 향상, 관리 일원화</li>
+          <li>SSO 서버가 단일 장애점이 될 수 있음</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>🔐 DRM (Digital Rights Management)</h4>
+        <ul>
+          <li>디지털 콘텐츠를 안전하게 보호할 목적으로 암호화 기술을 이용하여 허가되지 않은 사용자로부터 콘텐츠 저작권 관련 당사자의 권리 및 이익을 <em>지속적으로 보호 및 관리</em>하는 시스템</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>핑거프린트와 워터마킹 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🖨️</span>
+      <div class="callout-body">
+        <b>핑거프린트(Fingerprint)</b><br>
+        워터마킹(Watermarking) 기술 중 하나로 <em>구매자 정보와 판매자 정보를 삽입</em>하는 <em>Dual Watermarking</em>을 제공하고 불법유통을 방지하기 위해서 사용.<br>
+        구매자마다 다른 워터마크를 삽입해서 불법 배포 시 누가 유출했는지 추적 가능.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CH11 디지털 포렌식 -->
+<div id="ch11" class="chapter">
+  <div class="chapter-num">Chapter 11 · POINT 010</div>
+  <h2>디지털 포렌식 — 원칙, 리버싱 엔지니어링 도구</h2>
+  <div class="chapter-intro">디지털 포렌식은 디지털 기기를 대상으로 발생하는 특정 행위의 사실관계를 법정에서 증명하기 위한 방법 및 절차야. 과학수사와 수사과학 분야에서 활용돼.</div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>디지털 포렌식 원칙 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>원칙</th><th>설명</th></tr>
+        <tr><td><b>정당성 원칙</b></td><td>증거가 적법한 절차에 의해 수집되었는가?</td></tr>
+        <tr><td><b>재현 원칙</b></td><td>같은 조건과 상황에서 항상 같은 결과가 나오는가?</td></tr>
+        <tr><td><b>신속성 원칙</b></td><td>디지털 포렌식의 전 과정이 신속하게 진행되었는가?</td></tr>
+        <tr><td><b>절차 연속성 원칙</b></td><td>증거물 수집, 이동, 보관, 분석, 법정제출의 각 단계에서 담당자 및 책임자가 명확한가?</td></tr>
+        <tr><td><b>무결성 원칙</b></td><td>수집된 증거가 위변조되지 않았는가?</td></tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 암기법</div>
+      <div class="memo-body"><b>정재신절무</b> — 정당성, 재현, 신속성, 절차연속성, 무결성</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>리버싱 엔지니어링 도구 <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">실행 파일로부터 설계사상 혹은 행위 등을 추출하는 과정이야. 컴파일된 바이너리(exe, dll, com 등)를 <strong>디스어셈블(Disassemble)</strong> 도구를 사용해서 어셈블리 코드를 변환하는 작업이야.</p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>도구</th><th>분석 유형</th><th>설명</th></tr>
+        <tr><td><b>OllyDbg</b></td><td>정적 및 동적 분석</td><td>윈도우 실행파일(PE구조)의 구조와 동작을 분석. OllyDbg와 유사한 소프트웨어로는 IDA pro가 있음. 실시간 디버깅, 레지스터 및 메모리 값을 확인. Breakpoint를 설정하여 특정 지점에서 실행을 중단시킬 수 있음</td></tr>
+        <tr><td><b>Process Explorer</b></td><td>동적분석</td><td>실행 중인 프로세스의 동작을 모니터링</td></tr>
+        <tr><td><b>Autoruns</b></td><td>동적도구</td><td>레지스트리를 확인하여 악성코드 실행 전과 후로 레지스트리 값의 변화를 확인할 수 있음</td></tr>
+        <tr><td><b>ProcMonitor</b></td><td>동적분석</td><td>파일 시스템, 레지스트리, 네트워크 등에서 발생하는 활동을 실시간으로 추적</td></tr>
+        <tr><td><b>FileMonitor</b></td><td>동적분석</td><td>파일 관련 이벤트를 모니터링하는 도구. 파일 생성, 읽기, 쓰기, 삭제 등을 실시간으로 추적</td></tr>
+        <tr><td><b>TCP View</b></td><td>동적분석</td><td>윈도우 운영체제에서 열려 있는 TCP 및 UDP 포트와 네트워크 활동을 추적할 수 있음</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:60px 0 30px;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:60px;">
+  정보보안기사 3과목 애플리케이션 보안 — 읽으면서 이해되는 정리노트 | 2025
+</div>
+</div>
+</body>
+</html>
