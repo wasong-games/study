@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보보안기사 4과목 — 정보보안 일반</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{--bg:#0f0f13;--surface:#16161e;--surface2:#1e1e2a;--surface3:#242433;--border:#2a2a3a;--border2:#333348;--accent:#7c6af7;--accent2:#5eead4;--accent3:#f59e0b;--accent4:#f87171;--accent5:#34d399;--accent6:#38bdf8;--text:#dde1f0;--text-sub:#a8adc4;--text-dim:#666880;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.85;font-size:15px;padding:0 0 80px;}
+.hero{background:linear-gradient(160deg,#0d1a2e 0%,#0a2040 40%,#0f1a0d 100%);border-bottom:1px solid var(--border);padding:64px 40px 48px;max-width:860px;margin:0 auto;}
+.hero-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;color:var(--accent6);text-transform:uppercase;margin-bottom:14px;}
+.hero h1{font-size:2rem;font-weight:700;line-height:1.3;background:linear-gradient(100deg,#bae6fd 0%,#38bdf8 40%,#34d399 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.hero p{color:var(--text-sub);font-size:.95rem;max-width:560px;line-height:1.8;}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+.badge{font-size:.72rem;font-weight:600;padding:3px 11px;border-radius:20px;border:1px solid;letter-spacing:.03em;}
+.badge-w{background:#7c6af718;border-color:#7c6af7;color:#a78bfa;}
+.badge-p{background:#5eead418;border-color:#5eead4;color:#5eead4;}
+.badge-wp{background:#f59e0b18;border-color:#f59e0b;color:#fcd34d;}
+.content{max-width:860px;margin:0 auto;padding:0 40px;}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin:40px 0 0;}
+.toc h3{color:var(--accent6);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
+.toc ol{padding-left:18px;}
+.toc li{margin:7px 0;color:var(--text-sub);font-size:.88rem;}
+.toc a{color:var(--text-sub);text-decoration:none;}
+.toc a:hover{color:var(--accent2);}
+.chapter{margin-top:72px;padding-top:32px;border-top:1px solid var(--border);}
+.chapter-num{font-size:.7rem;font-weight:700;letter-spacing:.15em;color:var(--accent6);text-transform:uppercase;margin-bottom:6px;}
+.chapter h2{font-size:1.55rem;font-weight:700;margin-bottom:14px;color:var(--text);}
+.chapter-intro{color:var(--text-sub);font-size:.93rem;line-height:1.9;padding:16px 20px;border-left:2px solid var(--border2);margin-bottom:32px;}
+.section{margin-bottom:48px;}
+.section-title{font-size:1.05rem;font-weight:700;color:var(--accent2);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-title .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+.section-title .badge{margin-left:4px;}
+.prose{color:var(--text-sub);font-size:.93rem;line-height:2;margin-bottom:14px;}
+.prose b,.prose strong{color:var(--text);font-weight:600;}
+.prose em{color:var(--accent3);font-style:normal;font-weight:600;}
+.prose u{text-decoration:none;color:var(--accent2);font-weight:600;}
+.prose .danger{color:var(--accent4);font-weight:600;}
+.callout{border-radius:10px;padding:16px 20px;margin:16px 0;font-size:.9rem;line-height:1.85;display:flex;gap:14px;align-items:flex-start;}
+.callout-icon{font-size:1.05rem;flex-shrink:0;margin-top:1px;}
+.callout-body{color:var(--text-sub);}
+.callout-body b{color:var(--text);}
+.callout-body em{color:var(--accent3);font-style:normal;}
+.callout-body .danger{color:var(--accent4);}
+.callout-body u{text-decoration:none;color:var(--accent2);}
+.callout-body code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem;color:var(--accent3);}
+.callout.tip{background:#5eead410;border:1px solid #5eead428;}
+.callout.warn{background:#f59e0b10;border:1px solid #f59e0b28;}
+.callout.info{background:#7c6af710;border:1px solid #7c6af728;}
+.callout.danger{background:#f8717110;border:1px solid #f8717128;}
+.table-wrap{overflow-x:auto;margin:16px 0 20px;}
+table{width:100%;border-collapse:collapse;font-size:.87rem;}
+th{background:var(--surface2);color:var(--accent);padding:10px 16px;border:1px solid var(--border);font-weight:600;text-align:left;white-space:nowrap;}
+td{padding:10px 16px;border:1px solid var(--border);vertical-align:top;line-height:1.75;color:var(--text-sub);}
+td b,td strong{color:var(--text);}
+td em{color:var(--accent3);font-style:normal;}
+td .danger{color:var(--accent4);}
+td code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:3px;font-size:.8rem;color:var(--accent3);}
+tr:nth-child(even) td{background:#ffffff04;}
+tr:hover td{background:#7c6af708;}
+.row-key td:first-child{color:var(--text);font-weight:600;}
+code{font-family:'JetBrains Mono',monospace;background:var(--surface3);border:1px solid var(--border);padding:1px 6px;border-radius:4px;font-size:.82rem;color:var(--accent3);}
+.memo{background:linear-gradient(135deg,#1a1440 0%,#1e1b4b 100%);border:1px solid #3730a3;border-radius:10px;padding:16px 20px;margin:16px 0;font-size:.88rem;}
+.memo .memo-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:#818cf8;text-transform:uppercase;margin-bottom:8px;}
+.memo .memo-body{color:#c7d2fe;line-height:1.8;}
+.memo .memo-body b{color:#e0e7ff;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+@media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
+.card h4{color:var(--accent);font-size:.88rem;margin-bottom:12px;}
+.card ul{list-style:none;padding:0;}
+.card ul li{font-size:.88rem;color:var(--text-sub);padding:4px 0 4px 16px;position:relative;line-height:1.7;}
+.card ul li::before{content:'·';position:absolute;left:4px;color:var(--accent);}
+.card ul li b{color:var(--text);}
+.card ul li em{color:var(--accent3);font-style:normal;}
+hr{border:none;border-top:1px solid var(--border);margin:50px 0;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">정보보안기사 필기+실기</div>
+  <h1>4과목 — 정보보안 일반<br>읽으면서 이해되는 정리노트</h1>
+  <p>CIA 3요소부터 암호학, 접근통제, 전자서명, 해시함수까지 — 정보보안의 핵심 이론을 흐름으로 이해해봐.</p>
+  <div class="badge-row">
+    <span class="badge badge-w">📝 필기 출제</span>
+    <span class="badge badge-p">💻 실기 출제</span>
+    <span class="badge badge-wp">⭐ 필기+실기 모두</span>
+  </div>
+</div>
+
+<div class="content">
+<div class="toc">
+  <h3>📋 목차</h3>
+  <ol>
+    <li><a href="#ch1">정보보호 목표 — CIA 3요소, 보안통제, FDS</a></li>
+    <li><a href="#ch2">사용자 인증 — 악성코드, 정보 접근단계, 인증 방식, 생체인증</a></li>
+    <li><a href="#ch3">Kerberos — 인증 과정, 버전별 특징</a></li>
+    <li><a href="#ch4">접근통제 — MAC/DAC/RBAC 비교, 접근통제 모델</a></li>
+    <li><a href="#ch5">전자서명 — 과정, 종류(RSA/ElGamal/DSS/KCDSA/ECC), PKI</a></li>
+    <li><a href="#ch6">암호학 — 암호화 종류, 블록 암호 기법, 대칭키 알고리즘</a></li>
+    <li><a href="#ch7">국내 개발 암호 알고리즘 — HIGHT, ARIA, LEA, LSH</a></li>
+    <li><a href="#ch8">암호화 공격기법</a></li>
+    <li><a href="#ch9">해시함수 — 조건, 종류, 생일자 공격</a></li>
+  </ol>
+</div>
+
+
+<!-- CH1 정보보호 목표 -->
+<div id="ch1" class="chapter">
+  <div class="chapter-num">Chapter 01 · POINT 011</div>
+  <h2>정보보호 목표<br>— CIA 3요소, 보안통제, FDS</h2>
+  <div class="chapter-intro">
+    정보보안의 모든 개념은 CIA 3요소 위에서 출발해. 무엇을 왜 보호하는지 이해하면 이후 나오는 모든 보안 기술이 어떤 목적을 위한 것인지 자연스럽게 연결돼.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>정보보호의 목표 — CIA 3요소 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>목표</th><th>설명</th><th>위협 예시</th></tr>
+        <tr>
+          <td><b>기밀성</b><br>(Confidentiality)</td>
+          <td>정보가 허가되지 않은 사용자(조직)에게 노출되지 않는 것을 보장하는 보안 원칙</td>
+          <td>도청, 스니핑, 정보 유출</td>
+        </tr>
+        <tr>
+          <td><b>무결성</b><br>(Integrity)</td>
+          <td>정보가 권한이 없는 사용자의 의의적 또는 비의의적인 접근에 의해 변경되지 않는 것을 보장하는 보안 원칙</td>
+          <td>데이터 변조, 위·변조 공격</td>
+        </tr>
+        <tr>
+          <td><b>가용성</b><br>(Availability)</td>
+          <td>인가된 사용자(조직)가 정보시스템의 데이터 또는 자원을 필요로 할 때 부당한 지체 없이 원하는 객체 또는 자원을 접근하고 사용할 수 있는 것을 보장하는 보안 원칙</td>
+          <td>DoS/DDoS 공격, 랜섬웨어</td>
+        </tr>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <b>추가 보안 목표</b><br>
+        • <em>부인방지(Non-Repudiation)</em>: 송신자가 메시지를 보낸 사실을 부인하거나, 수신자가 받은 사실을 부인하지 못하게 함 → 전자서명으로 구현<br>
+        • <em>인증(Authentication)</em>: 사용자가 주장하는 신원이 맞는지 확인
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>보안통제 — 시점별 통제의 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>통제 유형</th><th>설명</th><th>사례</th></tr>
+        <tr>
+          <td><b>예방 통제</b><br>(Preventive Control)</td>
+          <td>바람직하지 못한 사건이 발생하는 것을 피하기 위해 사용되는 통제</td>
+          <td>담장, 자물쇠, 보안 경비원, 백신, 직무분리, 암호화, 방화벽</td>
+        </tr>
+        <tr>
+          <td><b>탐지 통제</b><br>(Detective Control)</td>
+          <td>발생된 사건을 식별하기 위해 사용</td>
+          <td>CCTV, 보안 감사, 감사로그, 침입탐지, 경보</td>
+        </tr>
+        <tr>
+          <td><b>교정 통제</b><br>(Corrective Control)</td>
+          <td>발생된 사건을 교정하기 위해 사용</td>
+          <td>백신 소프트웨어</td>
+        </tr>
+        <tr>
+          <td><b>복구 통제</b><br>(Recovery Control)</td>
+          <td>자원과 능력을 복구하기 위해 사용</td>
+          <td>백업과 복구</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>FDS (Fraud Detection System) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout info">
+      <span class="callout-icon">🔍</span>
+      <div class="callout-body">
+        FDS는 전자금융거래에서 사용되는 <em>단말정보, 접속로그, 거래정보 등을 분석</em>하여 금전 및 사적인 이득을 취하기 위해서 발생하는 각종 <em>부정 거래행위를 탐지 및 예방</em>한다.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH2 사용자 인증 -->
+<div id="ch2" class="chapter">
+  <div class="chapter-num">Chapter 02 · POINT 012</div>
+  <h2>사용자 인증<br>— 악성코드, 정보 접근단계, 인증 방식, 생체인증</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>악성코드 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>종류</th><th>설명</th></tr>
+        <tr>
+          <td><b>논리폭탄</b><br>(Logic Bomb)</td>
+          <td>특정 조건이 발생할 때 실행되는 악성코드. 특정 조건이 발생하지 않으면 악성코드로 작동하지 않기 때문에 <em>탐지하기 어려움</em></td>
+        </tr>
+        <tr>
+          <td><b>키로거</b><br>(Key-Logger)</td>
+          <td>사용자가 입력하는 정보를 갈취하는 악성코드. 윈도우 후킹(Hooking)을 통해서 <em>키보드 입력정보를 획득</em></td>
+        </tr>
+        <tr>
+          <td><b>트로이목마</b><br>(Trojan)</td>
+          <td>자기복제 능력이 없음. 시스템 정보, 개인정보 등을 유출하거나 특정 <em>시스템 파일을 삭제</em></td>
+        </tr>
+        <tr>
+          <td><b>백도어</b><br>(Backdoor, Trapdoor)</td>
+          <td>인증과정을 우회해서 시스템에 접근할 수 있도록 열어둔 뒷문을 통해 <em>원격 조정하여 시스템을 장악</em></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>정보의 접근단계 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>단계</th><th>설명</th><th>예시</th></tr>
+        <tr>
+          <td><b>식별</b><br>(Identification)</td>
+          <td>사용자가 시스템에 본인이 누구인지 밝히는 행위</td>
+          <td>사용자 ID 입력</td>
+        </tr>
+        <tr>
+          <td><b>인증</b><br>(Authentication)</td>
+          <td>정보나 시스템에 접근하려는 사용자가 <em>본인임을 확인</em>하는 단계. 인증을 주장하는 정당한 사용자임을 확인</td>
+          <td>Password, 스마트카드, 생체인증</td>
+        </tr>
+        <tr>
+          <td><b>인가</b><br>(Authorization)</td>
+          <td>인증을 거친 사용자에게 허용된 <em>접근 권한과 사용 범위를 부여</em>하는 단계</td>
+          <td>파일 읽기/쓰기 권한 부여</td>
+        </tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 순서 암기</div>
+      <div class="memo-body"><b>식별 → 인증 → 인가</b> (나는 누구 → 맞는지 확인 → 권한 줌)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>인증 방식의 분류 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구분</th><th>설명</th><th>기반</th><th>종류</th></tr>
+        <tr><td><b>Type I 인증</b></td><td>Something you know</td><td>지식</td><td>Password, Pin, Passphrase</td></tr>
+        <tr><td><b>Type II 인증</b></td><td>Something you have</td><td>소유</td><td>Smart Card, Tokens, Key</td></tr>
+        <tr><td><b>Type III 인증</b></td><td>Something you are</td><td>존재(생체)</td><td>홍채, 지문, 정맥</td></tr>
+        <tr><td><b>Type IV 인증</b></td><td>Something you do</td><td>행동</td><td>음성, 서명, Keystroke Dynamics</td></tr>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <b>다중인증(MFA)</b>: 두 가지 이상의 Type을 결합. 예: ATM 카드(Type II) + PIN(Type I) → 보안 강화
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>생체인증 오류율 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>용어</th><th>설명</th></tr>
+        <tr>
+          <td><b>FRR</b><br>(False Reject Rate, Type I Error)</td>
+          <td>잘못된 거부율. <em>편의성 관점</em>: 정상적인 사람을 거부함</td>
+        </tr>
+        <tr>
+          <td><b>FAR</b><br>(False Acceptance Rate, Type II Error)</td>
+          <td>잘못된 승인율. <em>보안 관점</em>: 비인가자를 정상 인가자로 받아들임</td>
+        </tr>
+        <tr>
+          <td><b>CER / ERR</b><br>(Crossover Error Rate, Equal Error Rate)</td>
+          <td>FRR과 FAR이 교차되는 지점. <em>효율성 및 생체인증의 척도</em>. CER이 낮을수록 좋은 시스템</td>
+        </tr>
+      </table>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">📊</span>
+      <div class="callout-body">
+        FRR ↑ = 보안 강화, 불편함 증가<br>
+        FAR ↑ = 편의성 증가, 보안 약화<br>
+        <em>CER(ERR)</em> = 두 오류율이 같아지는 지점 → 생체인증 시스템의 종합 성능 지표
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH3 Kerberos -->
+<div id="ch3" class="chapter">
+  <div class="chapter-num">Chapter 03 · POINT 012</div>
+  <h2>Kerberos<br>— 인증 과정, 버전별 특징</h2>
+  <div class="chapter-intro">
+    Kerberos는 네트워크 환경에서 티켓(Ticket) 기반으로 인증하는 프로토콜이야. 패스워드를 네트워크로 직접 전송하지 않아서 도청 공격에 강해. 기업 내부망(Active Directory)에서 많이 사용돼.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Kerberos 인증 과정 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>단계</th><th>방향</th><th>내용</th></tr>
+        <tr><td><b>① AS 요청</b></td><td>클라이언트 → AS</td><td>사용자 ID(평문)를 AS에 요청</td></tr>
+        <tr><td><b>② TGS 세션키 응답</b></td><td>AS → 클라이언트</td><td>TGS 세션키 + TGT(Ticket Granting Ticket) 발급</td></tr>
+        <tr><td><b>③ TGT로 티켓 요청</b></td><td>클라이언트 → TGS</td><td>TGS 세션키와 TGT로 서비스 티켓 요청</td></tr>
+        <tr><td><b>④ SS 세션키 응답</b></td><td>TGS → 클라이언트</td><td>서비스 서버(SS) 세션키 발급</td></tr>
+        <tr><td><b>⑤ SS 세션키로 접속</b></td><td>클라이언트 → SS</td><td>발급받은 세션키로 서비스 서버에 접속</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Kerberos 버전별 특징 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>항목</th><th>Kerberos v4</th><th>Kerberos v5</th></tr>
+        <tr><td><b>암호화</b></td><td>DES 암호화 알고리즘 사용</td><td>다른 종류의 안전한 암호화 알고리즘 사용 가능</td></tr>
+        <tr><td><b>주소</b></td><td>IP 주소 사용</td><td>다른 형식의 주소 사용 가능</td></tr>
+        <tr><td><b>메시지 순서</b></td><td>메시지 바이트 순서 표시 고정</td><td>ASN.1과 BER 인코딩 규칙 표준 사용</td></tr>
+        <tr><td><b>티켓 유효시간</b></td><td>최대 28*5=1,280분</td><td>시작시간과 끝나는 시간 표시(유효 시간)</td></tr>
+        <tr><td><b>인증발송</b></td><td>인증발송 지원 안 함</td><td>인증발송을 지원함</td></tr>
+        <tr><td><b>상호인증</b></td><td>상호인증 지원 안 함</td><td>Kerberos 간의 상호인증 지원</td></tr>
+        <tr><td><b>암호화 모드</b></td><td>DES 비표준 모드인 PCBC 모드 사용</td><td>표준모드인 CBC 모드 사용</td></tr>
+        <tr><td><b>세션키 재사용</b></td><td>세션키의 연속적 사용으로 재생공격(Replay attack) 가능</td><td>단 한 번만 사용되는 서브 세션키 협약 가능</td></tr>
+        <tr><td><b>패스워드 공격</b></td><td>패스워드 추측공격 가능</td><td>사전 인증기능으로 패스워드 추측 공격이 더 어려워짐</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH4 접근통제 -->
+<div id="ch4" class="chapter">
+  <div class="chapter-num">Chapter 04 · POINT 013</div>
+  <h2>접근통제<br>— MAC/DAC/RBAC 비교, 접근통제 모델</h2>
+  <div class="chapter-intro">
+    접근통제는 "누가, 어떤 자원에, 어떤 방식으로 접근할 수 있는지"를 결정하는 메커니즘이야. 세 가지 방식(MAC/DAC/RBAC)의 차이를 이해하면 보안 등급, 정책 설계와 자연스럽게 연결돼.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>접근통제 기술 비교 — MAC / DAC / RBAC <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>항목</th><th>MAC (강제적 접근통제)</th><th>DAC (임의적 접근통제)</th><th>RBAC (역할기반 접근통제)</th></tr>
+        <tr><td><b>권한부여자</b></td><td>System(관리자)</td><td>Data Owner(소유자가 관리)</td><td>Central Authority</td></tr>
+        <tr><td><b>접근여부 결정기준</b></td><td>Security Label</td><td>Identity</td><td>Role</td></tr>
+        <tr><td><b>오렌지 북</b></td><td>B</td><td>C</td><td>C</td></tr>
+        <tr><td><b>장점</b></td><td>안전/중앙 집중 관리</td><td>유연, 구현 용이</td><td>관리 용이</td></tr>
+        <tr><td><b>단점</b></td><td>구현/운영 어려움, 높은 비용</td><td>트로이목마, ID 도용문제</td><td>유연한 통제 어려움</td></tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 핵심 구분</div>
+      <div class="memo-body">
+        <b>MAC</b>: 시스템(관리자)이 보안 등급 라벨로 강제 통제 → 군사 환경<br>
+        <b>DAC</b>: 데이터 소유자가 직접 권한 설정 → 일반 OS 파일 시스템<br>
+        <b>RBAC</b>: 역할(Role)에 권한을 부여 → 기업 환경 (과장=결재권한, 사원=조회권한)
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>접근통제 모델 <span class="badge badge-w">필기</span></div>
+
+    <div class="callout info">
+      <span class="callout-icon">🔐</span>
+      <div class="callout-body">
+        <b>Bell-Lapadula 모델</b> — <em>기밀성</em> 모델<br>
+        높은 등급의 정보가 낮은 레벨로 유출되는 것을 통제하는 모델. 군사 보안 모델의 기반.<br><br>
+        <b>Bell-Lapadula 보안규칙</b><br>
+        ① <em>No Read-Up (NRU or ss-property)</em> — 단순 보안 규칙<br>
+        &nbsp;&nbsp;주체는 자신보다 높은 등급의 객체를 읽을 수 없음<br>
+        &nbsp;&nbsp;주체의 취급인가가 객체의 비밀 등급보다 같거나 높아야 그 객체를 읽을 수 있음<br><br>
+        ② <em>No Write-Down (NWD or *-property)</em> = Confinement property — *(스타) 보안 규칙<br>
+        &nbsp;&nbsp;주체는 자신보다 낮은 등급의 객체에 정보를 쓸 수 없음<br>
+        &nbsp;&nbsp;주체의 취급인가가 객체의 비밀 등급보다 낮거나 같은 경우에 그 객체를 주체가 기록할 수 있음<br><br>
+        ③ <em>Strong *-property</em><br>
+        &nbsp;&nbsp;더욱 강화된 모델로 주체는 자신과 등급이 다른 객체에 대해 읽거나 쓸 수 없음
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>모델</th><th>특징</th></tr>
+        <tr>
+          <td><b>Bell-Lapadula</b></td>
+          <td>기밀성 모델. 높은 등급의 정보가 낮은 레벨로 유출되는 것을 통제. <em>No Read-Up, No Write-Down</em></td>
+        </tr>
+        <tr>
+          <td><b>Biba 모델</b></td>
+          <td>Bell-Lapadula 모델의 단점인 <em>무결성을 보장</em>하는 모델. 주체에 의한 객체 접근의 항목으로 무결성을 다룸. No Read-Down, No Write-Up</td>
+        </tr>
+        <tr>
+          <td><b>Clark and Wilson</b><br>(클락 윌슨 모델)</td>
+          <td>무결성 중심의 상업용으로 설계. Application의 보안 요구사항을 다룸. 정보의 특성에 따라 비밀 노출 방지보다 <em>자료의 변조 방지</em>가 더 중요한 경우에 사용</td>
+        </tr>
+        <tr>
+          <td><b>만리장성 모델</b><br>(Chinese Wall = Brewer-Nash)</td>
+          <td>서로 상충 관계에 있는 객체 간의 정보 접근을 통제하는 모델 (이익의 상충 금지). <em>상업적으로 기밀성 정책</em>을 따름</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH5 전자서명 -->
+<div id="ch5" class="chapter">
+  <div class="chapter-num">Chapter 05 · POINT 014</div>
+  <h2>전자서명<br>— 과정, 종류, PKI</h2>
+  <div class="chapter-intro">
+    전자서명은 "이 문서를 내가 작성했다"는 것을 증명하는 디지털 기술이야. 종이에 도장 찍는 것과 같은 역할인데, 위조가 불가능하도록 암호학적으로 구현돼. 부인방지(Non-Repudiation)를 제공한다는 게 핵심이야.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>전자서명 과정 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>키(Key)</th><th>설명</th></tr>
+        <tr>
+          <td rowspan="2"><b>송신자</b></td>
+          <td>개인키</td>
+          <td><em>전자서명 수행</em> — 내가 개인키로 서명 (내 도장)</td>
+        </tr>
+        <tr>
+          <td>공개키</td>
+          <td><em>전자서명 확인</em> — 상대방이 내 공개키로 서명 검증</td>
+        </tr>
+        <tr>
+          <td rowspan="2"><b>수신자</b></td>
+          <td>개인키</td>
+          <td><em>복호화 수행</em> — 내 개인키로 암호화된 내용 복호화</td>
+        </tr>
+        <tr>
+          <td>공개키</td>
+          <td><em>암호화 수행</em> — 상대방의 공개키로 암호화해서 전송</td>
+        </tr>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <b>핵심 정리</b><br>
+        암호화: <em>수신자의 공개키</em>로 암호화 → 수신자의 개인키로 복호화 (기밀성)<br>
+        전자서명: <em>송신자의 개인키</em>로 서명 → 송신자의 공개키로 검증 (부인방지, 무결성)
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>전자서명 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>종류</th><th>특징</th></tr>
+        <tr>
+          <td><b>① RSA 전자서명</b></td>
+          <td>RSA 암호화 알고리즘을 사용해서 메시지에 대해 전자서명. RSA 방식은 암호화와 복호화를 하는 경우 송신자의 개인키와 공개키를 사용. <em>소인수 분해의 어려움</em>을 기반으로 하는 전자서명</td>
+        </tr>
+        <tr>
+          <td><b>② ElGamal 전자서명</b></td>
+          <td>1985년 발표된 것으로 이산대수 문제를 이용한 전자서명. 전자서명의 안전성은 이산대수 문제에 기반. ElGamal은 암호화 알고리즘으로는 사용할 수 없고 오직 전자서명만 가능. 서명자 A는 자신의 개인키를 사용하여 메시지에 대해 전자서명</td>
+        </tr>
+        <tr>
+          <td><b>③ Schnorr 전자서명</b></td>
+          <td>IC 카드에 적합한 전자서명 방식. ElGamal을 기반으로 하는 방식으로 <em>서명의 크기를 줄이기 위해 제안</em></td>
+        </tr>
+        <tr>
+          <td><b>④ DSS</b><br>(Digital Signature Standard)</td>
+          <td>미국 전자서명 표준으로, ElGamal 전자서명을 개량한 것. RSA와 다르게 암호화 교환과 암호화는 지원하지 않고 <em>오직 전자서명만 지원</em>. ElGamal 전자서명 방식으로 서명 검증을 개량한 것으로 서명검증의 부하를 줄이기 위해서 계산량을 줄인 방식</td>
+        </tr>
+        <tr>
+          <td><b>⑤ KCDSA</b><br>(Korea Certificate-based Digital Signature Algorithm)</td>
+          <td>1996년에 개발된 국내 전자서명 표준으로 국내 전자서명법을 준용하여 인감과 같은 법적 효력을 가짐. 1998년 한국정보통신기술 협회에서 국가 표준으로 제정. <em>이산대수를 기반으로 하는 전자서명 알고리즘</em></td>
+        </tr>
+        <tr>
+          <td><b>⑥ ECC 전자서명</b><br>(Elliptic Curve Digital Scheme)</td>
+          <td>ECDSA로 타원곡선을 기반으로 하는 전자서명. 타원곡선 알고리즘은 <em>짧은 키를 사용</em>하기 때문에 전자서명을 짧은 시간 내에 생성이 가능</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>PKI (Public Key Infrastructure) <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구성요소</th><th>주요 기능</th></tr>
+        <tr>
+          <td><b>인증기관</b><br>(CA, Certification Authority)</td>
+          <td>• 인증 정책 수립<br>• 인증서 및 인증서 폐기 목록 관리(생성, 공개, 취소, 재발급)</td>
+        </tr>
+        <tr>
+          <td><b>등록기관</b><br>(RA, Registration Authority)</td>
+          <td>사용자 신원 확인, 인증서 요구를 승인. CA에 인증서 발급 요청.<br>예: 은행, 증권사</td>
+        </tr>
+        <tr>
+          <td><b>CRL</b><br>(Certificate Revocation List)</td>
+          <td>• 인증서 폐기 목록<br>• 인증서의 지속적인 유효함을 점검하는 도구<br>• OCSP: 인증서 상태에 관한 정보 조회 또는 CRL 검색 프로토콜</td>
+        </tr>
+        <tr>
+          <td><b>X.509</b></td>
+          <td>• X.500 디렉토리 서비스에서 서로의 인증을 위해 개발된 것<br>• CA에서 발행하는 인증서를 기반으로 함. 공개키 인증서 표준 포맷<br>• 공개키 인증서의 포맷 표준: <em>발행자, 소유자, 소유자의 공개키, 유효기간, 고유번호, 알고리즘</em><br>• 사용자의 신원과 키 정보를 서로 결합하는 것을 의미<br>• <em>Version 3을 사용</em></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH6 암호학 -->
+<div id="ch6" class="chapter">
+  <div class="chapter-num">Chapter 06 · POINT 015</div>
+  <h2>암호학<br>— 암호화 종류, 블록 암호 기법, 대칭키 알고리즘</h2>
+  <div class="chapter-intro">
+    암호학은 정보를 읽기 어렵게 변환하는 기술이야. 복호화 가능 여부(단방향/양방향)와 키의 종류(대칭키/공개키)를 기준으로 이해하면 체계가 잡혀.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>암호화 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>복호화 여부</th><th>구분</th><th>종류</th><th>설명</th></tr>
+        <tr>
+          <td rowspan="2"><b>단방향</b><br>(복호화 불가)</td>
+          <td>해시함수<br>(One Way Function)</td>
+          <td>MDC, MAC</td>
+          <td>• MDC: 무결성 검사, 암호키 없음, MD6, SHA-1, SHA-2 등<br>• MAC: 대칭키 사용, 인증, HMAC, CBC-MAC</td>
+        </tr>
+        <tr>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td rowspan="4"><b>양방향</b><br>(복호화 가능)</td>
+          <td>대칭키<br>(동일 키)</td>
+          <td>블록 암호화<br>스트림 암호화</td>
+          <td>• 블록: Feistel 구조 — DES, 3DES, SEED / SPN 구조 — IDEA, AES, ARIA<br>• 스트림: RC4, OTP</td>
+        </tr>
+        <tr>
+          <td>공개키<br>(비대칭키)</td>
+          <td>소인수분해<br>이산대수<br>타원곡선</td>
+          <td>• 소인수분해: RSA, Rabin<br>• 이산대수: 디피-헬만, DSA, ElGamal<br>• 타원곡선: ECC, ECDSA</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>블록 암호화 기법 <span class="badge badge-wp">필기+실기</span></div>
+
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>모드</th><th>특징</th></tr>
+        <tr>
+          <td><b>ECB</b><br>(Electronic Code Book)</td>
+          <td>가장 단순한 모드. 평문을 일정한 블록단위로 순차적으로 암호화. DES는 64비트씩, AES는 128비트씩 블록을 나눔. 각각의 블록은 독립적이므로 특정 블록의 에러가 다른 블록에 영향을 주지 않음. <em>같은 평문 블록은 항상 같은 암호문</em> → 패턴 분석 가능</td>
+        </tr>
+        <tr>
+          <td><b>CBC</b><br>(Cipher Block Chaining)</td>
+          <td>ECB 모드와 동일한 방법으로 평문을 일정한 블록단위로 나눔. 최초 키의 생성 버퍼로 <em>IV(Initialization Vector)</em>가 사용되어 첫 번째 블록과 XOR 연산을 통해 암호화. IV는 나뉘어진 일정한 블록 중 하나가 되거나 두 번째 위 블록과 길이가 같은 임의의 값이 될 수 있음. 두 번째 블록부터는 첫 번째 블록의 암호화된 블록과 XOR 연산을 하여 암호화</td>
+        </tr>
+        <tr>
+          <td><b>CFB</b><br>(Cipher FeedBack)</td>
+          <td>ECB, CBC 모드와는 달리 평문과 암호문의 길이가 동일. 패딩을 추가하지 않고 블록단위 암호화를 <em>스트림 암호화 방식</em>으로 구성하여 비트단위로 암호화를 수행</td>
+        </tr>
+        <tr>
+          <td><b>OFB</b><br>(Output FeedBack)</td>
+          <td>CFB 모드도 평문과 암호문의 길이가 동일. CFB 모드와 동일하게 패딩을 추가하지 않고 블록단위 암호화를 스트림 암호화 방식으로 구성. 암호화 함수는 키의 생성 시에만 사용되어 암호화와 복호화의 방법이 동일. 암호문을 다시 암호화하면 평문이 나옴. 최초 키의 생성 버퍼로 <em>IV가 사용</em></td>
+        </tr>
+        <tr>
+          <td><b>CTR</b><br>(CounTeR)</td>
+          <td>평문 블록과 키 스트림을 XOR 연산하여 암호문을 만듦. 키 스트림은 매 암호화 시 1씩 증가하는 카운터를 암호화한 비트열. 암호화와 복호화 방법이 동일하므로 구현이 간단하고 <em>블록의 암호화 순서가 임의의 순서</em>가 될 수 있어 병렬로 처리 가능</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>대칭키 암호화 알고리즘 비교 <span class="badge badge-wp">필기+실기</span></div>
+
+    <p class="prose"><b>AES 암호화 알고리즘의 키길이에 따른 라운드 수</b></p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구분</th><th>키 길이</th><th>블록 길이</th><th>라운드 수</th></tr>
+        <tr><td><b>AES-128</b></td><td>4 (128비트)</td><td>4</td><td><em>10</em></td></tr>
+        <tr><td><b>AES-192</b></td><td>6 (192비트)</td><td>4</td><td><em>12</em></td></tr>
+        <tr><td><b>AES-256</b></td><td>8 (256비트)</td><td>4</td><td><em>14</em></td></tr>
+      </table>
+    </div>
+
+    <p class="prose" style="margin-top:20px;"><b>대칭키 암호화 기법 비교</b></p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>구분</th><th>블록 크기</th><th>키 크기</th><th>Round</th><th>설명</th></tr>
+        <tr><td><b>DES</b></td><td>64Bit</td><td>56Bit</td><td>16</td><td>키 길이가 짧아 <em>해독이 용이</em></td></tr>
+        <tr><td><b>3DES</b></td><td>64Bit</td><td>168Bit</td><td>48</td><td>DES의 Round 수를 늘려 <em>보안성을 강화</em></td></tr>
+        <tr><td><b>AES</b></td><td>128Bit</td><td>128/192/256Bit</td><td>10/12/14</td><td><em>미국 표준 암호화 알고리즘</em></td></tr>
+        <tr><td><b>IDEA</b></td><td>64Bit</td><td>128Bit</td><td>8</td><td>암호화 강도가 DES보다 강하고 속도는 <em>2배 빠름</em></td></tr>
+        <tr><td><b>SEED</b></td><td>128Bit</td><td>128Bit</td><td>16</td><td>국내에서 개발. <em>ISO/IEC, IEFT 표준</em></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH7 국내 개발 암호 알고리즘 -->
+<div id="ch7" class="chapter">
+  <div class="chapter-num">Chapter 07 · POINT 015</div>
+  <h2>국내 개발 암호 알고리즘<br>— HIGHT, ARIA, LEA, LSH</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>국내 개발 암호 알고리즘 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>알고리즘</th><th>특징</th></tr>
+        <tr>
+          <td><b>HIGHT</b><br>(HIGh security and light weight)</td>
+          <td>RFID, USN 등과 같이 저전력, 경량화를 요구하는 컴퓨팅 환경에서 기밀성을 제공하기 위해 KISA 및 ETRI 부설 연구소와 고려 대학교가 공동으로 개발한 <em>64비트 블록 암호화 알고리즘</em></td>
+        </tr>
+        <tr>
+          <td><b>ARIA</b></td>
+          <td>경량환경 및 하드웨어 구현을 위해서 최적화된 Involutional SPN 구조를 가지는 범용 블록 암호화 알고리즘. <em>128비트 블록과 128/192/256비트 키 길이</em>를 가짐</td>
+        </tr>
+        <tr>
+          <td><b>LEA</b><br>(Lightweight Encryption Algorithm)</td>
+          <td>빅데이터, 클라우드 등 고속 환경 및 모바일 기기 등 경량 환경에서 기밀성을 제공하기 위한 <em>128비트 블록 암호화 알고리즘</em></td>
+        </tr>
+        <tr>
+          <td><b>LSH 해시함수</b></td>
+          <td>메시지 인증, 사용자 인증, 전자서명 등 다양한 암호 응용분야에서 활용 가능한 <em>암호학적 해시함수</em></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH8 암호화 공격기법 -->
+<div id="ch8" class="chapter">
+  <div class="chapter-num">Chapter 08 · POINT 015</div>
+  <h2>암호화 공격기법</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>암호화 공격기법 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>공격 방법</th><th>설명</th></tr>
+        <tr>
+          <td><b>암호문 단독 공격</b><br>(COA, Ciphertext only Attack)</td>
+          <td>공격자는 암호문만을 가지고 공격. 암호문으로부터 평문이나 암호키를 찾아내는 방법으로 통계적 성질과 문장의 특성 등을 추정하여 해독</td>
+        </tr>
+        <tr>
+          <td><b>알려진 평문 공격</b><br>(KPA, Known Plaintext Attack)</td>
+          <td>공격자는 약간의 평문에 대응하는 암호문을 가지고 있는 상태에서 나머지 암호문에 대한 공격을 하는 방법. 이미 입수한 암호문의 관계를 이용하여 새로운 암호문을 해독하는 방법</td>
+        </tr>
+        <tr>
+          <td><b>선택 평문 공격</b><br>(CPA, Chosen Plaintext Attack)</td>
+          <td>평문을 선택하면 대응되는 암호문을 얻을 수 있는 상황에서의 공격. 공격자가 사용된 암호기에 접근할 수 있을 때 사용하는 공격방법</td>
+        </tr>
+        <tr>
+          <td><b>선택 암호문 공격</b><br>(CCA, Chosen Ciphertext Attack)</td>
+          <td>암호문을 선택하면 대응되는 평문을 얻을 수 있는 상태에서의 공격. 가장 강력한 공격 방법</td>
+        </tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 암기 순서 (공격 강도 약 → 강)</div>
+      <div class="memo-body"><b>암호문 단독(COA) → 알려진 평문(KPA) → 선택 평문(CPA) → 선택 암호문(CCA)</b></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CH9 해시함수 -->
+<div id="ch9" class="chapter">
+  <div class="chapter-num">Chapter 09 · POINT 015</div>
+  <h2>해시함수<br>— 조건, 종류, 생일자 공격</h2>
+  <div class="chapter-intro">
+    해시함수는 임의 길이의 입력을 고정된 길이의 출력으로 변환해. 단방향이라서 출력값으로 원본을 복원할 수 없어. 패스워드 저장, 무결성 검증, 전자서명에 핵심적으로 사용돼.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>해시함수의 조건 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>조건</th><th>설명</th></tr>
+        <tr>
+          <td><b>압축</b></td>
+          <td>임의의 길이의 평문을 고정된 길이의 출력값으로 변환</td>
+        </tr>
+        <tr>
+          <td><b>제1역상 저항성</b><br>(One Way Function, 선이미지 회피성)</td>
+          <td>메시지에서 해시값(Hash code)을 구하는 것은 쉽지만 반대로 역방향 계산이 불가능하기 때문에 해시값에서 원래의 메시지를 구하는 것은 매우 어려움. 주어진 해시값 y로부터 h(x)=y를 만족하는 x 값을 찾는 것이 어려워야 함</td>
+        </tr>
+        <tr>
+          <td><b>제2역상 저항성</b><br>(2차 선이미지 회피성)</td>
+          <td>어떤 블록 x에 대해서 H(y)=H(x)인 y≠x인 값을 찾는 것이 계산적으로 불가능해야 함. 약한 충돌 회피성</td>
+        </tr>
+        <tr>
+          <td><b>충돌회피</b><br>(Collision free, 강한 충돌 회피성)</td>
+          <td>다른 문장을 사용하였는데도 동일한 암호문이 나오는 현상을 말함. h(M1) = h(M2)인 서로 다른 M1과 M2를 구하는 것은 계산상 불가능해야 함</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>해시함수의 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>종류</th><th>설명</th></tr>
+        <tr><td><b>MDC</b></td><td>Modification Detection Code. 메시지의 변경 여부를 확인</td></tr>
+        <tr><td><b>MAC</b></td><td>Message Authentication Code. 메시지 인증을 수행</td></tr>
+        <tr><td><b>MD5</b></td><td>Rivest가 개발한 것으로 안전성에서 떨어지는 MD4 알고리즘을 수정하여 만든 것. <em>MD5 이전의 512비트 64라운드 후 128비트의 출력 해시값을 생성</em></td></tr>
+        <tr><td><b>SHA</b></td><td>Secure Hash Algorithm. MD 계열의 알고리즘과는 달리 <em>160비트의 출력 해시값을 생성</em>. 80라운드 수행</td></tr>
+        <tr><td><b>SHA-1</b></td><td>미국 표준의 메시지 압축 알고리즘으로 <em>160비트의 출력 해시값을 생성</em>. 80라운드 수행</td></tr>
+        <tr><td><b>SHA-256</b></td><td>입력 블록크기 512비트에 최종 <em>256비트를 출력</em>하는 해시함수. 64라운드 수행</td></tr>
+        <tr><td><b>SHA-512</b></td><td>입력블록 크기 1,024비트에 80라운드 후 <em>512비트를 출력</em>하는 해시함수</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>생일자 공격 (Birthday Attacks) <span class="badge badge-w">필기</span></div>
+    <div class="callout warn">
+      <span class="callout-icon">🎂</span>
+      <div class="callout-body">
+        23명 중에서 <em>같은 생일을 가지는 사람이 두 사람 혹은 그 이상이 있을 확률은 1/2보다 크다</em>는 이론.<br>
+        이를 근거로 한 해시함수의 <em>최소 비트는 160비트 이상</em>이 되어야 함.<br>
+        따라서 국내에서 패스워드 암호화 시에 <em>SHA256 이상의 해시함수</em>를 사용.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:60px 0 30px;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border);margin-top:60px;">
+  정보보안기사 4과목 정보보안 일반 — 읽으면서 이해되는 정리노트 | 2025
+</div>
+</div>
+</body>
+</html>
