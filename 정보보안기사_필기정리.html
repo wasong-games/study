@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보보안기사 필기 정리</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #161b27;
+    --bg3: #1e2535;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --teal: #2dd4bf;
+    --teal-bg: rgba(45,212,191,0.1);
+    --blue: #60a5fa;
+    --blue-bg: rgba(96,165,250,0.1);
+    --amber: #fbbf24;
+    --amber-bg: rgba(251,191,36,0.1);
+    --red: #f87171;
+    --red-bg: rgba(248,113,113,0.1);
+    --purple: #a78bfa;
+    --purple-bg: rgba(167,139,250,0.1);
+    --gray: #94a3b8;
+    --gray-bg: rgba(148,163,184,0.1);
+    --s1: #2dd4bf;
+    --s2: #60a5fa;
+    --s3: #fbbf24;
+    --s4: #f472b6;
+    --s5: #a78bfa;
+    --sw: #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── 헤더 ── */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border2);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 56px;
+  }
+  header h1 { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+  header span { font-size: 12px; color: var(--text3); }
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text2);
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { background: var(--bg3); color: var(--text); }
+  .nav-tab.active { background: var(--bg3); border-color: var(--border2); color: var(--text); }
+
+  /* ── 레이아웃 ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ── 과목 섹션 ── */
+  .subject { margin-bottom: 48px; }
+  .subject-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .subject-num {
+    font-size: 11px; font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .subject-title-text { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+
+  .s1-color { color: var(--s1); }
+  .s2-color { color: var(--s2); }
+  .s3-color { color: var(--s3); }
+  .s4-color { color: var(--s4); }
+  .s5-color { color: var(--s5); }
+  .sw-color { color: var(--sw); }
+  .s1-num { background: var(--teal-bg); color: var(--teal); }
+  .s2-num { background: var(--blue-bg); color: var(--blue); }
+  .s3-num { background: var(--amber-bg); color: var(--amber); }
+  .s4-num { background: var(--red-bg); color: var(--red); }
+  .s5-num { background: var(--purple-bg); color: var(--purple); }
+  .sw-num { background: var(--gray-bg); color: var(--gray); }
+
+  /* ── 섹션 카드 ── */
+  .section { margin-bottom: 20px; }
+  .section-label {
+    font-size: 11px; font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  /* ── 테이블 ── */
+  .tbl-wrap { overflow-x: auto; margin-bottom: 6px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--bg3);
+    color: var(--text2);
+    font-weight: 600;
+    padding: 9px 12px;
+    text-align: left;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  tr:hover td { background: rgba(255,255,255,0.04); }
+
+  /* ── 배지 ── */
+  .badge {
+    display: inline-block;
+    font-size: 11px; padding: 2px 7px;
+    border-radius: 4px; font-weight: 600;
+    margin-right: 3px; white-space: nowrap;
+  }
+  .b-teal { background: var(--teal-bg); color: var(--teal); }
+  .b-blue { background: var(--blue-bg); color: var(--blue); }
+  .b-amber { background: var(--amber-bg); color: var(--amber); }
+  .b-red { background: var(--red-bg); color: var(--red); }
+  .b-purple { background: var(--purple-bg); color: var(--purple); }
+  .b-gray { background: var(--gray-bg); color: var(--gray); }
+
+  /* ── 코드 ── */
+  .mono {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 12px;
+    background: var(--bg3);
+    color: var(--teal);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── 노트 ── */
+  .note {
+    font-size: 12px;
+    color: var(--text2);
+    background: rgba(251,191,36,0.05);
+    border-left: 2px solid var(--amber);
+    padding: 6px 10px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 6px;
+  }
+
+  /* ── 영단어 그리드 ── */
+  .word-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .word-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    transition: border-color 0.15s;
+  }
+  .word-item:hover { border-color: var(--border2); }
+  .word-en { font-weight: 700; color: var(--blue); font-size: 13px; font-family: 'Fira Code', monospace; }
+  .word-full { font-size: 11px; color: var(--text3); margin-top: 2px; font-style: italic; }
+  .word-ko { font-size: 12px; color: var(--text2); margin-top: 4px; line-height: 1.5; }
+
+  /* ── 검색 바 ── */
+  .search-wrap {
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .search-wrap input {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-wrap input:focus { border-color: var(--blue); }
+  .search-wrap input::placeholder { color: var(--text3); }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 14px;
+    pointer-events: none;
+  }
+  #no-result { display:none; color:var(--text3); font-size:13px; padding:20px 0; text-align:center; }
+
+  /* ── 스크롤바 ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* ── 반응형 ── */
+  @media (max-width: 640px) {
+    header { padding: 0 12px; height: auto; flex-wrap: wrap; padding: 10px 12px; gap: 8px; }
+    .nav-tabs { width: 100%; }
+    .container { padding: 20px 12px 60px; }
+    .word-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔐 정보보안기사 필기</h1>
+  <span>기출 핵심 정리</span>
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showSubject('all', this)">전체</button>
+    <button class="nav-tab" onclick="showSubject('s1', this)">1과목</button>
+    <button class="nav-tab" onclick="showSubject('s2', this)">2과목</button>
+    <button class="nav-tab" onclick="showSubject('s3', this)">3과목</button>
+    <button class="nav-tab" onclick="showSubject('s4', this)">4과목</button>
+    <button class="nav-tab" onclick="showSubject('s5', this)">5과목</button>
+    <button class="nav-tab" onclick="showSubject('sw', this)">영단어</button>
+  </nav>
+</header>
+
+<div class="container">
+
+<!-- ──────────────────────────── 1과목 ──────────────────────────── -->
+<div class="subject" id="s1">
+  <div class="subject-header">
+    <span class="subject-num s1-num">1과목</span>
+    <span class="subject-title-text s1-color">시스템 보안</span>
+  </div>
+
+  <!-- PAM -->
+  <div class="section">
+    <div class="section-label">PAM — Pluggable Authentication Modules</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>리눅스 인증을 모듈화하여 플러그인 방식으로 교체·추가 가능한 인증 프레임워크. 설정 파일: <span class="mono">/etc/pam.d/서비스명</span></td></tr>
+        <tr><th>설정 형식</th><td><span class="mono">모듈타입&nbsp;&nbsp;제어플래그&nbsp;&nbsp;모듈경로&nbsp;&nbsp;[옵션]</span></td></tr>
+      </table>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>모듈 타입</th><th>역할</th></tr>
+        <tr><td><span class="badge b-teal">auth</span></td><td>사용자 인증 (비밀번호 확인, 자격증명 획득)</td></tr>
+        <tr><td><span class="badge b-blue">account</span></td><td>계정 유효성 검사 (만료·접근시간·잠금 여부)</td></tr>
+        <tr><td><span class="badge b-amber">password</span></td><td>비밀번호 갱신·변경 처리</td></tr>
+        <tr><td><span class="badge b-purple">session</span></td><td>로그인·로그아웃 시 환경 설정 (홈디렉터리 마운트, 로그 기록)</td></tr>
+      </table>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>제어 플래그</th><th>의미</th></tr>
+        <tr><td><span class="badge b-red">required</span></td><td>실패해도 이후 모듈 계속 실행 → 최종 실패 반환</td></tr>
+        <tr><td><span class="badge b-red">requisite</span></td><td>실패 즉시 인증 중단 (required보다 강함, 즉시 종료)</td></tr>
+        <tr><td><span class="badge b-amber">sufficient</span></td><td>성공 시 이후 required 무시하고 성공 반환</td></tr>
+        <tr><td><span class="badge b-gray">optional</span></td><td>결과가 전체 인증에 영향 없음 (보조 역할)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- rlogin -->
+  <div class="section">
+    <div class="section-label">rlogin — Remote Login</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>원격 로그인 서비스 (TCP 513). <span class="mono">.rhosts</span> 파일로 신뢰 호스트 관리 → 비밀번호 없이 접속 가능</td></tr>
+        <tr><th>보안 취약점</th><td>① IP 스푸핑 취약 ② .rhosts 오설정 시 무인증 접근 ③ 평문 전송(스니핑) ④ 현재 SSH로 대체</td></tr>
+        <tr><th>관련 명령</th><td><span class="mono">rsh</span>(원격 셸), <span class="mono">rcp</span>(원격 복사) — 동일 취약점 공유</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- xinetd -->
+  <div class="section">
+    <div class="section-label">xinetd — Extended Internet Daemon</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">역할</th><td>슈퍼 데몬. 서비스 요청 시에만 하위 데몬을 on-demand 실행 → 메모리 절약. 설정: <span class="mono">/etc/xinetd.conf</span></td></tr>
+        <tr><th>주요 기능</th><td>접근 제어(IP/시간대), 로깅, 연결 수 제한, TCP Wrapper 연동, DoS 방어</td></tr>
+        <tr><th>inetd vs xinetd</th><td>inetd: 기본 슈퍼데몬, 기능 단순 / xinetd: 개선판, 보안기능 강화</td></tr>
+        <tr><th>주요 속성</th><td><span class="mono">disable</span> · <span class="mono">only_from</span>(허용IP) · <span class="mono">no_access</span>(차단IP) · <span class="mono">access_times</span> · <span class="mono">instances</span>(최대연결)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 랜섬웨어 -->
+  <div class="section">
+    <div class="section-label">랜섬웨어 종류</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>종류</th><th>특징</th><th>대표 사례</th></tr>
+        <tr><td><span class="badge b-red">암호화형</span></td><td>파일 암호화 후 복호화 키 대가로 금전 요구</td><td>WannaCry, Locky, Ryuk, LockBit</td></tr>
+        <tr><td><span class="badge b-amber">화면 잠금형</span></td><td>화면을 잠가 사용 불능으로 만들고 금전 요구</td><td>Reveton</td></tr>
+        <tr><td><span class="badge b-purple">이중 갈취형</span><br><small>Double Extortion</small></td><td>암호화 + 데이터 유출 협박 병행</td><td>Maze, REvil, Conti</td></tr>
+        <tr><td><span class="badge b-blue">MBR 덮어쓰기형</span></td><td>부트 영역 파괴 → 부팅 불가</td><td>Petya, NotPetya</td></tr>
+        <tr><td><span class="badge b-teal">RaaS형</span></td><td>랜섬웨어 기능 서비스로 임대, 비개발자도 공격 가능</td><td>DarkSide</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- find 옵션 -->
+  <div class="section">
+    <div class="section-label">find 명령어 시간 옵션</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>옵션</th><th>의미</th><th>예시</th></tr>
+        <tr><td><span class="mono">-atime n</span></td><td>마지막 <b>접근(Access)</b> 시간 기준 n일</td><td><span class="mono">find / -atime -7</span> (7일 이내 접근)</td></tr>
+        <tr><td><span class="mono">-mtime n</span></td><td>마지막 <b>수정(Modify, 내용)</b> 시간 기준</td><td><span class="mono">find / -mtime +30</span> (30일 이전 수정)</td></tr>
+        <tr><td><span class="mono">-ctime n</span></td><td>마지막 <b>변경(Change, 메타데이터)</b> 시간 기준. 권한·소유자 변경 포함</td><td><span class="mono">find / -ctime 0</span> (오늘 변경)</td></tr>
+      </table>
+    </div>
+    <div class="note">💡 n값: 양수(n일 이전) · 음수(n일 이내) · 0(당일) / ctime은 mtime 변경 시 함께 업데이트됨</div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── 2과목 ──────────────────────────── -->
+<div class="subject" id="s2">
+  <div class="subject-header">
+    <span class="subject-num s2-num">2과목</span>
+    <span class="subject-title-text s2-color">네트워크 보안</span>
+  </div>
+
+  <!-- DNS 싱크홀 -->
+  <div class="section">
+    <div class="section-label">DNS 싱크홀 (Sinkhole)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>악성 도메인 DNS 쿼리를 실제 C&C 서버 대신 가짜(싱크홀) 서버 IP로 응답 → 악성코드 통신 차단</td></tr>
+        <tr><th>동작 원리</th><td>DNS 서버에 악성 도메인 → 싱크홀 IP 매핑 → 감염 PC가 C&C 접속 불가 → 탐지·분석 가능</td></tr>
+        <tr><th>활용</th><td>KISA 인터넷침해대응센터 운영, 봇넷 무력화 핵심 수단</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 포트 스캔 -->
+  <div class="section">
+    <div class="section-label">포트 스캔 기법 비교</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>기법</th><th>방식</th><th>특징</th></tr>
+        <tr><td><span class="badge b-red">TCP Open Scan</span><br><small>Full Connect</small></td><td>완전한 3-way handshake 수행</td><td>정확하나 로그에 100% 기록됨, 쉽게 탐지</td></tr>
+        <tr><td><span class="badge b-amber">TCP Half Open</span><br><small>SYN Scan</small></td><td>SYN → SYN/ACK 수신 후 RST 전송 (연결 미완성)</td><td>스텔스 스캔, 로그 잘 안 남음, 방화벽 일부 우회</td></tr>
+        <tr><td><span class="badge b-purple">NULL Scan</span></td><td>TCP 플래그 전혀 없이 빈 패킷 전송</td><td>열린 포트→응답 없음 / 닫힌 포트→RST. Unix 계열만 동작</td></tr>
+        <tr><td><span class="badge b-blue">UDP Scan</span></td><td>UDP 패킷 전송</td><td>열린 포트→응답 없음 / 닫힌 포트→ICMP Port Unreachable. 느리고 불정확</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- HTTP 상태 코드 -->
+  <div class="section">
+    <div class="section-label">HTTP 상태 코드</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>코드</th><th>분류</th><th>주요 코드</th></tr>
+        <tr><td><span class="badge b-teal">1xx</span></td><td>정보</td><td>100 Continue, 101 Switching Protocols</td></tr>
+        <tr><td><span class="badge b-blue">2xx</span></td><td>성공</td><td>200 OK, 201 Created, 204 No Content</td></tr>
+        <tr><td><span class="badge b-purple">3xx</span></td><td>리다이렉션</td><td>301 Moved Permanently, 302 Found, 304 Not Modified</td></tr>
+        <tr><td><span class="badge b-amber">4xx</span></td><td>클라이언트 오류</td><td>400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 405 Method Not Allowed</td></tr>
+        <tr><td><span class="badge b-red">5xx</span></td><td>서버 오류</td><td>500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- nmap -->
+  <div class="section">
+    <div class="section-label">nmap 주요 옵션</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>옵션</th><th>설명</th></tr>
+        <tr><td><span class="mono">-sS</span></td><td>SYN(Half Open) 스캔 — 기본값, 스텔스</td></tr>
+        <tr><td><span class="mono">-sT</span></td><td>TCP Connect(Full Open) 스캔</td></tr>
+        <tr><td><span class="mono">-sU</span></td><td>UDP 스캔</td></tr>
+        <tr><td><span class="mono">-sN / -sF / -sX</span></td><td>NULL / FIN / Xmas 스캔</td></tr>
+        <tr><td><span class="mono">-O</span></td><td>OS 탐지</td></tr>
+        <tr><td><span class="mono">-sV</span></td><td>서비스·버전 탐지</td></tr>
+        <tr><td><span class="mono">-p</span></td><td>포트 지정 (예: <span class="mono">-p 1-1024</span>, <span class="mono">-p 80,443</span>)</td></tr>
+        <tr><td><span class="mono">-A</span></td><td>OS탐지 + 버전탐지 + 스크립트 + traceroute 통합</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SPI -->
+  <div class="section">
+    <div class="section-label">SPI 방화벽 — Stateful Packet Inspection</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>패킷 헤더뿐 아니라 연결 상태(State Table)를 추적하여 정상 연결 흐름 내 패킷인지 검사</td></tr>
+        <tr><th>상태 추적</th><td>SYN → ESTABLISHED → FIN/RST 상태 추적. 비정상 세션 상태 패킷 차단</td></tr>
+        <tr><th>vs 패킷 필터링</th><td>패킷 필터링: 각 패킷 독립 검사 / SPI: 세션 컨텍스트 유지 → 세션 하이재킹 방어 가능</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SIEM/ESM/EAM/NMS -->
+  <div class="section">
+    <div class="section-label">보안 관리 솔루션 비교</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>솔루션</th><th>정식 명칭</th><th>핵심 기능</th></tr>
+        <tr><td><span class="badge b-red">SIEM</span></td><td>Security Information and Event Management</td><td>보안 이벤트 수집·상관분석·대시보드, 실시간 위협 탐지</td></tr>
+        <tr><td><span class="badge b-amber">ESM</span></td><td>Enterprise Security Management</td><td>기업 전체 보안 통합 관리, SIEM보다 넓은 관리 범위</td></tr>
+        <tr><td><span class="badge b-purple">EAM</span></td><td>Extranet Access Management</td><td>외부 파트너·고객의 인트라넷 접근 권한 통합 관리</td></tr>
+        <tr><td><span class="badge b-blue">NMS</span></td><td>Network Management System</td><td>네트워크 장비 모니터링·장애관리 (SNMP 기반)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- OSI 취약점 -->
+  <div class="section">
+    <div class="section-label">OSI 7계층별 주요 취약점 및 공격</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>계층</th><th>프로토콜·요소</th><th>주요 취약점·공격</th></tr>
+        <tr><td>7 응용</td><td>HTTP, FTP, SMTP, DNS</td><td>SQL Injection, XSS, CSRF, DNS Spoofing, 피싱</td></tr>
+        <tr><td>6 표현</td><td>SSL/TLS, 인코딩</td><td>SSL Strip, 암호화 취약점 (RC4, POODLE)</td></tr>
+        <tr><td>5 세션</td><td>NetBIOS, RPC</td><td>세션 하이재킹, TCP 세션 가로채기</td></tr>
+        <tr><td>4 전송</td><td>TCP, UDP</td><td>SYN Flood, TCP Hijacking, UDP Flood</td></tr>
+        <tr><td>3 네트워크</td><td>IP, ICMP, OSPF</td><td>IP Spoofing, ICMP Flood, 라우팅 테이블 변조</td></tr>
+        <tr><td>2 데이터링크</td><td>ARP, MAC, 802.11</td><td>ARP Spoofing, MAC Flooding, CAM Table Overflow</td></tr>
+        <tr><td>1 물리</td><td>케이블, 무선 신호</td><td>도청(Sniffing), 재밍(Jamming), 물리적 탈취</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CAM -->
+  <div class="section">
+    <div class="section-label">CAM 테이블 오버플로우 (MAC Flooding)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>스위치의 CAM(Content Addressable Memory) 테이블을 가짜 MAC 주소로 가득 채워 스위치를 허브처럼 동작시키는 공격</td></tr>
+        <tr><th>결과</th><td>스위치가 모든 포트로 패킷 브로드캐스트 → 스니핑 가능</td></tr>
+        <tr><th>대응</th><td>Port Security 설정(포트당 MAC 주소 수 제한), 802.1X 인증</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ICMP -->
+  <div class="section">
+    <div class="section-label">ICMP 오류 메시지 유형</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Type</th><th>메시지</th><th>설명</th></tr>
+        <tr><td>3</td><td>Destination Unreachable</td><td>목적지 도달 불가 (Code 0~15로 세분화)</td></tr>
+        <tr><td>4</td><td>Source Quench</td><td>혼잡으로 인한 전송 속도 감소 요청 (현재 사용 안 함)</td></tr>
+        <tr><td>5</td><td>Redirect</td><td>라우팅 경로 변경 요청 → IP 스푸핑 악용 가능</td></tr>
+        <tr><td>11</td><td>Time Exceeded</td><td>TTL 초과 (traceroute에 활용)</td></tr>
+        <tr><td>12</td><td>Parameter Problem</td><td>IP 헤더 오류</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- DNS Spoofing -->
+  <div class="section">
+    <div class="section-label">DNS Spoofing</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>DNS 캐시 또는 응답을 위조하여 사용자를 악의적 IP로 유도하는 공격</td></tr>
+        <tr><th>방식</th><td>① DNS Cache Poisoning: 재귀 DNS 서버 캐시 조작 ② DNS 응답 위조: UDP 기반 레이스 컨디션 공격</td></tr>
+        <tr><th>대응</th><td>DNSSEC 적용(디지털 서명), DNS over HTTPS(DoH), 캐시 TTL 최소화</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- WPA/WPA2/TKIP/CCMP -->
+  <div class="section">
+    <div class="section-label">무선 보안 프로토콜 비교</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>프로토콜</th><th>암호화</th><th>인증</th><th>취약점·특징</th></tr>
+        <tr><td><span class="badge b-red">WEP</span></td><td>RC4 (40/104bit)</td><td>공유키</td><td>IV 재사용, 키스트림 재사용 취약점, 현재 사용 금지</td></tr>
+        <tr><td><span class="badge b-amber">WPA</span></td><td>TKIP (RC4 기반)</td><td>PSK/802.1X</td><td>WEP 보완, Michael MIC 코드 추가</td></tr>
+        <tr><td><span class="badge b-teal">WPA2</span></td><td>CCMP (AES 기반)</td><td>PSK/802.1X</td><td>현재 주요 표준, PMKID 취약점(2018)</td></tr>
+        <tr><td><span class="badge b-blue">WPA3</span></td><td>GCMP-256</td><td>SAE(Dragonfly)</td><td>사전공격 저항, 순방향 비밀성(PFS) 지원</td></tr>
+      </table>
+    </div>
+    <div class="tbl-wrap" style="margin-top:6px">
+      <table>
+        <tr><th>항목</th><th>TKIP</th><th>CCMP</th></tr>
+        <tr><td>기반 암호</td><td>RC4 (스트림 암호)</td><td>AES-128 (블록 암호)</td></tr>
+        <tr><td>무결성 검증</td><td>Michael MIC (64bit)</td><td>CBC-MAC (128bit)</td></tr>
+        <tr><td>IV 길이</td><td>48bit</td><td>48bit (Packet Number)</td></tr>
+        <tr><td>보안 수준</td><td>중간 (취약점 존재)</td><td>높음 (현재 표준)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- EAP -->
+  <div class="section">
+    <div class="section-label">EAP — Extensible Authentication Protocol</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>유형</th><th>특징</th></tr>
+        <tr><td><span class="badge b-blue">EAP-TLS</span></td><td>클라이언트·서버 모두 인증서 필요, 가장 강력한 보안</td></tr>
+        <tr><td><span class="badge b-teal">EAP-TTLS</span></td><td>서버 인증서만 필요, 터널 내 다른 EAP 사용 가능</td></tr>
+        <tr><td><span class="badge b-amber">PEAP</span></td><td>서버 인증서로 TLS 터널 생성, MS-CHAPv2 등 내부 인증. WPA 엔터프라이즈에 많이 사용</td></tr>
+        <tr><td><span class="badge b-purple">EAP-FAST</span></td><td>Cisco 개발, PAC(Protected Access Credential) 사용</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 방화벽 기능 -->
+  <div class="section">
+    <div class="section-label">방화벽 기능</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>기능</th><th>설명</th></tr>
+        <tr><td>패킷 필터링</td><td>IP·Port·프로토콜 기반 ACL 룰로 패킷 허용·차단</td></tr>
+        <tr><td>상태 추적(SPI)</td><td>세션 상태 테이블 유지, 비정상 패킷 차단</td></tr>
+        <tr><td>NAT/PAT</td><td>내부 사설 IP → 공인 IP 변환, 내부 구조 은닉</td></tr>
+        <tr><td>응용 프록시</td><td>7계층 페이로드 검사 (ALG, Application Layer Gateway)</td></tr>
+        <tr><td>VPN 지원</td><td>IPSec/SSL-VPN 터널 엔드포인트 기능</td></tr>
+        <tr><td>로깅·감사</td><td>허용·차단 정책 로그 기록</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- VPN 종류 -->
+  <div class="section">
+    <div class="section-label">VPN 종류 및 동작 계층</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>VPN</th><th>계층</th><th>특징</th></tr>
+        <tr><td><span class="badge b-red">IPSec VPN</span></td><td>L3 (네트워크)</td><td>AH(인증)+ESP(암호화+인증), 터널/전송 모드, IKE 키 교환</td></tr>
+        <tr><td><span class="badge b-amber">SSL VPN</span></td><td>L4~L7</td><td>웹 브라우저 기반, 별도 클라이언트 불필요, HTTPS 포트 사용</td></tr>
+        <tr><td><span class="badge b-blue">PPTP</span></td><td>L2 (데이터링크)</td><td>MS 개발, GRE+PPP 캡슐화, 보안 취약 (비추천)</td></tr>
+        <tr><td><span class="badge b-teal">L2TP</span></td><td>L2</td><td>PPTP+L2F 통합, 자체 암호화 없어 IPSec과 병행 사용</td></tr>
+        <tr><td><span class="badge b-purple">MPLS VPN</span></td><td>L2.5</td><td>레이블 기반 스위칭, 통신사 WAN 서비스에 사용</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CDR/EDR/SDN -->
+  <div class="section">
+    <div class="section-label">CDR / EDR / SDN</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>솔루션</th><th>정식 명칭</th><th>설명</th></tr>
+        <tr><td><span class="badge b-blue">CDR</span></td><td>Content Disarm and Reconstruction</td><td>문서·이메일 파일의 악성 콘텐츠(매크로, 스크립트) 제거 후 무해화하여 재생성</td></tr>
+        <tr><td><span class="badge b-teal">EDR</span></td><td>Endpoint Detection and Response</td><td>엔드포인트 행위 모니터링·위협 탐지·대응 자동화. 안티바이러스보다 고도화</td></tr>
+        <tr><td><span class="badge b-purple">SDN</span></td><td>Software Defined Networking</td><td>제어 평면(Control Plane)과 데이터 평면(Data Plane) 분리, 중앙 집중 네트워크 관리. OpenFlow 프로토콜</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- APT -->
+  <div class="section">
+    <div class="section-label">APT — Advanced Persistent Threat</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">정의</th><td>특정 목표에 대해 장기간 은밀하게 수행되는 지능형 지속 위협 공격</td></tr>
+        <tr><th>단계</th><td>① 정찰 → ② 초기 침투 → ③ 거점 확보 → ④ 권한 상승 → ⑤ 내부 이동 → ⑥ 정보 수집 → ⑦ 유출/파괴</td></tr>
+        <tr><th>특징</th><td>0-day 취약점 활용, 스피어 피싱, 장기간 잠복, 탐지 회피</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- NAT -->
+  <div class="section">
+    <div class="section-label">NAT 종류</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>NAT 유형</th><th>설명</th></tr>
+        <tr><td><span class="badge b-teal">Static NAT</span></td><td>사설 IP ↔ 공인 IP 1:1 고정 매핑</td></tr>
+        <tr><td><span class="badge b-blue">Dynamic NAT</span></td><td>공인 IP 풀에서 사설 IP에 동적 할당 (1:1, 비대칭)</td></tr>
+        <tr><td><span class="badge b-amber">PAT / NAPT</span></td><td>포트 번호로 다수 사설 IP → 하나의 공인 IP 공유 (N:1). 가장 일반적</td></tr>
+        <tr><td><span class="badge b-purple">NAT64</span></td><td>IPv6 ↔ IPv4 주소 변환</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── 3과목 ──────────────────────────── -->
+<div class="subject" id="s3">
+  <div class="subject-header">
+    <span class="subject-num s3-num">3과목</span>
+    <span class="subject-title-text s3-color">애플리케이션 보안</span>
+  </div>
+
+  <div class="section">
+    <div class="section-label">REST API 보안</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">REST 원칙</th><td>Stateless, Uniform Interface, Client-Server, Cacheable, Layered System, Code on Demand(선택)</td></tr>
+        <tr><th>인증 방식</th><td>① API Key ② OAuth 2.0 (토큰 기반) ③ JWT (JSON Web Token) ④ Basic Auth (HTTPS 필수)</td></tr>
+        <tr><th>주요 취약점</th><td>Broken Object Level Authorization, 과도한 데이터 노출, 속도 제한 부재, 주입 공격</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">IAM / SSO</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>항목</th><th>IAM (Identity and Access Management)</th><th>SSO (Single Sign-On)</th></tr>
+        <tr><td>개념</td><td>사용자 신원 및 접근 권한 통합 관리 시스템</td><td>한 번 인증으로 여러 서비스 접근 가능</td></tr>
+        <tr><td>기능</td><td>인증, 권한부여, 프로비저닝, 감사</td><td>통합 로그인, 세션 공유</td></tr>
+        <tr><td>관련 기술</td><td>RBAC, ABAC, MFA, Directory Service</td><td>SAML 2.0, OAuth 2.0, OpenID Connect, Kerberos</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">TDE — Transparent Data Encryption</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>DB 파일 수준 암호화. 애플리케이션 코드 수정 없이 데이터파일·로그파일 자동 암호화</td></tr>
+        <tr><th>동작</th><td>데이터 → DB 엔진 → 암호화 → 디스크 저장. DEK(Data Encryption Key)를 MEK(Master Encryption Key)로 보호</td></tr>
+        <tr><th>장점·단점</th><td>✅ 투명성, 도입 용이 / ❌ 메모리 상 복호화 상태 → 메모리 공격 취약, SQL Injection 미방어</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">DNSSEC — DNS Security Extensions</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>DNS 응답에 디지털 서명을 추가하여 DNS Spoofing·Cache Poisoning 방어</td></tr>
+        <tr><th>주요 레코드</th><td>RRSIG(서명), DNSKEY(공개키), DS(상위 서명), NSEC/NSEC3(부존재 증명)</td></tr>
+        <tr><th>인증 체인</th><td>루트 Zone → TLD → 도메인 순 신뢰 체인 구성 (Chain of Trust)</td></tr>
+        <tr><th>한계</th><td>가용성(DoS) 방어 안 됨, 트래픽 증가, 키 관리 복잡</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">HTTP 요청 방식 (Methods)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>메서드</th><th>용도</th><th>보안 이슈</th></tr>
+        <tr><td>GET</td><td>리소스 조회 (멱등, 안전)</td><td>URL에 파라미터 노출 → 로그·캐시 유출</td></tr>
+        <tr><td>POST</td><td>리소스 생성·처리</td><td>CSRF 공격 대상</td></tr>
+        <tr><td>PUT</td><td>리소스 전체 업데이트 (멱등)</td><td>인증 없으면 임의 수정 가능</td></tr>
+        <tr><td>PATCH</td><td>리소스 부분 업데이트</td><td>권한 검증 필수</td></tr>
+        <tr><td>DELETE</td><td>리소스 삭제 (멱등)</td><td>접근제어 필수</td></tr>
+        <tr><td>OPTIONS</td><td>지원 메서드 조회</td><td>정보 노출, 불필요 시 비활성화</td></tr>
+        <tr><td>TRACE</td><td>루프백 테스트</td><td>XST(Cross-Site Tracing) 취약점 → 비활성화 권고</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">WPKI — Wireless PKI</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>무선 환경에 최적화된 PKI. WTLS 프로토콜 위에서 동작, 경량 인증서(WTLS 인증서) 사용</td></tr>
+        <tr><th>vs 유선 PKI</th><td>인증서 크기 축소, WAP Gateway에서 WTLS ↔ TLS 변환</td></tr>
+        <tr><th>WAP Gap</th><td>WAP 게이트웨이에서 일시적 평문 상태 → 공격 가능 지점</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">ModSecurity (웹 애플리케이션 방화벽, WAF)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>오픈소스 WAF 모듈. Apache·Nginx·IIS에 설치, HTTP 요청·응답 실시간 필터링</td></tr>
+        <tr><th>OWASP CRS</th><td>Core Rule Set — SQL Injection, XSS, LFI, RFI, 프로토콜 위반 등 탐지 규칙 집합</td></tr>
+        <tr><th>동작 모드</th><td>Detection Only(탐지만) / Prevention(차단) 모드</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">CSRF — Cross-Site Request Forgery</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">원리</th><td>인증된 사용자의 세션을 이용해 공격자가 의도한 요청을 피해자 브라우저가 자동 전송하게 유도</td></tr>
+        <tr><th>성립 조건</th><td>① 피해자가 사이트에 로그인된 상태 ② 쿠키 기반 세션 ③ 예측 가능한 요청 파라미터</td></tr>
+        <tr><th>대응</th><td>① CSRF Token ② SameSite 쿠키 속성 ③ Referer 검증 ④ Double Submit Cookie</td></tr>
+        <tr><th>vs XSS</th><td>XSS: 공격 스크립트를 사이트에 삽입 / CSRF: 피해자 권한으로 요청 위조</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">FDS / FIDO / AML / SET</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>항목</th><th>정식 명칭</th><th>핵심 내용</th></tr>
+        <tr><td><span class="badge b-red">FDS</span></td><td>Fraud Detection System</td><td>금융 이상거래 탐지 시스템. 행동 패턴 분석으로 부정 거래 실시간 차단</td></tr>
+        <tr><td><span class="badge b-blue">FIDO</span></td><td>Fast Identity Online</td><td>비밀번호 없는 인증. 생체정보·PIN → 디바이스 내 개인키로 서명, 서버엔 공개키만 저장. FIDO2(WebAuthn) 표준</td></tr>
+        <tr><td><span class="badge b-amber">AML</span></td><td>Anti-Money Laundering</td><td>자금세탁 방지 시스템. 의심 금융거래 모니터링·신고 (STR/CTR)</td></tr>
+        <tr><td><span class="badge b-teal">SET</span></td><td>Secure Electronic Transaction</td><td>Visa+MasterCard 개발 전자지불 프로토콜. 공개키 암호화, 이중서명으로 카드정보·구매정보 분리 보호</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── 4과목 ──────────────────────────── -->
+<div class="subject" id="s4">
+  <div class="subject-header">
+    <span class="subject-num s4-num">4과목</span>
+    <span class="subject-title-text s4-color">정보보안 일반</span>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Kerberos 티켓 정보</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>구성 요소</th><th>역할</th></tr>
+        <tr><td><span class="badge b-blue">KDC</span> (Key Distribution Center)</td><td>AS + TGS 포함. 인증 중앙 서버</td></tr>
+        <tr><td><span class="badge b-teal">AS</span> (Authentication Server)</td><td>초기 인증, TGT 발급</td></tr>
+        <tr><td><span class="badge b-amber">TGS</span> (Ticket Granting Server)</td><td>TGT 검증 후 서비스 티켓 발급</td></tr>
+        <tr><td><span class="badge b-red">TGT</span> (Ticket Granting Ticket)</td><td>사용자가 KDC에서 받는 1차 티켓. 세션키+사용자정보+유효기간 포함. KDC 비밀키 암호화</td></tr>
+        <tr><td><span class="badge b-purple">서비스 티켓</span></td><td>특정 서비스 접근용 티켓. 서비스 서버 비밀키 암호화</td></tr>
+      </table>
+    </div>
+    <div class="note">💡 흐름: 클라이언트 → AS(TGT 획득) → TGS(서비스 티켓 획득) → 서비스 서버 접근</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">CRL — Certificate Revocation List</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>CA가 발급한 인증서 중 유효기간 만료 전 폐기된 인증서 목록. CA가 서명하여 주기적 배포</td></tr>
+        <tr><th>포함 정보</th><td>인증서 일련번호, 폐기 날짜, 폐기 이유, 다음 CRL 발행일</td></tr>
+        <tr><th>vs OCSP</th><td>CRL: 전체 목록 다운로드(무거움) / OCSP: 개별 인증서 실시간 상태 조회(경량)</td></tr>
+        <tr><th>Delta CRL</th><td>마지막 CRL 이후 변경분만 배포 → 전송량 감소</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">참조 모니터 / TCB / 보안 커널</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>개념</th><th>설명</th></tr>
+        <tr><td><span class="badge b-purple">참조 모니터</span><br><small>Reference Monitor</small></td><td>주체와 객체 사이 모든 접근을 중재하는 추상적 개념. 3대 요건: <b>완전성</b>(항상 호출)·<b>고립성</b>(변조 불가)·<b>검증 가능성</b>(소규모·분석 가능)</td></tr>
+        <tr><td><span class="badge b-red">TCB</span><br><small>Trusted Computing Base</small></td><td>시스템 보안 정책 시행을 위한 H/W+S/W+F/W 전체 집합. OS 커널·하드웨어 포함. TCB 자체의 신뢰성이 핵심</td></tr>
+        <tr><td><span class="badge b-blue">보안 커널</span><br><small>Security Kernel</small></td><td>참조 모니터 개념을 실제 구현한 TCB의 핵심 부분. 참조 모니터 3대 요건 만족 필수</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">시스템 콜 (System Call)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>사용자 프로세스가 커널 서비스(파일 I/O, 프로세스 생성 등)를 요청하는 인터페이스. 사용자 모드 → 커널 모드 전환 발생</td></tr>
+        <tr><th>보안 의미</th><td>시스템 콜 후킹: 루트킷이 시스템 콜 테이블 변조 → 커널 수준 은닉. HIDS가 모니터링으로 탐지</td></tr>
+        <tr><th>예시</th><td><span class="mono">read()</span>, <span class="mono">write()</span>, <span class="mono">open()</span>, <span class="mono">fork()</span>, <span class="mono">exec()</span>, <span class="mono">socket()</span>, <span class="mono">connect()</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">PKI 세부 구성 요소</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>구성 요소</th><th>설명</th></tr>
+        <tr><td><span class="badge b-red">CA</span> 인증기관</td><td>인증서 발급·서명·폐기 관리. 루트CA/중간CA 계층 구조</td></tr>
+        <tr><td><span class="badge b-blue">RA</span> 등록기관</td><td>사용자 신원 확인 및 인증서 신청 접수. CA 위임 기관</td></tr>
+        <tr><td><span class="badge b-teal">VA</span> 검증기관</td><td>인증서 유효성 검증 서비스 제공 (OCSP 응답)</td></tr>
+        <tr><td><span class="badge b-amber">저장소</span> Repository</td><td>인증서·CRL 공개 저장 및 배포 (LDAP, HTTP)</td></tr>
+        <tr><td><span class="badge b-purple">CPS</span></td><td>Certification Practice Statement — 인증 업무 준칙</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">특수 암호화 방식</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>방식</th><th>영문</th><th>특징 및 활용</th></tr>
+        <tr><td><span class="badge b-purple">동형 암호화</span></td><td>Homomorphic Encryption</td><td>암호문 상태에서 연산 수행 → 복호화 없이 클라우드 데이터 처리 가능. 프라이버시 보호 컴퓨팅</td></tr>
+        <tr><td><span class="badge b-blue">형태 보존</span></td><td>Format Preserving Encryption (FPE)</td><td>평문의 형식(길이·문자 유형)을 유지한 채 암호화. 카드번호·주민번호 암호화 활용 (FF1, FF3)</td></tr>
+        <tr><td><span class="badge b-teal">순서 보존</span></td><td>Order Preserving Encryption (OPE)</td><td>암호문 간 대소관계 = 평문과 동일 → 암호화 상태로 정렬·범위 검색 가능. DB 인덱스 활용</td></tr>
+        <tr><td><span class="badge b-amber">다형성</span></td><td>Polymorphic Encryption</td><td>암호화할 때마다 다른 암호문 생성 (같은 평문 ≠ 같은 암호문). 패턴 분석 방어. RSA-OAEP, ElGamal</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">MAC — Message Authentication Code</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th style="width:20%">개념</th><td>공유 비밀키 + 메시지 → 고정 길이 태그 생성. 무결성 + 메시지 인증 제공 (부인 방지는 없음)</td></tr>
+        <tr><th>종류</th><td>① HMAC: 해시 함수 기반 (HMAC-SHA256) ② CMAC: 블록 암호 기반 (AES-CMAC) ③ GMAC: GCM 모드 인증 태그</td></tr>
+        <tr><th>vs 디지털 서명</th><td>MAC: 대칭키 → 무결성+인증 / 디지털 서명: 비대칭키 → 무결성+인증+<b>부인방지</b></td></tr>
+        <tr><th>시퀀스 번호</th><td>재전송 공격(Replay Attack) 방어: 패킷에 순서 번호 포함 → 이전 패킷 재전송 탐지</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── 5과목 ──────────────────────────── -->
+<div class="subject" id="s5">
+  <div class="subject-header">
+    <span class="subject-num s5-num">5과목</span>
+    <span class="subject-title-text s5-color">정보보안 관리 및 법규</span>
+  </div>
+
+  <div class="section">
+    <div class="section-label">업무 연속성 계획 (BCP) 5단계</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>단계</th><th>내용</th><th>산출물</th></tr>
+        <tr><td><span class="badge b-blue">1단계</span> 프로젝트 범위 설정·기획</td><td>BCP 추진 목표·범위 정의, 경영진 승인, 팀 구성</td><td>BCP 정책서, 프로젝트 계획서</td></tr>
+        <tr><td><span class="badge b-teal">2단계</span> 업무 영향 분석 (BIA)</td><td>핵심 업무 식별, 복구 목표(RTO/RPO) 설정, 재무적 영향 분석</td><td>BIA 보고서, RTO/RPO 정의</td></tr>
+        <tr><td><span class="badge b-amber">3단계</span> 복구 전략 개발</td><td>복구 대안 도출 (Hot/Warm/Cold Site), 비용-효과 분석, 전략 선택</td><td>복구 전략 문서</td></tr>
+        <tr><td><span class="badge b-purple">4단계</span> BCP 문서화</td><td>복구 절차 문서화, 비상 연락망, 역할·책임 명시</td><td>BCP 문서, 대응 절차서</td></tr>
+        <tr><td><span class="badge b-red">5단계</span> 교육·훈련·유지보수</td><td>모의 훈련(Tabletop/Full-scale), 테스트, 주기적 업데이트</td><td>훈련 결과 보고서, 개정 BCP</td></tr>
+      </table>
+    </div>
+    <div class="note">💡 암기: 범위 → BIA → 전략 → 문서화 → 훈련/유지보수</div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── 영단어 ──────────────────────────── -->
+<div class="subject" id="sw">
+  <div class="subject-header">
+    <span class="subject-num sw-num">영단어</span>
+    <span class="subject-title-text sw-color">핵심 용어 모음</span>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="wordSearch" placeholder="단어 검색... (예: VPN, 암호화, PKI)" oninput="filterWords()">
+  </div>
+  <div id="no-result">검색 결과가 없어요</div>
+
+  <div class="word-grid" id="wordGrid">
+
+    <!-- 1과목 -->
+    <div class="word-item" data-tags="pam pluggable authentication modules 플러그인 인증">
+      <div class="word-en">PAM</div>
+      <div class="word-full">Pluggable Authentication Modules</div>
+      <div class="word-ko">플러그인 방식의 인증 모듈 프레임워크. 리눅스 인증을 모듈화</div>
+    </div>
+    <div class="word-item" data-tags="rlogin remote login 원격 로그인">
+      <div class="word-en">rlogin</div>
+      <div class="word-full">Remote Login</div>
+      <div class="word-ko">원격 로그인 서비스. .rhosts 기반, SSH로 대체됨</div>
+    </div>
+    <div class="word-item" data-tags="xinetd extended internet daemon 슈퍼 데몬">
+      <div class="word-en">xinetd</div>
+      <div class="word-full">Extended Internet Daemon</div>
+      <div class="word-ko">슈퍼 데몬. 서비스 요청 시에만 하위 데몬 실행</div>
+    </div>
+    <div class="word-item" data-tags="ransomware 랜섬웨어 악성코드 금전">
+      <div class="word-en">Ransomware</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">파일 암호화 또는 시스템 잠금 후 금전을 요구하는 악성코드</div>
+    </div>
+    <div class="word-item" data-tags="raas ransomware as a service 서비스형">
+      <div class="word-en">RaaS</div>
+      <div class="word-full">Ransomware as a Service</div>
+      <div class="word-ko">랜섬웨어 기능을 서비스로 임대하는 비즈니스 모델</div>
+    </div>
+
+    <!-- 2과목 -->
+    <div class="word-item" data-tags="dns sinkhole 싱크홀 c&c 차단 봇넷">
+      <div class="word-en">DNS Sinkhole</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">악성 도메인 쿼리를 가짜 IP로 응답하여 C&C 통신 차단하는 기법</div>
+    </div>
+    <div class="word-item" data-tags="syn scan half open tcp 스텔스">
+      <div class="word-en">SYN Scan</div>
+      <div class="word-full">TCP Half Open Scan</div>
+      <div class="word-ko">SYN 후 RST로 연결 미완성. 스텔스 포트 스캔 기법</div>
+    </div>
+    <div class="word-item" data-tags="null scan tcp 플래그 없음 unix">
+      <div class="word-en">NULL Scan</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">TCP 플래그 없이 전송하는 스캔. Unix 계열에서만 동작</div>
+    </div>
+    <div class="word-item" data-tags="spi stateful packet inspection 상태 추적 방화벽">
+      <div class="word-en">SPI</div>
+      <div class="word-full">Stateful Packet Inspection</div>
+      <div class="word-ko">세션 상태를 추적하여 정상 흐름 내 패킷만 허용하는 방화벽 기술</div>
+    </div>
+    <div class="word-item" data-tags="siem security information event management 이벤트 관리">
+      <div class="word-en">SIEM</div>
+      <div class="word-full">Security Information and Event Management</div>
+      <div class="word-ko">보안 이벤트 수집·상관분석·실시간 위협 탐지 시스템</div>
+    </div>
+    <div class="word-item" data-tags="esm enterprise security management 기업 보안 통합">
+      <div class="word-en">ESM</div>
+      <div class="word-full">Enterprise Security Management</div>
+      <div class="word-ko">기업 전체 보안을 통합 관리하는 시스템</div>
+    </div>
+    <div class="word-item" data-tags="eam extranet access management 외부 접근 관리">
+      <div class="word-en">EAM</div>
+      <div class="word-full">Extranet Access Management</div>
+      <div class="word-ko">외부 파트너·고객의 인트라넷 접근 권한 통합 관리</div>
+    </div>
+    <div class="word-item" data-tags="nms network management system 네트워크 관리 snmp">
+      <div class="word-en">NMS</div>
+      <div class="word-full">Network Management System</div>
+      <div class="word-ko">SNMP 기반 네트워크 장비 모니터링·장애관리 시스템</div>
+    </div>
+    <div class="word-item" data-tags="cam content addressable memory mac flooding 스위치">
+      <div class="word-en">CAM Table</div>
+      <div class="word-full">Content Addressable Memory</div>
+      <div class="word-ko">스위치의 MAC 주소 테이블. MAC Flooding 공격 대상</div>
+    </div>
+    <div class="word-item" data-tags="mac flooding cam overflow 스위치 허브 스니핑">
+      <div class="word-en">MAC Flooding</div>
+      <div class="word-full">CAM Table Overflow</div>
+      <div class="word-ko">스위치 CAM 테이블을 가득 채워 허브처럼 동작시키는 공격</div>
+    </div>
+    <div class="word-item" data-tags="icmp internet control message protocol 오류 메시지">
+      <div class="word-en">ICMP</div>
+      <div class="word-full">Internet Control Message Protocol</div>
+      <div class="word-ko">IP 계층 오류 메시지·제어 메시지 전달 프로토콜</div>
+    </div>
+    <div class="word-item" data-tags="dns spoofing 캐시 포이즈닝 위조 스푸핑">
+      <div class="word-en">DNS Spoofing</div>
+      <div class="word-full">DNS Cache Poisoning</div>
+      <div class="word-ko">DNS 응답을 위조하여 사용자를 악성 IP로 유도하는 공격</div>
+    </div>
+    <div class="word-item" data-tags="dnssec security extensions 디지털 서명 무결성">
+      <div class="word-en">DNSSEC</div>
+      <div class="word-full">DNS Security Extensions</div>
+      <div class="word-ko">DNS 응답에 디지털 서명을 추가하여 위변조를 방지하는 확장</div>
+    </div>
+    <div class="word-item" data-tags="wpa wi-fi protected access 무선 보안">
+      <div class="word-en">WPA / WPA2 / WPA3</div>
+      <div class="word-full">Wi-Fi Protected Access</div>
+      <div class="word-ko">무선랜 보안 표준. WPA(TKIP) → WPA2(AES/CCMP) → WPA3(SAE)</div>
+    </div>
+    <div class="word-item" data-tags="tkip temporal key integrity protocol rc4 무결성">
+      <div class="word-en">TKIP</div>
+      <div class="word-full">Temporal Key Integrity Protocol</div>
+      <div class="word-ko">WPA에서 사용하는 RC4 기반 암호화 프로토콜. Michael MIC 포함</div>
+    </div>
+    <div class="word-item" data-tags="ccmp counter mode cbc-mac protocol aes wpa2">
+      <div class="word-en">CCMP</div>
+      <div class="word-full">Counter Mode with CBC-MAC Protocol</div>
+      <div class="word-ko">WPA2의 AES 기반 암호화·인증 프로토콜. 현재 무선 보안 표준</div>
+    </div>
+    <div class="word-item" data-tags="eap extensible authentication protocol 확장 인증">
+      <div class="word-en">EAP</div>
+      <div class="word-full">Extensible Authentication Protocol</div>
+      <div class="word-ko">다양한 인증 방식을 지원하는 확장 인증 프레임워크</div>
+    </div>
+    <div class="word-item" data-tags="peap protected eap 터널 ms-chapv2">
+      <div class="word-en">PEAP</div>
+      <div class="word-full">Protected EAP</div>
+      <div class="word-ko">TLS 터널 내에서 EAP 인증을 수행. WPA 엔터프라이즈에 널리 사용</div>
+    </div>
+    <div class="word-item" data-tags="vpn virtual private network 가상사설망">
+      <div class="word-en">VPN</div>
+      <div class="word-full">Virtual Private Network</div>
+      <div class="word-ko">공용망을 통해 암호화된 사설 통신 터널을 구성하는 기술</div>
+    </div>
+    <div class="word-item" data-tags="ipsec internet protocol security ah esp ike 터널">
+      <div class="word-en">IPSec</div>
+      <div class="word-full">Internet Protocol Security</div>
+      <div class="word-ko">L3 기반 VPN. AH(인증)와 ESP(암호화+인증)로 IP 패킷 보호</div>
+    </div>
+    <div class="word-item" data-tags="cdr content disarm reconstruction 무해화 악성">
+      <div class="word-en">CDR</div>
+      <div class="word-full">Content Disarm and Reconstruction</div>
+      <div class="word-ko">파일 내 악성 요소(매크로 등) 제거 후 무해화하여 재생성하는 기술</div>
+    </div>
+    <div class="word-item" data-tags="edr endpoint detection response 엔드포인트 탐지">
+      <div class="word-en">EDR</div>
+      <div class="word-full">Endpoint Detection and Response</div>
+      <div class="word-ko">엔드포인트 행위 모니터링 및 위협 탐지·대응을 자동화하는 솔루션</div>
+    </div>
+    <div class="word-item" data-tags="sdn software defined networking 소프트웨어 정의 네트워크 openflow">
+      <div class="word-en">SDN</div>
+      <div class="word-full">Software Defined Networking</div>
+      <div class="word-ko">제어 평면과 데이터 평면을 분리하여 중앙에서 네트워크를 관리하는 기술</div>
+    </div>
+    <div class="word-item" data-tags="apt advanced persistent threat 지능형 지속 위협 공격">
+      <div class="word-en">APT</div>
+      <div class="word-full">Advanced Persistent Threat</div>
+      <div class="word-ko">특정 목표를 장기간 은밀하게 공격하는 지능형 지속 위협</div>
+    </div>
+    <div class="word-item" data-tags="nat network address translation 주소 변환">
+      <div class="word-en">NAT</div>
+      <div class="word-full">Network Address Translation</div>
+      <div class="word-ko">사설 IP ↔ 공인 IP 주소를 변환하는 기술. 내부 구조 은닉 효과</div>
+    </div>
+    <div class="word-item" data-tags="pat napt port address translation 포트 주소 변환">
+      <div class="word-en">PAT / NAPT</div>
+      <div class="word-full">Port Address Translation / Network Address Port Translation</div>
+      <div class="word-ko">포트 번호로 다수의 사설 IP가 하나의 공인 IP를 공유하는 N:1 NAT</div>
+    </div>
+
+    <!-- 3과목 -->
+    <div class="word-item" data-tags="rest api representational state transfer stateless">
+      <div class="word-en">REST API</div>
+      <div class="word-full">Representational State Transfer API</div>
+      <div class="word-ko">HTTP 기반 Stateless 아키텍처 스타일의 웹 API 설계 방식</div>
+    </div>
+    <div class="word-item" data-tags="iam identity access management 신원 접근 관리">
+      <div class="word-en">IAM</div>
+      <div class="word-full">Identity and Access Management</div>
+      <div class="word-ko">사용자 신원 확인 및 리소스 접근 권한을 통합 관리하는 시스템</div>
+    </div>
+    <div class="word-item" data-tags="sso single sign-on 통합 로그인 세션">
+      <div class="word-en">SSO</div>
+      <div class="word-full">Single Sign-On</div>
+      <div class="word-ko">한 번의 인증으로 여러 서비스에 접근할 수 있는 통합 로그인 기술</div>
+    </div>
+    <div class="word-item" data-tags="tde transparent data encryption 투명 암호화 db">
+      <div class="word-en">TDE</div>
+      <div class="word-full">Transparent Data Encryption</div>
+      <div class="word-ko">앱 코드 수정 없이 DB 파일 수준에서 자동으로 암호화하는 기술</div>
+    </div>
+    <div class="word-item" data-tags="wpki wireless pki 무선 공개키 인프라 wtls">
+      <div class="word-en">WPKI</div>
+      <div class="word-full">Wireless Public Key Infrastructure</div>
+      <div class="word-ko">무선 환경에 최적화된 경량 PKI. WTLS 위에서 동작</div>
+    </div>
+    <div class="word-item" data-tags="waf web application firewall 웹 방화벽 modsecurity">
+      <div class="word-en">WAF</div>
+      <div class="word-full">Web Application Firewall</div>
+      <div class="word-ko">웹 애플리케이션 계층의 공격(SQLi, XSS 등)을 탐지·차단하는 방화벽</div>
+    </div>
+    <div class="word-item" data-tags="csrf cross-site request forgery 사이트 간 요청 위조">
+      <div class="word-en">CSRF</div>
+      <div class="word-full">Cross-Site Request Forgery</div>
+      <div class="word-ko">인증된 사용자의 세션으로 공격자가 의도한 요청을 강제 전송시키는 공격</div>
+    </div>
+    <div class="word-item" data-tags="fds fraud detection system 이상거래 탐지 금융">
+      <div class="word-en">FDS</div>
+      <div class="word-full">Fraud Detection System</div>
+      <div class="word-ko">금융 이상거래를 행동 패턴 분석으로 실시간 탐지·차단하는 시스템</div>
+    </div>
+    <div class="word-item" data-tags="fido fast identity online 비밀번호 없는 인증 생체">
+      <div class="word-en">FIDO</div>
+      <div class="word-full">Fast Identity Online</div>
+      <div class="word-ko">생체정보·PIN을 디바이스 내 개인키로 서명하는 비밀번호 없는 인증 표준</div>
+    </div>
+    <div class="word-item" data-tags="aml anti-money laundering 자금세탁 방지 금융">
+      <div class="word-en">AML</div>
+      <div class="word-full">Anti-Money Laundering</div>
+      <div class="word-ko">자금세탁 방지를 위한 의심 금융거래 모니터링·신고 시스템</div>
+    </div>
+    <div class="word-item" data-tags="set secure electronic transaction 전자지불 visa mastercard">
+      <div class="word-en">SET</div>
+      <div class="word-full">Secure Electronic Transaction</div>
+      <div class="word-ko">Visa·MasterCard 개발 전자지불 프로토콜. 이중서명으로 카드정보 분리 보호</div>
+    </div>
+    <div class="word-item" data-tags="jwt json web token 토큰 인증 oauth">
+      <div class="word-en">JWT</div>
+      <div class="word-full">JSON Web Token</div>
+      <div class="word-ko">Header.Payload.Signature 구조의 자가 포함형 인증 토큰</div>
+    </div>
+    <div class="word-item" data-tags="saml security assertion markup language sso 연동">
+      <div class="word-en">SAML</div>
+      <div class="word-full">Security Assertion Markup Language</div>
+      <div class="word-ko">XML 기반 SSO 표준. IdP와 SP 간 인증 정보를 교환하는 프로토콜</div>
+    </div>
+
+    <!-- 4과목 -->
+    <div class="word-item" data-tags="kdc key distribution center 키 분배 kerberos">
+      <div class="word-en">KDC</div>
+      <div class="word-full">Key Distribution Center</div>
+      <div class="word-ko">Kerberos의 핵심 인증 서버. AS(인증)와 TGS(티켓 발급)을 포함</div>
+    </div>
+    <div class="word-item" data-tags="tgt ticket granting ticket kerberos 인증 티켓">
+      <div class="word-en">TGT</div>
+      <div class="word-full">Ticket Granting Ticket</div>
+      <div class="word-ko">Kerberos에서 AS로부터 발급받는 1차 티켓. 서비스 티켓 요청에 사용</div>
+    </div>
+    <div class="word-item" data-tags="tgs ticket granting server kerberos 서비스 티켓">
+      <div class="word-en">TGS</div>
+      <div class="word-full">Ticket Granting Server</div>
+      <div class="word-ko">Kerberos에서 TGT를 검증하고 서비스 접근 티켓을 발급하는 서버</div>
+    </div>
+    <div class="word-item" data-tags="crl certificate revocation list 인증서 폐기 목록">
+      <div class="word-en">CRL</div>
+      <div class="word-full">Certificate Revocation List</div>
+      <div class="word-ko">CA가 발급한 인증서 중 유효기간 전에 폐기된 인증서 목록</div>
+    </div>
+    <div class="word-item" data-tags="ocsp online certificate status protocol 인증서 상태 검증">
+      <div class="word-en">OCSP</div>
+      <div class="word-full">Online Certificate Status Protocol</div>
+      <div class="word-ko">개별 인증서의 유효성을 실시간으로 조회하는 경량 검증 프로토콜</div>
+    </div>
+    <div class="word-item" data-tags="tcb trusted computing base 신뢰 컴퓨팅 기반 보안">
+      <div class="word-en">TCB</div>
+      <div class="word-full">Trusted Computing Base</div>
+      <div class="word-ko">시스템 보안 정책 시행을 위한 H/W·S/W·F/W 전체 신뢰 집합</div>
+    </div>
+    <div class="word-item" data-tags="reference monitor 참조 모니터 접근 중재 완전성 고립성">
+      <div class="word-en">Reference Monitor</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">주체-객체 모든 접근을 중재하는 추상 개념. 완전성·고립성·검증가능성 필요</div>
+    </div>
+    <div class="word-item" data-tags="pki public key infrastructure 공개키 인프라 ca ra va">
+      <div class="word-en">PKI</div>
+      <div class="word-full">Public Key Infrastructure</div>
+      <div class="word-ko">공개키 암호 기반의 인증서 발급·관리·검증 체계. CA·RA·VA·저장소 포함</div>
+    </div>
+    <div class="word-item" data-tags="ca certification authority 인증기관 인증서 발급">
+      <div class="word-en">CA / RA / VA</div>
+      <div class="word-full">Certification / Registration / Validation Authority</div>
+      <div class="word-ko">CA: 인증기관(발급) / RA: 등록기관(신청접수) / VA: 검증기관(상태확인)</div>
+    </div>
+    <div class="word-item" data-tags="hmac hash mac message authentication code 해시 무결성">
+      <div class="word-en">HMAC</div>
+      <div class="word-full">Hash-based Message Authentication Code</div>
+      <div class="word-ko">해시 함수와 공유 비밀키를 조합한 메시지 인증 코드. 무결성+인증 제공</div>
+    </div>
+    <div class="word-item" data-tags="mac message authentication code 메시지 인증 코드 무결성">
+      <div class="word-en">MAC</div>
+      <div class="word-full">Message Authentication Code</div>
+      <div class="word-ko">공유 비밀키로 생성하는 메시지 인증 태그. 무결성·인증 제공, 부인방지 없음</div>
+    </div>
+    <div class="word-item" data-tags="fpe format preserving encryption 형태 보존 암호화 카드번호">
+      <div class="word-en">FPE</div>
+      <div class="word-full">Format Preserving Encryption</div>
+      <div class="word-ko">평문의 형식(길이·유형)을 유지한 채 암호화. 카드번호·주민번호에 활용</div>
+    </div>
+    <div class="word-item" data-tags="ope order preserving encryption 순서 보존 암호화 정렬">
+      <div class="word-en">OPE</div>
+      <div class="word-full">Order Preserving Encryption</div>
+      <div class="word-ko">암호문 대소관계 = 평문과 동일. 암호화 상태로 정렬·범위 검색 가능</div>
+    </div>
+    <div class="word-item" data-tags="homomorphic encryption 동형 암호화 연산 클라우드">
+      <div class="word-en">Homomorphic Encryption</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">암호문 상태에서 직접 연산 가능. 복호화 없이 클라우드 데이터 처리</div>
+    </div>
+    <div class="word-item" data-tags="polymorphic 다형성 암호화 다른 암호문 패턴 분석">
+      <div class="word-en">Polymorphic Encryption</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">같은 평문이라도 매번 다른 암호문 생성. 패턴 분석 공격 방어</div>
+    </div>
+    <div class="word-item" data-tags="mfa multi-factor authentication 다중 인증 otp 생체">
+      <div class="word-en">MFA</div>
+      <div class="word-full">Multi-Factor Authentication</div>
+      <div class="word-ko">2개 이상의 인증 요소(지식·소유·생체)를 결합하는 다중 인증 방식</div>
+    </div>
+    <div class="word-item" data-tags="dek mek data master encryption key 암호화 키">
+      <div class="word-en">DEK / MEK</div>
+      <div class="word-full">Data Encryption Key / Master Encryption Key</div>
+      <div class="word-ko">DEK: 실제 데이터 암호화 키 / MEK: DEK를 암호화하는 마스터 키</div>
+    </div>
+
+    <!-- 5과목 -->
+    <div class="word-item" data-tags="bcp business continuity plan 업무 연속성 계획">
+      <div class="word-en">BCP</div>
+      <div class="word-full">Business Continuity Plan</div>
+      <div class="word-ko">재해·장애 발생 시 업무 연속성을 확보하기 위한 계획. 5단계 프로세스</div>
+    </div>
+    <div class="word-item" data-tags="bia business impact analysis 업무 영향 분석 rto rpo">
+      <div class="word-en">BIA</div>
+      <div class="word-full">Business Impact Analysis</div>
+      <div class="word-ko">BCP 2단계. 핵심 업무 식별 및 재해로 인한 재무적·운영적 영향 분석</div>
+    </div>
+    <div class="word-item" data-tags="rto recovery time objective 복구 목표 시간">
+      <div class="word-en">RTO</div>
+      <div class="word-full">Recovery Time Objective</div>
+      <div class="word-ko">재해 발생 후 업무·시스템을 복구해야 하는 목표 시간</div>
+    </div>
+    <div class="word-item" data-tags="rpo recovery point objective 복구 목표 시점 데이터">
+      <div class="word-en">RPO</div>
+      <div class="word-full">Recovery Point Objective</div>
+      <div class="word-ko">재해 발생 시 허용 가능한 최대 데이터 손실 기준 시점</div>
+    </div>
+    <div class="word-item" data-tags="xss cross site scripting 크로스 사이트 스크립팅 스크립트 삽입">
+      <div class="word-en">XSS</div>
+      <div class="word-full">Cross-Site Scripting</div>
+      <div class="word-ko">공격자가 웹페이지에 악성 스크립트를 삽입해 피해자 브라우저에서 실행시키는 공격</div>
+    </div>
+    <div class="word-item" data-tags="sql injection sqli 데이터베이스 주입 공격">
+      <div class="word-en">SQL Injection</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">악의적 SQL 구문을 입력 값에 삽입해 DB를 비정상적으로 조작하는 공격</div>
+    </div>
+    <div class="word-item" data-tags="arp spoofing 스푸핑 주소 결정 프로토콜 위조">
+      <div class="word-en">ARP Spoofing</div>
+      <div class="word-full">Address Resolution Protocol Spoofing</div>
+      <div class="word-ko">ARP 캐시를 위조하여 트래픽을 가로채는 중간자 공격 기법</div>
+    </div>
+    <div class="word-item" data-tags="ddos distributed denial of service 분산 서비스 거부">
+      <div class="word-en">DDoS</div>
+      <div class="word-full">Distributed Denial of Service</div>
+      <div class="word-ko">다수의 좀비 PC로 서버에 과부하를 유발하여 서비스를 불가능하게 만드는 공격</div>
+    </div>
+    <div class="word-item" data-tags="syn flood flooding tcp 3way handshake 반쪽">
+      <div class="word-en">SYN Flood</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">대량의 SYN 패킷으로 서버 연결 큐를 가득 채우는 DoS 공격</div>
+    </div>
+    <div class="word-item" data-tags="zero day 0day 취약점 패치 미공개">
+      <div class="word-en">Zero-Day</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">공개·패치되지 않은 취약점을 이용하는 공격. APT에서 주로 활용</div>
+    </div>
+    <div class="word-item" data-tags="rbac role based access control 역할 기반 접근 제어">
+      <div class="word-en">RBAC</div>
+      <div class="word-full">Role-Based Access Control</div>
+      <div class="word-ko">사용자의 역할(Role)에 따라 권한을 부여하는 접근 제어 모델</div>
+    </div>
+    <div class="word-item" data-tags="abac attribute based access control 속성 기반 접근 제어">
+      <div class="word-en">ABAC</div>
+      <div class="word-full">Attribute-Based Access Control</div>
+      <div class="word-ko">사용자·환경·리소스 속성을 기반으로 접근을 제어하는 정책 모델</div>
+    </div>
+    <div class="word-item" data-tags="replay attack 재전송 공격 시퀀스 번호 방어">
+      <div class="word-en">Replay Attack</div>
+      <div class="word-full">—</div>
+      <div class="word-ko">이전에 캡처한 유효한 패킷을 재전송하여 불법 인증을 시도하는 공격</div>
+    </div>
+    <div class="word-item" data-tags="man in the middle mitm 중간자 공격 가로채기">
+      <div class="word-en">MITM</div>
+      <div class="word-full">Man-in-the-Middle Attack</div>
+      <div class="word-ko">통신 당사자 사이에 끼어 트래픽을 도청·변조하는 공격</div>
+    </div>
+    <div class="word-item" data-tags="hids host intrusion detection system 호스트 침입 탐지">
+      <div class="word-en">HIDS</div>
+      <div class="word-full">Host-based Intrusion Detection System</div>
+      <div class="word-ko">호스트 내부 로그·시스템 콜을 모니터링하는 호스트 기반 침입 탐지 시스템</div>
+    </div>
+    <div class="word-item" data-tags="nids network intrusion detection 네트워크 침입 탐지">
+      <div class="word-en">NIDS</div>
+      <div class="word-full">Network-based Intrusion Detection System</div>
+      <div class="word-ko">네트워크 트래픽을 분석하여 침입을 탐지하는 네트워크 기반 IDS</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function showSubject(id, btn) {
+  // 탭 활성화
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  // 과목 표시/숨김
+  const subjects = ['s1','s2','s3','s4','s5','sw'];
+  subjects.forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.style.display = (id === 'all' || id === s) ? '' : 'none';
+  });
+}
+
+function filterWords() {
+  const q = document.getElementById('wordSearch').value.toLowerCase().trim();
+  const items = document.querySelectorAll('.word-item');
+  let visible = 0;
+  items.forEach(item => {
+    const tags = (item.getAttribute('data-tags') || '').toLowerCase();
+    const text = item.innerText.toLowerCase();
+    const match = !q || tags.includes(q) || text.includes(q);
+    item.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.getElementById('no-result').style.display = (q && visible === 0) ? 'block' : 'none';
+}
+
+// 초기: 전체 표시
+document.querySelectorAll('.subject').forEach(s => s.style.display = '');
+</script>
+</body>
+</html>
