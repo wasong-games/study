@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정보보안기사 2과목 — 네트워크 보안</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #0f0f13;
+  --surface: #16161e;
+  --surface2: #1e1e2a;
+  --surface3: #242433;
+  --border: #2a2a3a;
+  --border2: #333348;
+  --accent: #7c6af7;
+  --accent2: #5eead4;
+  --accent3: #f59e0b;
+  --accent4: #f87171;
+  --accent5: #34d399;
+  --text: #dde1f0;
+  --text-sub: #a8adc4;
+  --text-dim: #666880;
+  --code-bg: #0d0d16;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  font-size: 15px;
+  padding: 0 0 80px;
+}
+
+.hero {
+  background: linear-gradient(160deg, #0d1a0d 0%, #0f2a12 40%, #0a1a2e 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 64px 40px 48px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.hero-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; color: var(--accent5); text-transform: uppercase; margin-bottom: 14px; }
+.hero h1 {
+  font-size: 2rem; font-weight: 700; line-height: 1.3;
+  background: linear-gradient(100deg, #a7f3d0 0%, #34d399 40%, #5eead4 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 16px;
+}
+.hero p { color: var(--text-sub); font-size: 0.95rem; max-width: 560px; line-height: 1.8; }
+.badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.badge { font-size: 0.72rem; font-weight: 600; padding: 3px 11px; border-radius: 20px; border: 1px solid; letter-spacing: 0.03em; }
+.badge-w  { background: #7c6af718; border-color: #7c6af7; color: #a78bfa; }
+.badge-p  { background: #5eead418; border-color: #5eead4; color: #5eead4; }
+.badge-wp { background: #f59e0b18; border-color: #f59e0b; color: #fcd34d; }
+
+.content { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+
+.toc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px 32px; margin: 40px 0 0; }
+.toc h3 { color: var(--accent5); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+.toc ol { padding-left: 18px; }
+.toc li { margin: 7px 0; color: var(--text-sub); font-size: 0.88rem; }
+.toc a { color: var(--text-sub); text-decoration: none; }
+.toc a:hover { color: var(--accent2); }
+
+.chapter { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--border); }
+.chapter-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; color: var(--accent5); text-transform: uppercase; margin-bottom: 6px; }
+.chapter h2 { font-size: 1.55rem; font-weight: 700; margin-bottom: 14px; color: var(--text); }
+.chapter-intro { color: var(--text-sub); font-size: 0.93rem; line-height: 1.9; padding: 16px 20px; border-left: 2px solid var(--border2); margin-bottom: 32px; }
+
+.section { margin-bottom: 48px; }
+.section-title { font-size: 1.05rem; font-weight: 700; color: var(--accent2); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-title .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+.section-title .badge { margin-left: 4px; }
+
+.prose { color: var(--text-sub); font-size: 0.93rem; line-height: 2; margin-bottom: 14px; }
+.prose b, .prose strong { color: var(--text); font-weight: 600; }
+.prose em { color: var(--accent3); font-style: normal; font-weight: 600; }
+.prose u { text-decoration: none; color: var(--accent2); font-weight: 600; }
+.prose .danger { color: var(--accent4); font-weight: 600; }
+
+.callout { border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 0.9rem; line-height: 1.85; display: flex; gap: 14px; align-items: flex-start; }
+.callout-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 1px; }
+.callout-body { color: var(--text-sub); }
+.callout-body b { color: var(--text); }
+.callout-body em { color: var(--accent3); font-style: normal; }
+.callout-body .danger { color: var(--accent4); }
+.callout-body u { text-decoration: none; color: var(--accent2); }
+.callout-body code { font-family: 'JetBrains Mono', monospace; background: var(--surface3); border: 1px solid var(--border); padding: 1px 6px; border-radius: 3px; font-size: 0.8rem; color: var(--accent3); }
+.callout.tip    { background: #5eead410; border: 1px solid #5eead428; }
+.callout.warn   { background: #f59e0b10; border: 1px solid #f59e0b28; }
+.callout.info   { background: #7c6af710; border: 1px solid #7c6af728; }
+.callout.danger { background: #f8717110; border: 1px solid #f8717128; }
+.callout.story  { background: #34d39910; border: 1px solid #34d39928; }
+
+.table-wrap { overflow-x: auto; margin: 16px 0 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+th { background: var(--surface2); color: var(--accent); padding: 10px 16px; border: 1px solid var(--border); font-weight: 600; text-align: left; white-space: nowrap; }
+td { padding: 10px 16px; border: 1px solid var(--border); vertical-align: top; line-height: 1.75; color: var(--text-sub); }
+td b, td strong { color: var(--text); }
+td em { color: var(--accent3); font-style: normal; }
+td .danger { color: var(--accent4); }
+td u { text-decoration: none; color: var(--accent2); }
+td code { font-family: 'JetBrains Mono', monospace; background: var(--surface3); border: 1px solid var(--border); padding: 1px 6px; border-radius: 3px; font-size: 0.8rem; color: var(--accent3); }
+tr:nth-child(even) td { background: #ffffff04; }
+tr:hover td { background: #7c6af708; }
+.row-key td:first-child { color: var(--text); font-weight: 600; }
+
+code { font-family: 'JetBrains Mono', monospace; background: var(--surface3); border: 1px solid var(--border); padding: 1px 6px; border-radius: 4px; font-size: 0.82rem; color: var(--accent3); }
+
+.code-block { background: var(--code-bg); border: 1px solid var(--border); border-left: 3px solid var(--accent3); border-radius: 8px; padding: 18px 22px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #cdd6f4; line-height: 1.9; overflow-x: auto; margin: 14px 0; white-space: pre; }
+
+.memo { background: linear-gradient(135deg, #1a1440 0%, #1e1b4b 100%); border: 1px solid #3730a3; border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 0.88rem; }
+.memo .memo-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: #818cf8; text-transform: uppercase; margin-bottom: 8px; }
+.memo .memo-body { color: #c7d2fe; line-height: 1.8; }
+.memo .memo-body b { color: #e0e7ff; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+.card h4 { color: var(--accent); font-size: 0.88rem; margin-bottom: 12px; }
+.card ul { list-style: none; padding: 0; }
+.card ul li { font-size: 0.88rem; color: var(--text-sub); padding: 4px 0 4px 16px; position: relative; line-height: 1.7; }
+.card ul li::before { content: '·'; position: absolute; left: 4px; color: var(--accent); }
+.card ul li b { color: var(--text); }
+.card ul li em { color: var(--accent3); font-style: normal; }
+
+.port { display: inline-block; font-family: 'JetBrains Mono', monospace; background: #f59e0b18; border: 1px solid #f59e0b80; color: #fcd34d; font-size: 0.77rem; padding: 1px 7px; border-radius: 4px; font-weight: 600; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 50px 0; }
+
+/* 핸드셰이크 다이어그램 */
+.handshake { display: flex; gap: 0; align-items: stretch; margin: 16px 0; font-size: 0.83rem; }
+.hs-col { flex: 1; }
+.hs-head { background: var(--surface2); border: 1px solid var(--border2); padding: 10px; text-align: center; font-weight: 700; color: var(--accent); border-radius: 8px 8px 0 0; }
+.hs-body { border: 1px solid var(--border); border-top: none; padding: 12px; min-height: 120px; color: var(--text-sub); line-height: 2; border-radius: 0 0 8px 8px; font-size: 0.82rem; }
+.hs-mid { flex: 1.2; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; padding: 0 8px; }
+.hs-arrow { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-sub); white-space: nowrap; }
+.hs-arrow .line { flex: 1; height: 1px; background: var(--border2); min-width: 30px; }
+.hs-label { background: var(--surface2); border: 1px solid var(--border2); padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; color: var(--accent3); font-family: 'JetBrains Mono', monospace; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">정보보안기사 필기+실기</div>
+  <h1>2과목 — 네트워크 보안<br>읽으면서 이해되는 정리노트</h1>
+  <p>왜 이 프로토콜이 이렇게 동작하는지, 왜 이 공격이 가능한지 흐름을 읽으면서 자연스럽게 익히도록 만들었어.</p>
+  <div class="badge-row">
+    <span class="badge badge-w">📝 필기 출제</span>
+    <span class="badge badge-p">💻 실기 출제</span>
+    <span class="badge badge-wp">⭐ 필기+실기 모두</span>
+  </div>
+</div>
+
+<div class="content">
+
+<div class="toc">
+  <h3>📋 목차</h3>
+  <ol>
+    <li><a href="#ch1">네트워크 기초 — 토폴로지, HTTP, Stateless vs Stateful</a></li>
+    <li><a href="#ch2">TCP/IP — 3-Way/4-Way 핸드셰이크, Control Flags</a></li>
+    <li><a href="#ch3">네트워크 기반 공격 — SYN Flooding, Smurfing, Teardrop, Land</a></li>
+    <li><a href="#ch4">HTTP DDoS 공격 — Slow HTTP, 세션 하이재킹</a></li>
+    <li><a href="#ch5">포트 스캐닝과 스니핑</a></li>
+    <li><a href="#ch6">라우터 접근제어, VLAN, LAN 스위치</a></li>
+    <li><a href="#ch7">방화벽(Firewall)과 IDS — 침입탐지</a></li>
+    <li><a href="#ch8">Snort, Suricata, YARA</a></li>
+    <li><a href="#ch9">VPN — IPSec, SSL, PPTP</a></li>
+    <li><a href="#ch10">기타 보안 솔루션 — IPS, Honeypot, NAC, SIEM</a></li>
+    <li><a href="#ch11">무선 LAN 보안 — WEP, WPA, WPA2, IEEE 802.11</a></li>
+  </ol>
+</div>
+
+
+<!-- ═══ CH1 네트워크 기초 ═══ -->
+<div id="ch1" class="chapter">
+  <div class="chapter-num">Chapter 01 · POINT 004</div>
+  <h2>네트워크 기초<br>— 토폴로지, HTTP, Stateless vs Stateful</h2>
+  <div class="chapter-intro">
+    네트워크 보안을 이해하려면 먼저 네트워크가 어떻게 생겼고, 어떤 프로토콜로 통신하는지 알아야 해.
+    특히 HTTP는 웹 공격의 기반이 되고, Stateless/Stateful 개념은 세션 하이재킹이나 방화벽 이해에 직결돼.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>네트워크 토폴로지 <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>형태</th><th>구조</th><th>특징</th></tr>
+        <tr><td><b>계층형 (Tree)</b></td><td>부모-자식 관계의 트리 구조</td><td>확장이 쉬움. 상위 노드 장애 시 하위 전체 영향</td></tr>
+        <tr><td><b>버스형</b></td><td>중앙 통신 회선 하나에 여러 노드 연결</td><td>구성 간단, 비용 저렴. 회선 장애 시 전체 영향</td></tr>
+        <tr><td><b>성형 (Star)</b></td><td>중앙 컴퓨터를 중심으로 터미널들이 연결된 중앙 집중식</td><td>중앙 장비 장애 시 전체 마비. 관리 용이</td></tr>
+        <tr><td><b>원형 (Ring)</b></td><td>인접한 노드들을 연결하는 단방향 전송</td><td>토큰 방식으로 순서대로 전송. 한 노드 장애 시 전체 영향</td></tr>
+        <tr><td><b>망형 (Mesh)</b></td><td>모든 노드들이 상호 연결</td><td>안정성 최高. 구성 비용 매우 높음</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Stateless vs Stateful <span class="badge badge-w">필기</span></div>
+    <p class="prose">
+      웹 공격의 상당수가 <strong>세션(상태)</strong>을 악용하는 방식이야. Stateless와 Stateful의 차이를 알면 세션 하이재킹, 쿠키 공격, CSRF 같은 공격이 왜 가능한지 이해돼.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>Stateless</th><th>Stateful</th></tr>
+        <tr><td><b>개념</b></td><td>연결을 유지하지 않음. 요청마다 독립적</td><td>연결 정보(세션)를 유지함</td></tr>
+        <tr><td><b>예시</b></td><td>HTTP, DNS, UDP</td><td>TCP, FTP, SSH</td></tr>
+        <tr><td><b>서버</b></td><td>세션 정보 저장 불필요 (서버 부담 없음)</td><td>세션 정보 저장 필요 (서버 필요)</td></tr>
+        <tr><td><b>장점</b></td><td>설계 간단, 장애 후 재시작 쉬움, 서버에서 빠르게 처리</td><td>여러 세션 정보 유지 가능</td></tr>
+        <tr><td><b>단점</b></td><td>매 요청마다 인증 정보 재전송 필요</td><td>비교적 처리 느림, 복잡한 구현</td></tr>
+      </table>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <b>HTTP가 Stateless인데 로그인이 유지되는 이유?</b><br>
+        쿠키(Cookie)나 세션(Session) 토큰을 사용해서 상태를 흉내내. 서버가 세션 ID를 쿠키에 담아서 클라이언트에게 주고, 이후 요청마다 그 쿠키를 보내서 "나 이미 로그인한 사람이야"라고 알리는 거야.<br>
+        → 이 세션 ID를 탈취하면 <em>세션 하이재킹</em> 공격이 가능해.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>HTTP 프로토콜 — 요청 메서드 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>메서드</th><th>설명</th></tr>
+        <tr>
+          <td><b>GET</b></td>
+          <td>리소스의 위치를 URL로 표시하고 Request Body가 없음. 서버에 전달할 때 데이터를 URL에 포함시켜 요청. 전송량 제한 있음(4KB). 예: <code>login.php?userid=limbest&password=test</code> → URL에 노출되므로 민감 정보 전송에 부적합</td>
+        </tr>
+        <tr>
+          <td><b>POST</b></td>
+          <td>Request Body에 입력값을 전송. URL에 노출되지 않음. 데이터 전송량 제한 없음. 로그인, 파일 업로드 등에 사용</td>
+        </tr>
+        <tr>
+          <td><b>HEAD</b></td>
+          <td>서버의 정보를 확인하기 위해 사용. GET과 동일하지만 Response에 Body 없이 Response code와 Header만 응답받음 → 서버 정보 수집에 악용 가능</td>
+        </tr>
+        <tr><td><b>PUT</b></td><td>요청된 자원을 수정하기 위해 사용. 잘못 허용되면 서버 파일 덮어쓰기 가능</td></tr>
+        <tr><td><b>DELETE</b></td><td>요청된 자원을 삭제하기 위해 사용. 잘못 허용되면 서버 파일 삭제 가능</td></tr>
+        <tr><td><b>TRACE</b></td><td>Loopback 메시지를 호출하기 위해 테스트용으로 사용. <em>XST(Cross-Site Tracing) 공격</em>에 악용 가능 → 운영 서버에서는 비활성화 권고</td></tr>
+        <tr><td><b>OPTION</b></td><td>웹서버에서 지원하는 메서드를 알기 위해 사용</td></tr>
+        <tr><td><b>CONNECT</b></td><td>Proxy 기능을 사용할 때 사용</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>쿠키 보안 옵션 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>옵션</th><th>설명</th><th>왜 중요한가</th></tr>
+        <tr>
+          <td><b>Secure</b></td>
+          <td>HTTPS 프로토콜 상에서 암호화된 요청일 경우에만 전송. <code>cookie.setSecure(true)</code></td>
+          <td>HTTP로 쿠키가 평문 전송되는 것 방지. 스니핑 공격 방어</td>
+        </tr>
+        <tr>
+          <td><b>HttpOnly</b></td>
+          <td>XSS 공격을 방지하기 위해 JavaScript에서 <code>document.cookie</code> API 접근을 차단. <code>cookie.setHttpOnly(true)</code></td>
+          <td>XSS 공격으로 세션 쿠키 탈취하는 것 방지 — 가장 중요한 보안 설정 중 하나</td>
+        </tr>
+      </table>
+    </div>
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div class="callout-body">
+        <b>HttpOnly 미설정 시 공격 시나리오</b><br>
+        공격자가 XSS 취약점으로 <code>&lt;script&gt;document.cookie&lt;/script&gt;</code> 삽입<br>
+        → 피해자가 해당 페이지 방문 시 세션 쿠키가 공격자 서버로 전송<br>
+        → 공격자가 탈취한 세션 쿠키로 로그인 → <em>세션 하이재킹</em> 성공
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH2 TCP/IP ═══ -->
+<div id="ch2" class="chapter">
+  <div class="chapter-num">Chapter 02 · POINT 004</div>
+  <h2>TCP/IP<br>— 3-Way / 4-Way 핸드셰이크, Control Flags</h2>
+  <div class="chapter-intro">
+    TCP는 신뢰성 있는 연결을 보장하기 위해 연결 시작과 종료를 정해진 절차대로 해. 이 절차를 이해하면 SYN Flooding, 세션 하이재킹 같은 공격이 어떻게 이 절차를 악용하는지 바로 연결돼.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>TCP 3-Way Handshaking — 연결 수립 <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      TCP 연결을 맺으려면 클라이언트와 서버가 3번의 메시지를 주고받아. 이 과정에서 <strong>Sequence Number</strong>를 서로 교환해서 이후 패킷 순서를 추적할 수 있게 해.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>단계</th><th>방향</th><th>Flag</th><th>내용</th></tr>
+        <tr>
+          <td><b>(1) SYN</b></td><td>클라이언트 → 서버</td><td><code>SYN=1</code></td>
+          <td>클라이언트가 연결 요청. Seq Num=1000 (임의 생성). "나 연결하고 싶어, 내 번호는 1000이야"</td>
+        </tr>
+        <tr>
+          <td><b>(2) SYN+ACK</b></td><td>서버 → 클라이언트</td><td><code>SYN=1, ACK=1</code></td>
+          <td>서버가 수락 + 자신의 Seq 번호 전송. Seq Num=2000, ACK Num=1001 (클라이언트 Seq+1). "좋아, 1001번부터 보내줘. 내 번호는 2000이야"</td>
+        </tr>
+        <tr>
+          <td><b>(3) ACK</b></td><td>클라이언트 → 서버</td><td><code>ACK=1</code></td>
+          <td>클라이언트가 최종 확인. ACK Num=2001 (서버 Seq+1). "알았어, 2001번부터 보내줘" → 연결 수립(ESTABLISHED)</td>
+        </tr>
+      </table>
+    </div>
+    <div class="callout danger">
+      <span class="callout-icon">🚨</span>
+      <div class="callout-body">
+        <b>SYN Flooding 공격이 이 과정을 어떻게 악용하나?</b><br>
+        공격자가 위조된 IP로 SYN 패킷만 대량 전송 → 서버는 SYN+ACK를 보내고 ACK를 기다리는 <em>반열린 연결(Half-Open)</em> 상태로 대기<br>
+        → 서버의 연결 대기 큐(Backlog Queue)가 꽉 참 → 정상 사용자의 연결 요청 처리 불가 → <em class="danger">서비스 거부(DoS)</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>TCP 4-Way Handshaking — 연결 종료 <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      연결을 끊을 때는 4번의 메시지가 필요해. 양쪽 모두 "나는 다 보냈어"라고 각자 FIN을 보내야 하기 때문이야. 3-way와 달리 SYN+ACK를 한 번에 못 하는 이유는, 서버가 아직 보낼 데이터가 남아있을 수 있기 때문이야.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>단계</th><th>방향</th><th>Flag</th><th>상태</th></tr>
+        <tr><td><b>① FIN</b></td><td>클라이언트 → 서버</td><td><code>FIN</code></td><td>클라이언트: FIN_WAIT1. "나 다 보냈어, 끊을게"</td></tr>
+        <tr><td><b>② ACK</b></td><td>서버 → 클라이언트</td><td><code>ACK</code></td><td>서버: CLOSE_WAIT. 클라이언트: FIN_WAIT2. "알겠어, 근데 나 아직 보낼 거 있어"</td></tr>
+        <tr><td><b>③ FIN</b></td><td>서버 → 클라이언트</td><td><code>FIN</code></td><td>서버: LAST_ACK. "이제 나도 다 보냈어, 끊을게"</td></tr>
+        <tr><td><b>④ ACK</b></td><td>클라이언트 → 서버</td><td><code>ACK</code></td><td>클라이언트: TIME_WAIT → CLOSED. 서버: CLOSED</td></tr>
+      </table>
+    </div>
+    <div class="callout tip">
+      <span class="callout-icon">💡</span>
+      <div class="callout-body">
+        <b>TIME_WAIT 상태란?</b><br>
+        클라이언트가 마지막 ACK를 보낸 후 바로 연결을 닫지 않고 잠시 기다리는 상태야. 마지막 ACK가 유실됐을 때 서버가 FIN을 재전송하면 다시 ACK를 보내기 위해서야. 일반적으로 2MSL(Maximum Segment Lifetime) 시간 동안 유지.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>TCP Control Flags <span class="badge badge-p">실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>Flag</th><th>이름</th><th>역할</th></tr>
+        <tr><td><b>SYN</b></td><td>Synchronize</td><td>TCP 연결 시에 동기화를 요구. 3-way handshake의 시작</td></tr>
+        <tr><td><b>ACK</b></td><td>Acknowledgment</td><td>응답에 대해 확인. 패킷을 잘 받았다는 신호</td></tr>
+        <tr><td><b>PSH</b></td><td>Push</td><td>데이터 버퍼링을 하지 않고 <em>수신자에게 즉시 송신</em>을 요구</td></tr>
+        <tr><td><b>URG</b></td><td>Urgent</td><td>긴급 포인터 Flag. 긴급 데이터가 있음을 알림</td></tr>
+        <tr><td><b>FIN</b></td><td>Finish</td><td>정상 접속 종료. 4-way handshake에서 사용</td></tr>
+        <tr><td><b>RST</b></td><td>Reset</td><td>비정상 종료를 위한 Reset. 세션 하이재킹 공격에서 기존 세션을 강제 종료하는 데 사용</td></tr>
+      </table>
+    </div>
+    <div class="callout info">
+      <span class="callout-icon">🔍</span>
+      <div class="callout-body">
+        <b>포트 스캐닝에서 Control Flags 활용</b><br>
+        • FIN, NULL, XMAS 스캔: 비정상적인 Flag 조합을 보내서 포트 상태 파악<br>
+        • 포트가 열려있으면 → 응답 없음 (RFC 793)<br>
+        • 포트가 닫혀있으면 → RST 응답<br>
+        → 방화벽이 SYN 스캔은 막더라도 이 스캔들은 통과할 수 있어
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH3 네트워크 공격 ═══ -->
+<div id="ch3" class="chapter">
+  <div class="chapter-num">Chapter 03 · POINT 005</div>
+  <h2>네트워크 기반 공격<br>— SYN Flooding, Smurfing, Teardrop, Land</h2>
+  <div class="chapter-intro">
+    네트워크 프로토콜의 설계 허점을 이용한 공격들이야. 각 공격이 <strong>어떤 프로토콜의 어떤 특성</strong>을 악용하는지 연결해서 이해하면 암기가 아니라 논리적으로 기억돼.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>TCP SYN Flooding <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      TCP 3-Way Handshake의 허점을 이용한 DoS 공격이야. 서버가 SYN을 받으면 반드시 ACK를 기다리는 상태로 자원을 할당하는데, 이걸 악용해.
+    </p>
+    <div class="callout danger">
+      <span class="callout-icon">💥</span>
+      <div class="callout-body">
+        <b>공격 원리</b><br>
+        ① 공격자가 <em>위조된(가짜) IP 주소</em>로 SYN 패킷을 대량 전송<br>
+        ② 서버는 SYN+ACK를 보내고 ACK를 기다리는 <em>Half-Open 상태</em>로 연결 대기 큐(Backlog Queue)에 등록<br>
+        ③ 가짜 IP라서 ACK는 절대 오지 않음 → 큐가 꽉 참<br>
+        ④ 정상 사용자의 SYN 패킷은 큐에 들어오지 못해 → <em class="danger">서비스 불가</em><br><br>
+        <b>대응 방법</b><br>
+        • Backlog Queue 크기 늘리기: <code>sysctl -w net.ipv4.tcp_max_syn_backlog=1024</code><br>
+        • <em>SYN Cookie</em> 사용: ACK 오기 전까지 큐에 넣지 않고 쿠키로 검증<br>
+        • 방화벽에서 동일 IP의 SYN 패킷 임계치 설정
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>UDP Flooding <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      공격자의 IP를 <strong>피해자의 IP로 변경(스푸핑)</strong>하여 UDP 패킷을 지속적으로 전송하면, ICMP Destination Unreachable 메시지가 발생하고 해당 메시지가 피해자에게 수신돼 대역폭을 소모시켜.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>NTP 증폭 공격 <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      NTP(Network Time Protocol)는 시간 동기화 서버들이 내부 서버들의 시간을 동기화시키는 프로토콜이야. <code>#ntp -n -c monlist (점검대상 NTP서버 IP)</code>를 전송하면 응답으로 전송되는 서버 목록을 피해자에게 전송하게 해. <strong>요청 패킷보다 응답 패킷이 수백 배 커서</strong> 증폭 효과가 발생해.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Smurfing 공격 <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      IP의 특성인 <strong>Broadcast 주소</strong>와 ICMP 패킷을 이용한 공격이야.
+    </p>
+    <div class="callout danger">
+      <span class="callout-icon">💥</span>
+      <div class="callout-body">
+        <b>공격 원리</b><br>
+        ① 공격자가 출발지 IP를 <em>피해자 IP로 위조</em><br>
+        ② 목적지를 <em>브로드캐스트 주소</em>로 설정한 ICMP Echo Request 전송<br>
+        ③ 해당 네트워크의 <em>모든 호스트</em>가 ICMP Echo Reply를 피해자에게 전송<br>
+        ④ 피해자는 수많은 ICMP 응답으로 대역폭 소모 → 서비스 불가<br><br>
+        <b>대응 방법</b><br>
+        • 유닉스: <code>ndd -set /dev/ip ip_forward_directed_broadcasts 0</code><br>
+        • 리눅스: <code>sysctl -w net.ipv4.icmp_echo_ignore_broadcast=1</code><br>
+        → Directed Broadcast를 차단하면 방어 가능
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Teardrop 공격의 종류 <span class="badge badge-w">필기</span></div>
+    <p class="prose">
+      IP 패킷은 크기가 크면 여러 조각(Fragment)으로 나뉘어 전송되고 수신측에서 재조합돼. Teardrop 계열 공격은 이 <strong>IP 단편화(Fragmentation) 처리의 허점</strong>을 이용해.
+    </p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>공격 종류</th><th>원리</th></tr>
+        <tr>
+          <td><b>Tiny Fragment</b></td>
+          <td>최초의 Fragment를 아주 작게 만들어서 네트워크 침입탐지 시스템이나 패킷 필터링 장비를 우회하는 것이 목적</td>
+        </tr>
+        <tr>
+          <td><b>Fragment Overlap</b></td>
+          <td>Tiny Fragment보다 더욱 정교한 방법. IDS의 Fragment 처리 방법과 패킷 필터링의 재조합과 overwrite 처리를 이용. <em>IDS를 속이는 데 목적</em></td>
+        </tr>
+        <tr>
+          <td><b>Ping of Death</b></td>
+          <td>Ping을 이용해 ICMP 패킷을 <em>규정된 길이 이상</em>으로 IP 패킷을 전송. 수신 측 OS에서 처리하지 못하게 하여 시스템을 마비시키는 공격</td>
+        </tr>
+        <tr>
+          <td><b>Tear Drop</b></td>
+          <td>Fragment 재조합 과정의 취약점을 이용한 공격. 목표 시스템 정지나 재부팅을 유발. TCP Header 부분의 offset field 값이 중첩되는 데이터 패킷을 대상 시스템에 전송</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Land Attack <span class="badge badge-w">필기</span></div>
+    <div class="callout danger">
+      <span class="callout-icon">💥</span>
+      <div class="callout-body">
+        <b>IP Header를 변조</b>하여 인위적으로 <em>송신자 IP 주소 및 Port를 수신자의 IP 주소와 Port 주소로 동일하게 설정</em>하여 트래픽을 전송하는 공격기법이야.<br><br>
+        패킷의 출발지와 목적지가 동일해서 시스템이 자기 자신에게 계속 응답하다가 과부하 상태가 됨.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH4 HTTP DDoS, 세션 하이재킹 ═══ -->
+<div id="ch4" class="chapter">
+  <div class="chapter-num">Chapter 04 · POINT 005</div>
+  <h2>HTTP DDoS 공격과 세션 하이재킹</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>HTTP DDoS 공격 <span class="badge badge-wp">필기+실기</span></div>
+
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>공격 종류</th><th>원리</th></tr>
+        <tr>
+          <td><b>Slow HTTP POST</b><br>(RUDY 공격)</td>
+          <td>HTTP의 POST 지시자를 사용해 서버에게 전달할 대량의 데이터를 <em>장기간에 걸쳐 분할 전송</em>. POST 데이터가 모두 수신되지 않으면 연결을 장시간 유지하게 됨 → 다수 연결로 서버 자원 소진</td>
+        </tr>
+        <tr>
+          <td><b>Slow HTTP Read DoS</b></td>
+          <td>공격자가 웹 서버와 TCP 연결 시 <em>TCP 윈도우 크기 및 데이터 처리율을 감소</em>시켜 HTTP 데이터를 송신하여 웹 서버가 정상적으로 응답하지 못하게 하는 DoS/DDoS 기법. TCP 윈도우 크기를 감소시키면 서버는 정상상태로 회복될 때까지 대기상태에 빠져서 부하를 유발</td>
+        </tr>
+        <tr>
+          <td><b>Slow HTTP Header DoS</b><br>(Slowloris)</td>
+          <td>HTTP Header를 비정상적으로 조작하여 웹 서버가 헤더 정보를 구분할 수 없도록 만듦. 웹 서버가 아직 HTTP Header의 정보가 모두 전달되지 않은 것으로 판단하게 만들어 연결을 장시간 유지하게 함.<br>웹 서버는 클라이언트로부터 요청이 끝나지 않은 것으로 판단되기 때문에 <em>웹 로그에 기록되지 않는다</em>는 특징이 있음 → 탐지 어려움</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>세션 하이재킹 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="callout danger">
+      <span class="callout-icon">🎯</span>
+      <div class="callout-body">
+        <b>인증을 위한 모든 검증을 우회</b>하는 공격이야. TCP를 이용해서 통신하고 있을 때 <em>RST(Reset) 패킷을 보내</em> 일시적으로 TCP 세션을 끊고, Sequence Number를 새로 생성하여 세션을 빼앗고 인증을 회피해.<br><br>
+        <b>공격 흐름</b><br>
+        ① 공격자가 클라이언트-서버 간 통신을 스니핑으로 감청<br>
+        ② 현재 Sequence Number 파악<br>
+        ③ 클라이언트에게 RST 패킷 전송 → 클라이언트 연결 끊김<br>
+        ④ 공격자가 올바른 Seq Number로 서버에 패킷 전송 → 서버는 공격자를 클라이언트로 인식
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH5 포트 스캐닝, 스니핑 ═══ -->
+<div id="ch5" class="chapter">
+  <div class="chapter-num">Chapter 05 · POINT 006</div>
+  <h2>포트 스캐닝과 스니핑<br>— 정찰 단계의 핵심 기법</h2>
+  <div class="chapter-intro">
+    공격자가 본격적인 공격 전에 목표 시스템의 어떤 포트가 열려있는지, 어떤 서비스가 동작하는지 파악하는 정찰 단계야. 사이버 킬체인 1단계(정찰)에 해당해.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>포트 스캐닝 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>상황</th><th>스캐닝 기법</th><th>원리</th></tr>
+        <tr>
+          <td><b>포트 Open 시 응답 없음</b></td>
+          <td>UDP, FIN, X-MAS(FIN+PSH+URG), NULL 스캔</td>
+          <td>열린 포트는 이상한 패킷에 응답하지 않음 (RFC 793)</td>
+        </tr>
+        <tr>
+          <td><b>포트 Close 시 RST로 응답</b></td>
+          <td>FIN, X-MAS(FIN+PSH+URG), NULL 스캔</td>
+          <td>닫힌 포트는 RST 패킷으로 응답</td>
+        </tr>
+        <tr>
+          <td><b>UDP스캔 포트 Close 시</b></td>
+          <td>UDP 스캔</td>
+          <td>ICMP Destination Unreachable로 응답 → 닫힌 포트 확인</td>
+        </tr>
+        <tr>
+          <td><b>TCP스캔 포트 Open 시</b></td>
+          <td>TCP SYN 스캔 (Half-Open)</td>
+          <td>SYN+ACK로 응답 → 열린 포트 확인. 연결 완성 안 해서 로그에 안 남을 수 있음</td>
+        </tr>
+        <tr>
+          <td><b>TCP스캔 포트 Close 시</b></td>
+          <td>TCP SYN 스캔</td>
+          <td>RST+ACK로 응답</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>스니핑(수동적 공격) <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      스니핑 도구를 실행시키면 기본적으로 <strong>Normal Mode(정규모드)</strong>로 실행돼. Normal Mode는 자신의 컴퓨터에 전송되는 패킷만 수신하고 자신과 관련 없는 패킷은 삭제(Drop)해.
+    </p>
+    <div class="callout info">
+      <span class="callout-icon">🎧</span>
+      <div class="callout-body">
+        <b>네트워크의 모든 패킷을 모니터링하려면</b><br>
+        → <em>Promiscuous Mode(무차별 모드)</em>로 설정하고 스니핑 실행<br><br>
+        • 무차별 모드 설정: <code>ifconfig eth0 promisc</code><br>
+        • 무차별 모드 해제: <code>ifconfig eth0 -promisc</code><br><br>
+        <b>스니핑 탐지 방법</b><br>
+        • <code>ifconfig</code>로 PROMISC 플래그 확인<br>
+        • ARP 스푸핑 탐지 도구 사용<br>
+        • Ping을 이용한 응답시간 비교 (스니퍼가 있으면 살짝 느림)
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH6 라우터, VLAN, LAN 스위치 ═══ -->
+<div id="ch6" class="chapter">
+  <div class="chapter-num">Chapter 06 · POINT 004-005</div>
+  <h2>라우터 접근제어, VLAN, LAN 스위치</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>라우터 접근제어 (ACL) <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>목적</th><th>명령어 예시</th></tr>
+        <tr>
+          <td><b>특정 IP 차단</b></td>
+          <td>
+            <code>Router(config)#access-list 10 deny host 1.1.1.1</code><br>
+            (접근제어 번호 10번을 등록하고 1.1.1.1 IP를 차단)<br>
+            <code>Router(config)#access-list 10 deny 1.1.1.0 0.0.0.255</code><br>
+            (1.1.1.0 대역을 모두 차단)
+          </td>
+        </tr>
+        <tr>
+          <td><b>모든 IP 접근 허용</b></td>
+          <td><code>Router(config)#access-list 10 permit any</code></td>
+        </tr>
+        <tr>
+          <td><b>21번 포트 접속 허용</b></td>
+          <td><code>access-list 120 permit tcp any host 10.0.2.15 eq 21</code></td>
+        </tr>
+        <tr>
+          <td><b>접근통제 그룹설정 전체 흐름</b></td>
+          <td>
+            <code>Router#configure terminal</code><br>
+            <code>Router(config)#access-list 10 deny 10.10.3.0 0.0.0.255</code><br>
+            <code>Router(config)#access-list 10 permit any</code><br>
+            <code>Router(config)#interface s0</code><br>
+            <code>Router(config-if)#ip access-group 10 [in/out]</code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>VLAN 구성 방식 <span class="badge badge-p">실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>방식</th><th>설명</th></tr>
+        <tr><td><b>End to End VLAN</b></td><td>물리적 위치와 관계없이 <em>업무별 데이터 종류</em>에 따라서 VLAN을 할당. 사용자의 물리적 위치와 관계없이 동일한 정책을 적용</td></tr>
+        <tr><td><b>Local VLAN</b></td><td>사용자의 <em>물리적 위치</em>에 따라서 VLAN을 할당하는 방식. 설정 및 관리가 어려움</td></tr>
+        <tr><td><b>Static VLAN</b></td><td>VLAN 관리자가 직접 모든 포트에 VLAN을 할당</td></tr>
+        <tr><td><b>Dynamic VLAN</b></td><td>VMPLS(VLAN Membership Policy Server)를 사용해 VLAN을 자동으로 할당. 이동이 많은 환경에 적합. VMPLS 장애 발생 시 모든 네트워크 장애가 발생</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>LAN 스위치 방식 <span class="badge badge-p">실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>방식</th><th>설명</th></tr>
+        <tr><td><b>Cut Through</b></td><td>목적지의 MAC Address만 확인 후 해당 포트로 전송. 속도 빠름. 오류 검사 없음</td></tr>
+        <tr><td><b>Store and Forward</b></td><td>전체 Frame을 모두 저장한 후에 Error Check를 수행 후 전송. 오류 있으면 폐기. 신뢰성 높음</td></tr>
+        <tr>
+          <td><b>Fragment Free</b></td>
+          <td>Modify Cut Through. Frame의 64비트를 검사하여 Header의 Error를 검사 후 전송. 512비트가 수신될 때까지 대기 후 에러가 존재하지 않으면 전송</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH7 방화벽, IDS ═══ -->
+<div id="ch7" class="chapter">
+  <div class="chapter-num">Chapter 07 · POINT 007</div>
+  <h2>방화벽(Firewall)과 IDS<br>— 침입 차단과 침입 탐지</h2>
+  <div class="chapter-intro">
+    방화벽은 <strong>차단</strong>하는 장비고, IDS는 <strong>탐지</strong>하는 장비야. 둘의 차이와 각각의 구현 방식을 이해하면 실제 네트워크 보안 설계 문제도 풀 수 있어.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>방화벽(Firewall) 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>종류</th><th>특징</th></tr>
+        <tr>
+          <td><b>스크리닝 라우터</b><br>(Screening Router)</td>
+          <td>IP, TCP, UDP 헤더 부분에 포함된 내용만 분석하여 동작. 내부 네트워크와 외부 네트워크 사이의 패킷 트래픽을 perm/drop. 가장 기본적인 방화벽 형태</td>
+        </tr>
+        <tr>
+          <td><b>듀얼 홈드 호스트</b><br>(Dual-Homed Host)</td>
+          <td>2개의 네트워크 인터페이스를 가진 Bastion Host(듀얼 홈드)로서 하나의 NIC는 내부 네트워크와 연결하고 다른 NIC는 외부 네트워크와 연결. 두 네트워크 간 직접 통신 차단</td>
+        </tr>
+        <tr>
+          <td><b>스크린드 호스트</b><br>(Screened Host)</td>
+          <td>Packet Filtering Router와 Bastion Host로 구성. 스크리닝 라우터에서 1차 필터링 후 Bastion Host에서 2차 검사</td>
+        </tr>
+        <tr>
+          <td><b>스크린드 서브넷</b><br>(Screened Subnet)</td>
+          <td>일반적으로 두 개의 스크리닝 라우터와 한 개의 Bastion Host를 이용하여 구축. DMZ(비무장지대) 구성. 가장 안전한 방화벽 구조</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>IDS — 침입탐지 방법 <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      IDS(Intrusion Detection System)는 침입을 <strong>탐지</strong>하는 시스템이야. 어떻게 "침입"을 판단하는지에 따라 두 가지로 나뉘어.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>구분</th><th>오용탐지 (Misuse)</th><th>비정상탐지 (Anomaly)</th></tr>
+        <tr><td><b>동작 방식</b></td><td>시그니처(Signature) 기반 — 알려진 공격 패턴 DB와 비교</td><td>프로파일(Profile) 기반, Behavior 기반, Statistical 기반 — 정상과 다른 것을 탐지</td></tr>
+        <tr><td><b>침입 판단 방법</b></td><td>미리 정의된 Rule에 매칭</td><td>미리 학습된 사용자 패턴에서 어긋남</td></tr>
+        <tr>
+          <td><b>장점</b></td>
+          <td>• 빠른 속도, 구현 쉬움<br>• 이해하기 쉬움<br>• <em>False Positive(오탐)가 낮음</em></td>
+          <td>• <em>알려지지 않은 공격(Zero Day) 대응 가능</em><br>• 사용자가 미리 공격패턴을 정의할 필요 없음</td>
+        </tr>
+        <tr>
+          <td><b>단점</b></td>
+          <td>• <em>False Negative(미탐)가 높음</em><br>• 알려지지 않은 공격 탐지 불가<br>• 대량의 자료를 분석하기에 부적합</td>
+          <td>• 정상과 비정상을 결정하는 임계치 설정이 어려움<br>• <em>False Positive(오탐)가 높음</em><br>• 구현이 어려움</td>
+        </tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 핵심 구분</div>
+      <div class="memo-body">
+        <b>오용탐지</b> = 나쁜 것을 알고 있어서 그것과 비교 → 모르는 공격은 못 잡음 (False Negative↑)<br>
+        <b>비정상탐지</b> = 정상을 알고 있어서 다른 것을 잡음 → 정상인데 다르면 오탐 (False Positive↑)
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH8 Snort, Suricata, YARA ═══ -->
+<div id="ch8" class="chapter">
+  <div class="chapter-num">Chapter 08 · POINT 007</div>
+  <h2>Snort, Suricata, YARA</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Snort <span class="badge badge-wp">필기+실기</span></div>
+    <p class="prose">
+      Snort는 Sourcefile사가 개발하고 패킷을 스니핑해서 지정한 Rule과 동일한 패킷을 탐지하는 <strong>침입탐지 시스템</strong>이야. 오용탐지(시그니처 기반) 방식으로 동작해.
+    </p>
+
+    <p class="prose"><b>snort threshold 옵션 — 알림 빈도 제어</b></p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>옵션</th><th>설명</th></tr>
+        <tr><td><b>limit</b></td><td>임계시간을 기준으로 로그를 생성. count 동안 횟수 번째 트래픽까지만 탐지</td></tr>
+        <tr><td><b>threshold</b></td><td>패킷 발생량으로 정확하게 측정. 횟수마다 계속 탐지</td></tr>
+        <tr><td><b>both</b></td><td>IP주소를 로그발생을 기준으로 적용. count 동안 횟수만큼 트래픽이 탐지될 시에 한번만 탐지</td></tr>
+      </table>
+    </div>
+
+    <p class="prose" style="margin-top:20px;"><b>snort 탐지 옵션 — Rule에서 패킷 내용 검사</b></p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>옵션</th><th>설명</th></tr>
+        <tr><td><b>content</b></td><td>특정 문자열을 포함하고 있는 패킷을 탐지</td></tr>
+        <tr><td><b>uricontent</b></td><td>패킷의 URI(index.php)를 탐지. 문자열 지정만 가능하고 바이너리 형식의 지정은 불가능</td></tr>
+        <tr><td><b>depth</b></td><td>content 옵션 명령이 검사할 바이트 수를 지정하는 옵션. offset과 같이 사용하여 탐지 성능을 향상시킴</td></tr>
+        <tr><td><b>offset</b></td><td>패킷 문자열 검색의 시작 위치를 지정. 패킷의 특정 위치를 지정 — 대량의 패킷을 검색할 경우 탐지되는 데이터 양을 한정해서 성능을 향상시킴</td></tr>
+        <tr><td><b>nocase</b></td><td>대문자와 소문자를 구분하지 않음</td></tr>
+        <tr><td><b>flow</b></td><td>TCP의 established 상태를 검출. to_server, to_client, from_server, from_client를 지정하여 전송되는 위치에 따른 탐지를 함</td></tr>
+        <tr><td><b>sameip</b></td><td>송신자 IP와 수신자 IP가 동일한지 탐지 — <em>Land Attack 탐지에 사용</em></td></tr>
+        <tr><td><b>flags</b></td><td>TCP의 Control Flags를 탐지</td></tr>
+        <tr><td><b>itype</b></td><td>ICMP 프로토콜의 타입 값을 탐지</td></tr>
+        <tr><td><b>threshold</b></td><td>동일한 패킷이 설정한 시간 내에서 일정한 수가 탐지되면 경고를 발생시킴</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Suricata와 YARA <span class="badge badge-wp">필기+실기</span></div>
+    <div class="grid2">
+      <div class="card">
+        <h4>🔵 Suricata</h4>
+        <ul>
+          <li>Snort의 <b>단일 스레드 방식의 단점을 보완</b>한 오픈소스 IDS</li>
+          <li><em>멀티코어, 멀티 스레드 방식</em>으로 데이터를 처리</li>
+          <li>GPU 가속도를 지원</li>
+          <li>Snort 규칙과 호환 가능</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>🟡 YARA</h4>
+        <ul>
+          <li>Yet Another Recursive Acronym</li>
+          <li>악성코드의 시그니처를 사용해서 <b>악성코드를 식별하고 분류</b>하는 도구</li>
+          <li>시그니처는 파일, 프로세스에 포함되어 있는 <em>문자열 혹은 바이너리 패턴</em>을 탐지</li>
+          <li><em>EDR 보안 솔루션</em>은 YARA를 사용해서 악성코드 탐지 및 대응</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH9 VPN ═══ -->
+<div id="ch9" class="chapter">
+  <div class="chapter-num">Chapter 09 · POINT 007</div>
+  <h2>VPN — IPSec, SSL, PPTP</h2>
+  <div class="chapter-intro">
+    VPN은 공용 인터넷을 통해 마치 사설망처럼 안전하게 통신하는 기술이야. 어떤 OSI 계층에서 동작하는지, 어떤 암호화 방식을 쓰는지가 핵심이야.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>OSI 계층별 VPN 종류 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>VPN 종류</th><th>동작 계층</th><th>특징</th></tr>
+        <tr><td><b>SSL VPN</b></td><td>Application (L4~L7) 계층</td><td>웹 브라우저만으로 사용 가능. 별도 클라이언트 불필요. HTTPS 기반</td></tr>
+        <tr><td><b>IPSec VPN</b></td><td>Network (L4) 계층</td><td>IP 패킷 단위로 암호화. 강력한 보안. 클라이언트 소프트웨어 필요</td></tr>
+        <tr><td><b>PPTP, L2TP VPN</b></td><td>Data Link (L2) 계층</td><td>레거시 VPN 방식. PPTP는 MS가 개발. L2TP는 PPTP+L2F</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>IPSec VPN 전송모드 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>모드</th><th>설명</th></tr>
+        <tr>
+          <td><b>터널 모드</b></td>
+          <td>VPN 같은 구성으로 패킷의 출발지에서 일반 패킷이 보내지면 중간에서 IPSec을 탑재한 중계 장비가 패킷 전체를 암호화(인증)하고 중계 장비의 IP 주소를 붙여 전송. <em>IP Header까지 암호화</em> → 출발지 숨김</td>
+        </tr>
+        <tr>
+          <td><b>전송 모드</b></td>
+          <td>패킷의 출발지에서 암호화(인증)를 하고 목적지에서 복호화가 이루어지므로 <em>End-to-End 보안</em>을 제공. IP Header는 암호화 안 함, Payload만 암호화</td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="prose" style="margin-top:20px;"><b>IPSec 인증과 암호화를 위한 Header</b></p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>헤더</th><th>전체 이름</th><th>기능</th></tr>
+        <tr>
+          <td><b>AH</b></td>
+          <td>Authentication Header</td>
+          <td>데이터 무결성과 IP 패킷의 인증을 제공. MAC(Message Authentication Code)을 기반으로 인증. <em>암호화는 안 함</em></td>
+        </tr>
+        <tr>
+          <td><b>ESP</b></td>
+          <td>Encapsulating Security Payload</td>
+          <td>자료를 <em>암호화</em>하여 전송하고, 수신자가 받은 자료를 복호화하여 수신</td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="prose" style="margin-top:20px;"><b>IPSec VPN 키 관리 담당</b></p>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>프로토콜</th><th>역할</th></tr>
+        <tr>
+          <td><b>ISAKMP</b></td>
+          <td>Internet Security Association and Key Management Protocol. Security Association 설정, 협상, 변경, 삭제 등 SA 관리와 키 교환을 정의했으나 키 교환 메커니즘에 대한 언급은 없음</td>
+        </tr>
+        <tr>
+          <td><b>IKE</b></td>
+          <td>Internet Key Exchange. <em>키 교환 담당</em>. IKE 메시지는 UDP 프로토콜을 사용해 전달되면 출발지 및 도착지 주소는 <em>500 포트</em>를 사용</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH10 기타 보안 솔루션 ═══ -->
+<div id="ch10" class="chapter">
+  <div class="chapter-num">Chapter 10 · POINT 007</div>
+  <h2>기타 보안 솔루션<br>— IPS, Honeypot, NAC, ESM, SIEM</h2>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>주요 보안 솔루션 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>솔루션</th><th>설명</th></tr>
+        <tr>
+          <td><b>IPS</b><br>(침입방지시스템)</td>
+          <td>공격 시그니처를 찾아내 네트워크에 연결된 기기에서 수신한 활동이 이루어지는지 감시하여 자동으로 해결 조치함으로써 중단시키는 보안 솔루션. <em>IDS(탐지)에서 차단 기능을 추가한 것</em></td>
+        </tr>
+        <tr>
+          <td><b>Honeypot</b><br>(허니팟)</td>
+          <td>해커의 행동, 공격 기법 등을 분석하는 데 사용. 합법적이고 윤리적으로 유인(Enticement). 실제 시스템인 척 공격자를 유인해서 공격 기법을 연구하는 데 사용</td>
+        </tr>
+        <tr>
+          <td><b>NAC</b><br>(Network Access Control)</td>
+          <td>엔드 포인트(End point) 보안 솔루션으로 네트워크에 연결된 단말기에 대해서 사전에 IP주소, MAC주소 등을 복합하여 등록되지 않는 단말기의 네트워크 접근을 차단</td>
+        </tr>
+        <tr>
+          <td><b>ESM</b><br>(Enterprise Security Management)</td>
+          <td>기업의 정보보안 정책을 반영하여 다수의 보안 시스템을 통합한 통합 보안관제 시스템</td>
+        </tr>
+        <tr>
+          <td><b>SIEM</b><br>(Security Information and Event Management)</td>
+          <td>기업의 모든 자원의 정보 및 로그를 통합해서 수집. <em>실시간 이벤트 수집, 상관분석, 빅데이터</em>를 사용. ESM에서 빅데이터 분석 기능을 추가한 차세대 통합보안관제</td>
+        </tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 ESM vs SIEM 구분</div>
+      <div class="memo-body">
+        <b>ESM</b>: 정책 기반 통합관제 — 여러 보안 시스템을 하나로 묶음<br>
+        <b>SIEM</b>: ESM + <b>빅데이터 실시간 분석</b> — 더 지능적인 위협 탐지
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ CH11 무선 LAN 보안 ═══ -->
+<div id="ch11" class="chapter">
+  <div class="chapter-num">Chapter 11 · POINT 007</div>
+  <h2>무선 LAN 보안<br>— WEP, WPA, WPA2, IEEE 802.11</h2>
+  <div class="chapter-intro">
+    무선 네트워크는 유선과 달리 공기 중에 신호가 퍼지기 때문에 누구나 신호를 수신할 수 있어. 그래서 암호화가 더 중요하고, 암호화 방식이 약하면 쉽게 해독될 수 있어.
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>무선 LAN 보안 프로토콜 <span class="badge badge-wp">필기+실기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>프로토콜</th><th>암호화</th><th>특징 및 취약점</th></tr>
+        <tr>
+          <td><b>WEP</b></td>
+          <td>RC4 대칭형 암호화 알고리즘, 40Bit 키</td>
+          <td>24Bit 길이의 초기화 벡터(IV, Initialization Vector)를 사용. <em class="danger">무작위 공격에 취약</em>. IV가 짧아서 재사용되며 패턴 분석으로 키 해독 가능. 현재 사용 금지 권고</td>
+        </tr>
+        <tr>
+          <td><b>WPA</b><br>(IEEE 802.1x/EAP)</td>
+          <td>128Bit 동적 암호화 및 복호화(RC4 사용)</td>
+          <td>TKIP(Temporal Key Integrity Protocol) 방식으로 사용자, 네트워크 세션, 전송 프레임별로 키를 동적으로 생성. 상호인증을 위해 <em>EAP를 지원</em>. WEP보다 강력하지만 여전히 취약점 존재</td>
+        </tr>
+        <tr>
+          <td><b>WPA2</b><br>(IEEE 802.11i)</td>
+          <td>WPA의 동적 키 방식에 블록기반 암호화 기법이면서 128Bit 이상의 키를 사용하는 <em>AES 암호화</em> 사용</td>
+          <td>EAP를 지원. 현재 가장 안전한 무선 보안 방식. WPA3가 나왔지만 WPA2도 여전히 많이 사용</td>
+        </tr>
+      </table>
+    </div>
+    <div class="memo">
+      <div class="memo-label">🧠 암기 포인트</div>
+      <div class="memo-body">
+        <b>WEP</b>: RC4 + 40bit + IV 24bit → <b>취약</b> (IV 짧아서 재사용)<br>
+        <b>WPA</b>: RC4 + 128bit + <b>TKIP</b>(동적 키) → WEP 보완<br>
+        <b>WPA2</b>: <b>AES</b> + 128bit 이상 → 현재 표준
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>무선 LAN 표준 (IEEE 802.11) <span class="badge badge-w">필기</span></div>
+    <div class="table-wrap">
+      <table class="row-key">
+        <tr><th>표준</th><th>주파수</th><th>최대 속도</th></tr>
+        <tr><td><b>IEEE 802.11a</b></td><td>5GHz</td><td>54Mbps</td></tr>
+        <tr><td><b>IEEE 802.11b</b></td><td>2.4GHz</td><td>11Mbps. IEEE 위원회에서 지정한 무선 LAN 표준</td></tr>
+        <tr><td><b>IEEE 802.11n</b></td><td>2.4GHz + 5GHz</td><td>600Mbps</td></tr>
+        <tr><td><b>IEEE 802.11ac</b></td><td>5GHz</td><td>1Gbps</td></tr>
+        <tr><td><b>IEEE 802.11ax</b></td><td>5GHz + 2.4GHz</td><td>10Gbps. Wi-Fi 6</td></tr>
+        <tr><td><b>IEEE 802.11p</b></td><td>-</td><td>차량 이동환경에서 무선 액세스 지원. 차량 간 또는 차량과 도로 인프라 간의 통신을 지원</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 기출 추가 ═══ -->
+<div class="chapter">
+  <div class="chapter-num">기출 추가</div>
+  <h2>기출문제에서 추가된 개념</h2>
+</div>
+
+<!-- WEP IV 빈칸 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>WEP — 초기화 벡터(IV)와 암호화 키 <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">
+    WEP에 적용된 RC4 스트림 암호화 방식은 미리 정의된 <strong>40비트 길이의 WEP Key</strong>와 <em>초기화 벡터(Initialization Vector, IV)</em>를 사용해서 Key Stream을 생성하고 평문과 XOR 연산을 수행해서 암호문을 생성해. 즉, 키 생성 순서를 방지하기 위해서 랜덤하게 <em>초기화 벡터(IV)</em>를 생성한다.
+  </p>
+  <div class="table-wrap">
+    <table class="row-key">
+      <tr><th>빈칸 (ㄱ)</th><th>빈칸 (ㄴ)</th></tr>
+      <tr><td>초기화 벡터 (IV, Initialization Vector)</td><td>초기화 키</td></tr>
+    </table>
+  </div>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <b>기출 함정: "암호화 키"와 "초기화 벡터(IV)" 구분</b><br>
+      초기화 벡터(IV)는 <em>36byte로 랜덤하게 생성</em>한다.<br>
+      WEP의 IV가 24비트로 짧아서 재사용되며 → 패턴 분석으로 키 해독 가능 → WEP 취약점의 핵심
+    </div>
+  </div>
+</div>
+
+<!-- SNMP -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>SNMP (Simple Network Management Protocol) <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">
+    SNMP는 네트워크 관리를 위해서 정의된 프로토콜로 네트워크 장비 관리 및 감시를 위해 <strong>(ㄱ)상에 정의된 응용 계층 프로토콜</strong>이야. SNMP Manager와 SNMP Agent 간에 특정 정보를 주고받는 것이 네트워크 관리의 기본이며 이러한 관리 정보를 <strong>(ㄴ)MIB</strong>라고 한다. SNMP Community String은 SNMP에서 일종의 패스워드 역할을 수행하는 것으로 SNMP Community 이름이 <strong>(ㄷ)Public</strong>, <strong>(ㄹ)Private</strong>인 경우 보안에 취약하다.
+  </p>
+  <div class="table-wrap">
+    <table class="row-key">
+      <tr><th>구성요소</th><th>설명</th></tr>
+      <tr><td><b>SNMP Manager</b></td><td>네트워크 장비를 중앙에서 관리·모니터링하는 시스템</td></tr>
+      <tr><td><b>SNMP Agent</b></td><td>관리 대상 장비에 설치되어 Manager의 요청에 응답</td></tr>
+      <tr><td><b>MIB</b> (Management Information Base)</td><td>관리 정보를 담은 데이터베이스. 네트워크 장비의 상태 정보</td></tr>
+      <tr><td><b>Community String</b></td><td>SNMP에서 패스워드 역할. <em>public/private이 기본값 → 보안 취약</em></td></tr>
+    </table>
+  </div>
+  <div class="callout tip">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <b>정답: (ㄱ) TCP, (ㄴ) MIB, (ㄷ) Private, (ㄹ) Public</b> → ④번<br>
+      취약점 판단기준: Community 이름이 public, private이 <em>아닌</em> 경우 → 양호 / <em>인</em> 경우 → 취약
+    </div>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">🔒</span>
+    <div class="callout-body">
+      <b>SNMP Version 3.0에 추가된 기능 (기출)</b><br>
+      기존 SNMP Version 2.0에 보안 기능을 강화. 즉 <em>버퍼 오버플로우, 무차별 대입 공격</em>에 대응이 가능하고 <em>Injection 공격, Replay 공격, 세션키 스니핑</em>도 대응이 가능하다.<br>
+      → SNMP v3 추가 기능 = <b>강한 인증을 제공</b>한다 ✅<br>
+      → "GetRequest, GetNext, SetRequest, Trap 기능이 추가" ❌ (이건 기본 기능)
+    </div>
+  </div>
+</div>
+
+<!-- SDN vs NFV -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>SDN vs NFV <span class="badge badge-w">필기</span></div>
+  <p class="prose">
+    네트워크의 효율성과 QoS를 효율적으로 관리하기 위해서 <em>네트워크 장치의 제어부와 전송부를 분리하는 개념으로 중앙에서 여러 네트워크를 관리</em>할 수 있는 것 → <strong>SDN</strong>
+  </p>
+  <div class="table-wrap">
+    <table class="row-key">
+      <tr><th>기술</th><th>설명</th></tr>
+      <tr>
+        <td><b>SDN</b> (Software Defined Networking)</td>
+        <td>네트워크 장치의 <em>제어부와 전송부를 분리</em>하는 것으로 여러 네트워크를 논리적으로 관리하는 관리 기술이다. 소프트웨어를 사용해서 네트워크를 효율적으로 관리한다</td>
+      </tr>
+      <tr>
+        <td><b>NFV</b> (Network Function Virtualization)</td>
+        <td>네트워크 기능을 분리하는 것으로 <em>물리적 네트워크 장치에서 소프트웨어 네트워크 기능(방화벽, 로드밸런싱, 포워딩 등)을 가상화 기술을 이용하여 제공</em>한다</td>
+      </tr>
+      <tr>
+        <td><b>TMS</b> (Threat Management System)</td>
+        <td>위협 관리 시스템</td>
+      </tr>
+      <tr>
+        <td><b>CDR</b> (Content Disarm &amp; Reconstruction)</td>
+        <td>콘텐츠 무해화 기술 — 파일에서 위협 요소를 제거하고 재구성</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- APT -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>APT (Advanced Persistent Threat) — 지능형 지속 공격 <span class="badge badge-wp">필기+실기</span></div>
+  <div class="callout danger">
+    <span class="callout-icon">🎯</span>
+    <div class="callout-body">
+      APT(Advanced Persistent Threat)는 <em>개인 및 정부 기관, 기업을 대상으로 지속적인 해킹 공격을 수행해서 개인정보나 중요 데이터를 유출</em>하는 공격 형태로 <em>방어하기가 어렵다</em>.<br><br>
+      <b>APT 특징 (기출 오답 포인트)</b><br>
+      ① 개인 및 정부 기관을 대상으로 DDoS와 같은 네트워크 가용성을 공격한다 ❌<br>
+      → APT는 DDoS가 아니라 <em>데이터 유출과 정보 탈취</em>가 목적<br>
+      ② 지능형 공격에 대해서 접점 구간에 방화벽을 설치해서 대응 가능하다 ❌<br>
+      → 방화벽만으로는 대응 어려움<br>
+      ③ 특정 타깃을 대상으로 개인정보나 중요 데이터를 유출하며 방어가 어렵다 ✅<br>
+      ④ 계획적인 접근으로 악성 이메일을 사용해서만 공격한다 ❌<br>
+      → 이메일 외에도 다양한 벡터 사용
+    </div>
+  </div>
+</div>
+
+<!-- 스니핑 무차별모드 암호화 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>스니핑 무차별 모드 — 대응 방법 <span class="badge badge-wp">필기+실기</span></div>
+  <div class="callout info">
+    <span class="callout-icon">🎧</span>
+    <div class="callout-body">
+      스니핑(Sniffing)의 무차별 모드(Promiscuous)는 자신에게 전송되는 MAC 주소뿐만 아니라 <em>다른 MAC 주소까지 모두 수신하여 전송되는 패킷을 훔쳐</em>볼 수 있다.<br>
+      따라서 <b>무차별 모드를 활용한 스니핑에 대비하기 위해서는 전송되는 데이터를 암호화해야 한다.</b><br><br>
+      빈칸 (ㄱ) = <em>MAC</em>, (ㄴ) = <em>암호화</em> → 정답 ② (ㄱ) MAC, (ㄴ) 암호화
+    </div>
+  </div>
+</div>
+
+<!-- OSI Transport 계층 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>OSI 7계층 — Transport 계층 <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">
+    <em>End-to-End 구간에서 신뢰성 있는 데이터 송수신을 하고 흐름 제어와 혼잡 제어를 수행</em>하는 계층 → <strong>Transport 계층 (전송 계층)</strong>
+  </p>
+  <div class="callout info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      전송 계층(Transport Layer)은 <em>TCP와 UDP</em>가 있으며 TCP는 <em>신뢰성 있는 데이터 전송과 흐름 제어, 에러 처리, 혼잡 제어 기능</em>을 제공한다.<br><br>
+      • Network 계층: IP 주소 기반 라우팅<br>
+      • Data Link 계층: MAC 주소 기반 프레임 전송<br>
+      • Transport 계층: <em>포트 번호, 흐름제어, 혼잡제어, End-to-End</em> ← 정답
+    </div>
+  </div>
+</div>
+
+<!-- 방화벽 Rule 읽기 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>방화벽 Rule 읽는 법 — 출발지/목적지/CIDR/접근통제 <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">방화벽 Rule은 위에서 아래로 순서대로 적용돼. 먼저 매칭되는 Rule이 적용되고 나머지는 무시해.</p>
+  <div class="table-wrap">
+    <table>
+      <tr><th>출발지</th><th>목적지</th><th>CIDR</th><th>접근 통제</th></tr>
+      <tr><td>10.10.10.20</td><td>20.20.20.21</td><td>16</td><td>DROP</td></tr>
+      <tr><td>10.10.10.21</td><td>20.20.20.22</td><td>8</td><td>ACCEPT</td></tr>
+      <tr><td>ANY</td><td>20.20.20.23</td><td>16</td><td>DROP</td></tr>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <b>Rule 해석</b><br>
+      • 출발지 10.10.10.20 → 목적지 20.20.20.21: DROP (연결 안 됨)<br>
+      • 출발지 10.10.10.21 → 목적지 20.20.20.22: ACCEPT (연결 됨)<br>
+      • ANY → 목적지 20.20.20.23: DROP (모든 입력 패킷 DROP)<br><br>
+      <b>기출 정답: ④ 출발지 IP 10.10.10.20은 목적지 IP 20.20.20.23으로 연결되지 않는다</b><br>
+      → 목적지 20.20.20.23은 ANY에 대해 DROP이므로 연결 불가
+    </div>
+  </div>
+</div>
+
+<!-- nmap 포트스캐닝 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>nmap 포트스캐닝 상세 — 올바르지 않은 것 <span class="badge badge-wp">필기+실기</span></div>
+  <div class="table-wrap">
+    <table class="row-key">
+      <tr><th>스캔 종류</th><th>열린 포트 응답</th><th>닫힌 포트 응답</th></tr>
+      <tr><td><b>TCP Connection Scan</b></td><td>SYN+ACK 응답이 돌아오면 다시 SYN 메시지에 대해서 → 포트 열림</td><td>RST+ACK 응답이 오면 포트 닫힘</td></tr>
+      <tr><td><b>TCP FIN Scan</b></td><td><em>응답 없음</em></td><td>RST 응답</td></tr>
+      <tr><td><b>XMAS Scan</b></td><td><em>아무런 응답이 없다</em> ← 열린 것</td><td>RST가 오고 포트가 열려 있으면 <em>응답이 없다</em></td></tr>
+      <tr><td><b>NULL Scan</b></td><td>응답 없음</td><td>RST 응답</td></tr>
+    </table>
+  </div>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <b>기출 오답: "XMAS Scan은 포트가 열려 있을 때는 아무런 응답이 없다" ✅ (이게 맞는 말)</b><br>
+      <b>오답은: "TCP Connection Scan은 포트가 열려 있으면 되돌아오는 SYN+ACK 응답이 SYN 메시지에 대해서 온다"</b><br>
+      → TCP Connection Scan은 SYN 보내고 SYN+ACK 받으면 열린 것 ✅ (이건 맞음)<br>
+      → XMAS Scan은 포트가 <em>닫혀 있을 경우 응답이 없다</em> ❌ (닫히면 RST 옴)
+    </div>
+  </div>
+</div>
+
+<!-- Spoofing 종류 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>Spoofing 종류 — UDP Spoofing은 없음 <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">Spoofing은 결과 값이 <em>공격자에 의해서 변조된 공격</em>이야. <b>"UDP Spoofing"은 Spoofing의 종류가 아님!</b></p>
+  <div class="table-wrap">
+    <table class="row-key">
+      <tr><th>종류</th><th>설명</th></tr>
+      <tr><td><b>ARP Spoofing</b></td><td>ARP Request에 대해서 <em>가짜 MAC 주소를 전송</em>한다</td></tr>
+      <tr><td><b>DNS Spoofing</b></td><td>DNS Request에 대해서 <em>변조된 IP 주소를 전송</em>한다</td></tr>
+      <tr><td><b>IP Spoofing</b></td><td>IP 자체의 보안 취약점을 이용한 공격으로 자신의 IP 주소를 사용자와 신뢰 관계가 있는 IP로 속여서 접속하는 공격</td></tr>
+      <tr><td><b>Watchdog Spoofing</b></td><td>서버에 Watchdog Spoofing Router를 설치하여 클라이언트를 대신하여 응답한다</td></tr>
+      <tr><td><b>E-Mail Spoofing</b></td><td>이메일을 전송할 때 발신자의 주소를 <em>위조해서 전송</em>하는 것이다</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- HTTP Get Flooding vs 응용 계층 DoS -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>응용 계층 서비스 거부 공격 <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">
+    HTTP 프로토콜은 OSI 7계층의 응용 계층에서 동작하는 프로토콜이야. 따라서 <em>응용 계층에서 실행되는 DDoS 공격은 HTTP Get Flooding</em>이야.
+  </p>
+  <div class="table-wrap">
+    <table class="row-key">
+      <tr><th>공격</th><th>계층</th><th>설명</th></tr>
+      <tr><td><b>HTTP Get Flooding</b></td><td>응용 계층 (L7)</td><td>HTTP GET 요청을 대량으로 전송해서 웹 서버 과부하</td></tr>
+      <tr><td><b>TCP SYN Flooding</b></td><td>전송 계층 (L4)</td><td>SYN 패킷 대량 전송으로 Half-Open 연결 소진</td></tr>
+      <tr><td><b>Ping of Death</b></td><td>네트워크 계층 (L3)</td><td>규정 이상 크기의 ICMP 패킷 전송</td></tr>
+      <tr><td><b>Teardrop</b></td><td>네트워크 계층 (L3)</td><td>IP 단편화 재조합 취약점 악용</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Slow HTTP Post 추가 설명 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>Slow HTTP Post — Content_Length 활용 <span class="badge badge-wp">필기+실기</span></div>
+  <div class="callout info">
+    <span class="callout-icon">🐌</span>
+    <div class="callout-body">
+      처음 패킷은 <em>Content_Length를 크게 해서 전송</em>하고 다음 패킷부터 Content_Length를 <em>1바이트씩 작게 만들어 천천히 전송</em>하는 공격 기법이야. 천천히 데이터를 전송하여 시스템에 더 많은 부하를 유발한다.<br><br>
+      Slow HTTP Post는 공격자가 POST 메시지의 Content-Length 값을 크게 설정한 후에 소량의 데이터를 천천히 웹 서버로 전송하는 DDoS 공격 기법이다.
+    </div>
+  </div>
+</div>
+
+<!-- IDS 오용탐지 한계 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>IDS 오용탐지 — 변경된 공격 탐지 불가 <span class="badge badge-wp">필기+실기</span></div>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <b>"오용탐지는 변경된 공격도 탐지가 가능하다" ❌ → 이게 오답!</b><br>
+      오용탐지는 공격 패턴을 Rule로 지정하고 탐지하는 것으로 <em>변경된 공격에 대해서 탐지가 어렵고</em> 다양한 우회 공격이 가능하다.<br><br>
+      오용탐지의 올바른 특징:<br>
+      ① 공격자 측면에서 오용탐지는 다양한 방법으로 우회 가능성이 존재한다 ✅<br>
+      ② 오용탐지를 최소화하기 위해서는 세밀한 패턴 정의가 필요하다 ✅<br>
+      ④ 오용탐지는 잘못된 탐지 가능성이 낮다 ✅ (False Positive가 낮음)
+    </div>
+  </div>
+</div>
+
+<!-- SOAR -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>SOAR (Security Orchestration, Automation and Response) <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">사람, 기술, 프로세스를 하나로 만드는 효과가 있고, 낮은 수준의 보안 이벤트는 사람의 도움 없이 처리하며, <em>보안 오케스트레이션, 위협 인텔리전스, 보안사고 대응 플랫폼</em>을 제공한다 → <strong>SOAR</strong></p>
+  <div class="callout info">
+    <span class="callout-icon">🤖</span>
+    <div class="callout-body">
+      SOAR의 핵심 기능은 <em>보안 오케스트레이션, 위협 인텔리전스, 보안사고 대응 플랫폼</em>이다.<br>
+      SIEM과 구분: SIEM은 로그 수집·분석, SOAR는 <em>자동화된 대응까지 포함</em>
+    </div>
+  </div>
+</div>
+
+<!-- Web Proxy -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>Web Proxy — Burpsuite, Paros <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">
+    웹 브라우저와 웹 서버 사이에서 요청을 먼저 수신하여 전송되는 데이터를 훔쳐보거나 변조할 수 있는 도구 → <strong>Proxy</strong>
+  </p>
+  <div class="callout info">
+    <span class="callout-icon">🔍</span>
+    <div class="callout-body">
+      Web Proxy의 정의이다. Web Proxy에는 <em>Burpsuite, Paros</em> 등이 있다.<br>
+      • <b>Hping</b>: 패킷 생성 및 전송 도구<br>
+      • <b>Proxy</b>: 웹 요청/응답 중간에서 가로채고 변조 ← 정답<br>
+      • <b>Hydra</b>: 패스워드 크래킹 도구<br>
+      • <b>Access Control</b>: 접근 통제 기술
+    </div>
+  </div>
+</div>
+
+<!-- Honeypot vs Honeynet -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>허니팟 vs 허니넷 <span class="badge badge-wp">필기+실기</span></div>
+  <p class="prose">
+    <em>"네트워크의 침입 발생 시에 탐지하고 즉시 대응한다"</em> → 이건 허니팟에 대한 <strong>올바르지 않은 설명</strong>이야.
+  </p>
+  <div class="callout info">
+    <span class="callout-icon">🍯</span>
+    <div class="callout-body">
+      <b>허니팟(Honeypot)</b>: 비정상 행위를 위한 <em>함정</em>이고<br>
+      <b>허니넷(Honeynet)</b>: 다수의 허니팟으로 구성된 <em>네트워크</em>이다.<br><br>
+      허니팟으로 공격자를 유인해서 비정상 행위를 탐지하고 <em>Zero Day Attack에 대응</em>할 수 있다.<br><br>
+      <b>올바르지 않은 설명 (기출)</b><br>
+      ① "네트워크의 침입 발생 시에 탐지하고 즉시 대응한다" ❌<br>
+      → 허니팟은 즉시 대응이 아니라 <em>공격자를 유인해서 행동 분석</em>하는 것
+    </div>
+  </div>
+</div>
+
+<!-- EternalBlue / LockBit -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>EternalBlue — WannaCry, LockBit <span class="badge badge-w">필기</span></div>
+  <div class="callout danger">
+    <span class="callout-icon">💥</span>
+    <div class="callout-body">
+      <b>이터널블루(EternalBlue)</b>는 <em>SMB 원격 코드 실행 취약점</em>을 가지고 있는 것으로 이터널블루로 볼티모어시에 대해서 랜섬웨어를 수행했고 이때 사용된 랜섬웨어가 <em>로빈후드</em>이다.<br><br>
+      <b>로빈후드 랜섬웨어</b>는 최근 정상적으로 서명된 드라이버들을 사용해 보안 도구를 삭제하고 파일을 암호화시키는 방법이다.<br><br>
+      SNMP v3 → 버퍼오버플로우/무차별대입/Injection/Replay/세션키 스니핑 대응 가능
+    </div>
+  </div>
+</div>
+
+<!-- 비대면 업무환경 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>비대면 업무환경 보안 <span class="badge badge-wp">필기+실기</span></div>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <b>"원격근무지에서 VPN을 사용하여 연결하면 다중 인증 기능을 사용하지 않아도 된다" ❌ → 오답!</b><br>
+      원격 근무를 통해서 기업 정보시스템에 접근할 때는 <em>2-Factor 인증을 수행</em>해야 한다.<br><br>
+      올바른 비대면 업무환경 보안:<br>
+      ① 원격근무를 위해서 개인정보 PC에 대한 보호조치가 필요하다 ✅<br>
+      ③ 인증 시에 2-Factor 인증을 수행하고 전송되는 데이터는 암호화를 해야 한다 ✅<br>
+      ④ 재택에서 기업 정보시스템 접근 시에 원격접근계정에 대해서 접근 통제를 수행해야 한다 ✅
+    </div>
+  </div>
+</div>
+
+<!-- TCP SYN Flooding 판별 -->
+<div class="section">
+  <div class="section-title"><span class="dot"></span>TCP SYN Flooding — netstat 화면으로 판별 <span class="badge badge-wp">필기+실기</span></div>
+  <div class="callout info">
+    <span class="callout-icon">🖥️</span>
+    <div class="callout-body">
+      <b>netstat 화면에서 같은 Local Address에 여러 Foreign Address가 모두 "TCP RECEIVED" 상태</b>인 경우<br>
+      → <em>TCP SYN Flooding 공격</em>이야.<br><br>
+      TCP Received는 TCP SYN 메시지에 대해서 서버가 SYN+ACK를 전송했다는 의미다. 따라서 본 공격은 <em>TCP SYN Flooding 공격</em>이다.<br><br>
+      • FTP 바운스 Attack: FTP PORT 명령 악용<br>
+      • Smurfing: ICMP + Broadcast IP 스푸핑<br>
+      • Teardrop: IP 단편화 오프셋 조작
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; padding: 60px 0 30px; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 60px;">
+  정보보안기사 2과목 네트워크 보안 — 읽으면서 이해되는 정리노트 | 2025
+</div>
+
+</div>
+</body>
+</html>
